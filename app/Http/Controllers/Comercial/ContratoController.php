@@ -40,22 +40,35 @@ class ContratoController extends Controller {
         $endWork=Input::get('endWorkPost');
         $startLunch=Input::get('startLunchPost');
         $endLunch=Input::get('endLunchPost');
+        $monday=Input::get('mondayPost');
+        $tuesday=Input::get('tuesdayPost');
+        $wednesday=Input::get('wednesdayPost');
+        $friday=Input::get('fridayPost');
+        $saturday=Input::get('saturdayPost');
+        $sunday=Input::get('sundayPost');
 
         foreach ($numberPersons as $key => $value) {
 
-            $contrato= new Contract();
-            $contrato->enterprise_id =Input::get('enterprise_id');
-            $contrato->workplace_id = Input::get('workplace_id');
-            $contrato->services_id = Input::get('service_id');
+            $contract= new Contract();
+            $contract->enterprise_id =Input::get('enterprise_id');
+            $contract->workplace_id = Input::get('workplace_id');
+            $contract->service_id = Input::get('service_id');
 
-            $contrato->workers = $numberPersons[$key];
-            $contrato->start_contract = $startContract[$key];
-            $contrato->end_contract = $endContract[$key];
-            $contrato->start_work =$startWork[$key] ;
-            $contrato->end_work =$endWork[$key] ;
-            $contrato->start_lunch =$startLunch[$key] ;
-            $contrato->end_lunch =$endLunch[$key] ;
-            $contrato->save();
+            $contract->workers = $numberPersons[$key];
+            $contract->start_contract = $startContract[$key];
+            $contract->end_contract = $endContract[$key];
+            $contract->start_work =$startWork[$key] ;
+            $contract->end_work =$endWork[$key] ;
+            $contract->start_lunch =$startLunch[$key] ;
+            $contract->end_lunch =$endLunch[$key] ;
+            $contract->monday =is_null($monday[$key])?false:true;
+            $contract->tuesday =is_null($tuesday[$key])?false:true ;
+            $contract->wednesday =is_null($wednesday[$key])?false:true ;
+            $contract->thursday =is_null($tuesday[$key])?false:true ;
+            $contract->friday =is_null($friday[$key])?false:true ;
+            $contract->saturday =is_null($saturday[$key])?false:true ;
+            $contract->sunday =is_null($sunday[$key])?false:true ;
+            $contract->save();
         }
         $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
 

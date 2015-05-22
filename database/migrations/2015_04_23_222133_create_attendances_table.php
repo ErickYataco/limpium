@@ -19,8 +19,8 @@ class CreateAttendancesTable extends Migration {
             $table->integer('assignment_id');
             $table->string('start_work_hour',7);
             $table->string('end_work_hour',7);
-            $table->string('start_break_hour',7);
-            $table->string('end_break_hour',7);
+            $table->string('start_lunch_hour',7);
+            $table->string('end_lunch_hour',7);
 			$table->timestamps();
 		});
 	}

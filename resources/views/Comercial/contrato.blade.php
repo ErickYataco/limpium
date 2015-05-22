@@ -6,6 +6,7 @@
     <link href="{{ asset('css/theme-1/libs/select2/select2.css?1424887856') }}" rel="stylesheet">
     <link href="{{ asset('css/theme-1/libs/fullcalendar/fullcalendar.css?1425466619') }}" rel="stylesheet">
     <link href="{{ asset('css/theme-1/libs/jquery-ui/jquery-ui-theme.css?1423393666') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme-1/libs/toastr/toastr.css?1425466569') }}" rel="stylesheet">
     {{--<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />--}}
 
     <style>
@@ -13,11 +14,10 @@
         .row-text:focus{
             outline:none;
         }
-
         .row-text{
             background-color: transparent;
             border: 0px solid;
-            width:80px;
+            /*width:80px;*/
         }
         .row-text-id{
             background-color: transparent;
@@ -127,34 +127,15 @@
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id='startContract' name="startContract" data-inputmask="'mask': 'd/m/y'" required>
+                                                            <input type="text" class="form-control" id='startContract' name="startContract" data-rule-date="true" data-inputmask="'mask': 'd/m/y'" required>
                                                             <label for="startContract" class="control-label">Inicio de Requerimiento </label>
                                                         </div>
-                                                        {{--<div class="form-group control-width-normal">
-                                                            <div class="input-group " id="dateinicio">
-                                                                <div class="input-group-content">
-                                                                    --}}{{--{!! Form::text('startContract', null, array('id'=>'startContract','class' => 'form-control','required')) !!}--}}{{--
-                                                                    <input type="text" class="form-control" id='startContract' name="startContract" data-inputmask="'mask': 'd/m/y'" required>
-                                                                    <label for="startContract" class="control-label">Fecha de Inicio</label>
-                                                                </div>
-                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                            </div>
-                                                        </div>--}}
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id='endContract' name="endContract" data-inputmask="'mask': 'd/m/y'" required>
+                                                            <input type="text" class="form-control" id='endContract' name="endContract" data-rule-date="true" data-inputmask="'mask': 'd/m/y'" required>
                                                             <label for="endContract" class="control-label">Fin de Requerimiento</label>
                                                         </div>
-                                                        {{--<div class="form-group control-width-normal">
-                                                            <div class="input-group date" id="datefin">
-                                                                <div class="input-group-content">
-                                                                    {!! Form::text('endContract', null, array('id'=>'endContract','class' => 'form-control','required')) !!}
-                                                                    <label for="endContract" class="control-label">Fecha de Fin</label>
-                                                                </div>
-                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                            </div>
-                                                        </div>--}}
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
@@ -171,6 +152,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
+
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
                                                             {!! Form::text('startWork', null, array('id'=>'startWork','class' => 'form-control time12-mask','required')) !!}
@@ -201,12 +183,83 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <br/>
+                                                    <div class="col-sm-1">
+                                                        <div class="form-group">
+                                                            <div class="checkbox checkbox-styled">
+                                                                <label>
+                                                                    <input id="monday" type="checkbox" name="monday">
+                                                                    <span>Lunes</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <div class="form-group">
+                                                            <div class="checkbox checkbox-styled">
+                                                                <label>
+                                                                    <input id="tuesday" type="checkbox" name="tuesday">
+                                                                    <span>Martes</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <div class="form-group">
+                                                            <div class="checkbox checkbox-styled">
+                                                                <label>
+                                                                    <input id="wednesday" type="checkbox" name="wednesday">
+                                                                    <span>Miercoles</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <div class="form-group">
+                                                            <div class="checkbox checkbox-styled">
+                                                                <label>
+                                                                    <input id="thursday" type="checkbox" name="thursday">
+                                                                    <span>Jueves</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <div class="form-group">
+                                                            <div class="checkbox checkbox-styled">
+                                                                <label>
+                                                                    <input id="friday" type="checkbox" name="friday">
+                                                                    <span>Viernes</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <div class="form-group">
+                                                            <div class="checkbox checkbox-styled">
+                                                                <label>
+                                                                    <input id="saturday" type="checkbox" name="saturday">
+                                                                    <span>Sabado</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <div class="form-group">
+                                                            <div class="checkbox checkbox-styled">
+                                                                <label>
+                                                                    <input id="sunday" type="checkbox" name="sunday" >
+                                                                    <span>Domingo</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
                                                     <div class="col-sm-2">
-                                                        <button type="button" id="btnAddTable" class="btn btn-info btn-block ">
+                                                        <button type="button" id="btnAddTable" class="btn btn-raised btn-primary ink-reaction btn-block">
                                                         <span class="pull-left">
                                                             <i class="md md-add-box"></i>
-                                                        </span>Requirimientos
+                                                        </span> Requirimientos
                                                         </button>
                                                     </div>
                                                 </div>
@@ -217,6 +270,7 @@
                                                         <tr >
                                                             <th>#</th>
                                                             <th>Vigencia</th>
+                                                            <th>Dias</th>
                                                             <th>Horario</th>
                                                             <th>Refrigerio</th>
                                                             <th>Servicio</th>
@@ -704,5 +758,6 @@
     <script src="{{ asset('js/core/demo/DemoFormWizard.js') }}" ></script>
     <script src="{{ asset('js/core/demo/DemoFormComponents.js') }}" ></script>
     <script src="{{ asset('js/libs/jquery-ui/jquery-ui.min.js') }}" ></script>
+    <script src="{{ asset('js/libs/toastr/toastr.js') }}" ></script>
     <script src="{{ asset('js/contrato.js') }}" ></script>
 @stop

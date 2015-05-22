@@ -49,7 +49,13 @@ Route::get('operaciones/asignaciones',[
     'middleware'=>['auth','acl']
 ] );
 
-Route::get('operaciones/asignaciones/{local_id}',[
+Route::post('operaciones/asignaciones',[
+    'uses'=>'Operaciones\AsignacionesController@show',
+    'permission'=>'operaciones_asignaciones',
+    'middleware'=>['auth','acl']
+] );
+
+Route::get('operaciones/asignaciones/requerimiento/{id}',[
     'uses'=>'Operaciones\AsignacionesController@show',
     'permission'=>'operaciones_asignaciones',
     'middleware'=>['auth','acl']
@@ -145,6 +151,9 @@ Route::get('find-empresa','Admin\EmpresaController@find');
 Route::get('find-local','Admin\LocalController@find');
 Route::get('find-province','RRHH\PersonaController@findProvince');
 Route::get('find-district','RRHH\PersonaController@findDistrict');
+Route::get('find-backups','Operaciones\AsignacionesController@findBackups');
+Route::get('find-requirements','Operaciones\AsignacionesController@findRequirements');
+
 
 Route::get('comercial/buscar-empresa',[
     'uses'=>'Comercial\ContratoController@find',

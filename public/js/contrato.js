@@ -9,9 +9,6 @@ $(document).ready(function(){
         minLength:3,
         dataType: 'json',
         focus: function( event, ui ) {
-            //$("#nombreempresa").val(ui.item.name);
-            //alert(ui.item.nombreempresa);
-            //$("#nombreempresa").val(ui.item.value);
             return false;
         },
         select: function( event, ui ) {
@@ -44,6 +41,15 @@ $(document).ready(function(){
         });
     });
 
+    $( "#crear").click(function(){
+        var form=$('#formCreate');
+        var valid = form.valid();
+        if(!valid) {
+            form.data('validator').focusInvalid();
+            return false;
+        }
+    });
+
     $( "#btnAddTable").click(function(){
 
         var form=$('#formCreate');
@@ -55,19 +61,29 @@ $(document).ready(function(){
 
         var number='<input readonly class="row-text-id" size="2" type="text" name="numberPersonsPost[]" value="'+$('#numberPersons').val()+'"></input>';
 
-        var validity='<input readonly class="row-text" type="text" name="startContractPost[]" value="'+$('#startContract').val()+'"></input> - '+
-                    '<input readonly class="row-text" type="text" name="endContractPost[]" value="'+$('#endContract').val()+'"></input>';
+        var validity='<input readonly class="row-text" size="10" type="text" name="startContractPost[]" value="'+$('#startContract').val()+'"></input> - '+
+                    '<input readonly class="row-text" size="10" type="text" name="endContractPost[]" value="'+$('#endContract').val()+'"></input>';
 
-        var shift='<input readonly class="row-text" type="text" name="startWorkPost[]" value="'+$('#startWork').val()+'"></input> - '+
-                '<input readonly class="row-text" type="text" name="endWorkPost[]" value="'+$('#endWork').val()+'"></input>';
+        var days=
+            ($("#monday").is(':checked')?'<input readonly class="row-text-id" size="1" type="text" name="sunday[]" value="L"</input>':'') +
+            ($("#tuesday").is(':checked')?'<input readonly class="row-text-id" size="2" type="text" name="tuesday[]" value="MA"</input>':'') +
+            ($("#wednesday").is(':checked')?'<input readonly class="row-text-id" size="2" type="text" name="wednesday[]" value="MI"</input>':'') +
+            ($("#thursday").is(':checked')?'<input readonly class="row-text-id" size="1" type="text" name="thursday[]" value="J"</input>':'') +
+            ($("#friday").is(':checked')?'<input readonly class="row-text-id" size="1" type="text" name="friday[]" value="F"</input>':'') +
+            ($("#saturday").is(':checked')?'<input readonly class="row-text-id" size="1" type="text" name="saturday[]" value="S"</input>':'') +
+            ($("#sunday").is(':checked')?'<input readonly class="row-text-id" size="1" type="text" name="sunday[]" value="D"</input>':'') ;
 
-        var lunch='<input readonly class="row-text" type="text" name="startLunchPost[]" value="'+$('#startLunch').val()+'"></input> - '+
-            '<input readonly class="row-text" type="text" name="endLunchPost[]" value="'+$('#endLunch').val()+'"></input>';
+        var shift='<input readonly class="row-text" size="8" type="text" name="startWorkPost[]" value="'+$('#startWork').val()+'"></input> - '+
+                '<input readonly class="row-text" size="8" type="text" name="endWorkPost[]" value="'+$('#endWork').val()+'"></input>';
+
+        var lunch='<input readonly class="row-text" size="8" type="text" name="startLunchPost[]" value="'+$('#startLunch').val()+'"></input> - '+
+                '<input readonly class="row-text" size="8" type="text" name="endLunchPost[]" value="'+$('#endLunch').val()+'"></input>';
 
         var service='<input readonly class="row-text" type="text" name="service[]" value="'+$('#services').select2('data').text+'"></input>';
 
         var html='<tr><td>'+number+'</td>'+
                 '<td>'+validity+'</td>'+
+                '<td>'+days+'</td>'+
                 '<td>'+shift+'</td>'+
                 '<td>'+lunch+'</td>'+
                 '<td>'+service+'</td>'+

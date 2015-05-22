@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="limpium" uploadOnCheckin="73b50a6f-75da-484a-80b3-1f19d7f3e1a3">
+    <serverData>
+      <paths name="limpium">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/var/www/limpium" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="limpium" />
+  </component>
+</project>

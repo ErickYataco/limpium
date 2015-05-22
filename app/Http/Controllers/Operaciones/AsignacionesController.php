@@ -1,5 +1,6 @@
 <?php namespace TORUSlimpium\Http\Controllers\operaciones;
 
+use Illuminate\Support\Facades\Input;
 use TORUSlimpium\Http\Requests;
 use TORUSlimpium\Http\Controllers\Controller;
 
@@ -8,6 +9,7 @@ use TORUSlimpium\Models\Assignment;
 use TORUSlimpium\Models\Contract;
 use TORUSlimpium\Models\Worker;
 use TORUSlimpium\Models\Parameters;
+use TORUSlimpium\Models\Workplace;
 
 class AsignacionesController extends Controller {
 
@@ -18,13 +20,9 @@ class AsignacionesController extends Controller {
 	 */
 	public function index()
 	{
-        $assignments=Assignment::all();
-        /*$assignments=Assignment::all()->worker();
-        dd($assignments);*/
-
-        $contract=Contract::where('id',1)->first();
         $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
-        return view('operaciones.asignacion')->with('assignments',$assignments)->with('contract',$contract)->with('departments',$departments);
+        $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
+        return view('operaciones.asignacion')->with('departments',$departments)->with('services', $services);
 	}
 
 	/**
@@ -55,11 +53,14 @@ class AsignacionesController extends Controller {
 	 */
 	public function show($id)
 	{
-        $data = Worker::whereHas('assignments', function($q) use($id) {
-            $q->where('workplace_id', '=', $id);
-        })->get();
-        dd($data);
-        return view('operaciones.asignacion');
+//        $assignments=Assignment::with('worker.attachments','attendance')->get();
+//        dd($assignments);
+        $assignments=Assignment::with('worker.attachments','attendance')->paginate(8);
+        $contract=Contract::with('enterprise')->where('id',1)->first();
+        $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
+        $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
+        return view('operaciones.asignacion')->with('assignments',$assignments)->with('contract',$contract)->with('departments',$departments)
+                ->with('services', $services)->with('contract', $contract);
 	}
 
 	/**
@@ -94,5 +95,22 @@ class AsignacionesController extends Controller {
 	{
 		//
 	}
+
+    public function findBackups()
+    {
+        $workers = Worker::with('attachments')->where('department_id',Input::get('department_id'))
+            ->where('province_id',Input::get('province_id'))->where('district_id',Input::get('district_id'))->paginate(5);
+
+        return response()->json(view('operaciones.backupList', array('workers' => $workers))->render());
+    }
+
+    public function findRequirements()
+    {
+
+        $contracts=Contract::where('workplace_id',Input::get('workplace_id'))->where('service_id',Input::get('service_id'))->paginate(8);
+        //$contracts = Worker::with('attachments')->paginate(8);
+
+        return response()->json(view('operaciones.requirementsList', array('id'=>Input::get('workplace_id'),'contracts' => $contracts))->render());
+    }
 
 }

@@ -104,6 +104,7 @@
 			unhighlight: function (element) {
 				$(element).closest('.form-group').removeClass('has-error');
 			},
+            excluded: [':disabled'],
 			errorElement: 'span',
 			errorClass: 'help-block',
 			errorPlacement: function (error, element) {

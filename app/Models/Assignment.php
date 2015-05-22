@@ -13,4 +13,8 @@ class Assignment extends Model {
     {
         return $this->belongsTo('TORUSlimpium\Models\Worker');
     }
+    public function attendance()
+    {
+        return $this->hasMany('TORUSlimpium\Models\Attendance')->where('day_attendance',date("Y-m-d"));
+    }
 }

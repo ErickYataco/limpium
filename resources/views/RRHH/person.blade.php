@@ -3,6 +3,22 @@
 @section('css')
     <link href="{{ asset('css/theme-1/libs/wizard/wizard.css?1425466601') }}" rel="stylesheet">
     <link href="{{ asset('css/theme-1/libs/select2/select2.css?1424887856') }}" rel="stylesheet">
+    <style>
+
+        .row-text:focus{
+            outline:none;
+        }
+        .row-text{
+            background-color: transparent;
+            border: 0px solid;
+            /*width:80px;*/
+        }
+        .row-text-id{
+            background-color: transparent;
+            border: 0px solid;
+        }
+
+    </style>
 @stop
 @section('content')
     <!-- BEGIN CONTENT-->
@@ -92,13 +108,13 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            {!!Form::select('maritalstatus', $maritalStatus, null, array('class' => 'form-control select2-list','required'=>'required'))!!}
+                                                            {!!Form::select('maritalstatus', $maritalStatus, null, array('class' => 'form-control','required'=>'required'))!!}
                                                             <label for="maritalstatus" class="control-label">Estado Civil</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="nacimiento" data-inputmask="'mask': 'd/m/y'" required>
+                                                            <input type="text" class="form-control" name="nacimiento" data-rule-date="true" data-inputmask="'mask': 'd/m/y'" required>
                                                             <label for="nacimiento" class="control-label">Fecha de Nacimiento</label>
                                                         </div>
                                                     </div>
@@ -107,19 +123,19 @@
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            <input type="text" name="emergencyperson" class="form-control" data-rule-minlength="2" required>
+                                                            <input type="text" name="emergencyperson" class="form-control" data-rule-minlength="10" required>
                                                             <label for="emergencyperson" class="control-label">En Emergencias llamar</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            <input type="text" name="emergencyphone" class="form-control" data-rule-minlength="2" required>
+                                                            <input type="text" name="emergencyphone" class="form-control"  data-rule-minlength="7" required>
                                                             <label for="emergencyphone" class="control-label">Telefono a llamar</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            {!!Form::select('vinculo', $emergency, null, array('class' => 'form-control select2-list','required'=>'required'))!!}
+                                                            {!!Form::select('vinculo', $emergency, null, array('class' => 'form-control','required'=>'required'))!!}
                                                             <label for="vinculo" class="control-label">Vinculo</label>
                                                         </div>
                                                     </div>
@@ -147,7 +163,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <div>
                                                                 <label class="radio-inline radio-styled">
@@ -159,7 +175,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <div class="checkbox checkbox-styled">
                                                                 <label>
@@ -169,12 +185,18 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            {!!Form::select('job_title', $job_title, null, array('class' => 'form-control','required'=>'required'))!!}
+                                                            <label for="job_title" class="control-label">Posicion</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div><!--end #step1 -->
                                             <div class="tab-pane" id="step2">
                                                 <br/>
                                                 <div class="form-group">
-                                                    <input type="text" name="address" class="form-control" data-rule-email="true" required>
+                                                    <input type="text" name="address" class="form-control" data-rule-minlength="10" required>
                                                     <label for="address" class="control-label">Direccion</label>
                                                 </div>
                                                 <div class="row">
@@ -187,16 +209,18 @@
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
                                                             {{--{!!Form::select('province', $provinces, null, array('id'=>'province','class' => 'form-control select2-list','required'=>'required'))!!}--}}
-                                                            <div class="form-control " name="province" id="province" >
-                                                            </div>
+                                                            {{--<div class="form-control " name="province" id="province" >
+                                                            </div>--}}
+                                                            <select id="province" class="form-control" name="province" required></select>
                                                             <label for="province" class="control-label">Provincia</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
                                                             {{--{!!Form::select('district', $districts, null, array(id'=>'departments','class' => 'form-control select2-list','required'=>'required'))!!}--}}
-                                                            <div class="form-control " name="district" id="district" >
-                                                            </div>
+                                                            {{--<div class="form-control " name="district" id="district" >
+                                                            </div>--}}
+                                                            <select id="district" class="form-control" name="district" required></select>
                                                             <label for="district" class="control-label">Distrito</label>
                                                         </div>
                                                     </div>
@@ -209,20 +233,20 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="form-group">
-                                                        <input type="text" name="reference"  class="form-control" required>
+                                                        <input type="text" name="reference"  class="form-control" data-rule-minlength="10" required>
                                                         <label for="reference" class="control-label">Referencia</label>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" name="sizetshirt" class="form-control" required="" data-rule-minlength="5">
+                                                            <input type="text" name="sizetshirt" class="form-control" required="" >
                                                             <label for="sizetshirt" class="control-label">Talla Polo</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" name="sizepant"  class="form-control" required="">
+                                                            <input type="text" name="sizepant"  class="form-control" data-rule-digits="true" required="">
                                                             <label for="sizepant" class="control-label">Talla Pantalon</label>
                                                         </div>
                                                     </div>
@@ -234,7 +258,7 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" name="sizeshoes"  class="form-control" required>
+                                                            <input type="text" name="sizeshoes"  class="form-control" data-rule-digits="true" required>
                                                             <label for="sizeshoes" class="control-label">Talla Zapato</label>
                                                         </div>
                                                     </div>
@@ -242,15 +266,93 @@
                                             </div><!--end #step2 -->
                                             <div class="tab-pane" id="step3">
                                                 <br/><br/>
-                                                <div class="form-group">
-                                                    <input type="text" name="url2" id="url2" class="form-control" data-rule-url="true" required="">
-                                                    <label for="url2" class="control-label">URL</label>
-                                                    <p class="help-block">Starts with http:// </p>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id='first_name_relative' name="firs_name_relative" required>
+                                                            <label for="firs_name_relative" class="control-label">Primer Nombre Familiar</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id='second_name_relative' name="second_name_relative" required>
+                                                            <label for="second_name_relative" class="control-label">Segundo Nombre Familiar</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id='first_last_name_relative' name="first_last_name_relative" required>
+                                                            <label for="first_last_name_relative" class="control-label">Apellido Paterno Familiar</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id='second_last_name_relative' name="second_last_name_relative" required>
+                                                            <label for="second_last_name_relative" class="control-label">Apellido Materno Familiar</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <input type="text" name="rangelength2" id="rangelength2" class="form-control" data-rule-rangelength="[5, 10]" required="">
-                                                    <label for="rangelength2" class="control-label">Range restriction</label>
-                                                    <p class="help-block">Between 5 and 10 </p>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id='birthdate_relative' name="birthdate_relative" data-rule-date="true" data-inputmask="'mask': 'd/m/y'" required>
+                                                            <label for="birthdate_relative" class="control-label">Fecha de Nacimiento</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id='occupation_relative' name="occupation_relative" required>
+                                                            <label for="occupation_relative" class="control-label">Ocupacion</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id='workplace_relative' name="workplace_relative" required>
+                                                            <label for="workplace_relative" class="control-label">Centro Laboral</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id='phone_relative' name="phone_relative" required>
+                                                            <label for="phone_relative" class="control-label">Telefono Familiar</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            {!!Form::select('relationship_relative', $emergency, null, array('id'=>'relationship_relative','class' => 'form-control','required'=>'required'))!!}
+                                                            <label for="relationship_relative" class="control-label">Telefono Familiar</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <button type="button" id="btnAddTable" class="btn btn-raised btn-primary ink-reaction btn-block">
+                                                        <span class="pull-left">
+                                                            <i class="md md-add-box"></i>
+                                                        </span> Familiares
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <br/><br/>
+                                                    <table id="relative" class="table table-bordered table-hover ">
+                                                        <thead class="style-accent-dark">
+                                                        <tr >
+                                                            <th>Familiar</th>
+                                                            <th>Nacimiento</th>
+                                                            <th>Parentesco</th>
+                                                            <th>Ocupacion</th>
+                                                            <th>Centro Laboral</th>
+                                                            <th>Telefono</th>
+                                                            <th class="text-center" width="20px" ></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div><!--end #step3 -->
                                             <div class="tab-pane" id="step4">
@@ -258,7 +360,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            <input name="salary" type="text" class="form-control" data-inputmask="'mask': '(99) (9) 999-999-999'" required>
+                                                            <input name="salary" type="text" class="form-control" data-rule-digits="true" required>
                                                             <label for="salary" class="control-label">Sueldo Básico (S/.)</label>
                                                         </div>
                                                     </div>
@@ -271,7 +373,7 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            {!!Form::select('bank', $banks, null, array('class' => 'form-control select2-list','required'=>'required'))!!}
+                                                            {!!Form::select('bank', $banks, null, array('class' => 'form-control','required'=>'required'))!!}
                                                             <label for="bank" class="control-label">Banco</label>
                                                         </div>
                                                     </div>
@@ -288,7 +390,7 @@
                                 </div><!--end #rootwizard -->
                             </div><!--end .card-body -->
                         </div><!--end .card -->
-                        <em class="text-caption">Form wizard with validation</em>
+                        <em class="text-caption">Cada dato es valioso para los siguientes procesos</em>
                         </form>
                     </div><!--end .col -->
                 </div><!--end .row -->
@@ -314,7 +416,13 @@
    <script type="text/javascript">
        jQuery(function(){
 
-           $("#department").select2().on("change", function(e) {
+           $('input[type=text]').on('keydown', function(e) {
+               if (e.which == 13) {
+                   return false;
+               }
+           });
+
+           /*$("#department").select2().on("change", function(e) {
                $.getJSON('/find-province?data='+ e.val, function(opts){
                    $("#province").select2({
                        data: opts
@@ -326,6 +434,72 @@
                        });
 
                    });
+               });
+           });*/
+
+           $( "#btnAddTable").click(function(){
+
+               var form=$('#formCreate');
+               var valid = form.valid();
+               if(!valid) {
+                   form.data('validator').focusInvalid();
+                   return false;
+               }
+
+               var relative='<input readonly class="row-text-id" size="13" type="text" name="numberPersonsPost[]" value="'+$('#first_name_relative').val()+'"></input> '+
+                       '<input readonly class="row-text-id" size="13" type="text" name="numberPersonsPost[]" value="'+$('#second_name_relative').val()+'"></input> '+
+                       '<input readonly class="row-text-id"  size="13" type="text" name="numberPersonsPost[]" value="'+$('#first_last_name_relative').val()+'"></input> '+
+                       '<input readonly class="row-text-id"  size="13" type="text" name="numberPersonsPost[]" value="'+$('#second_last_name_relative').val()+'"></input> ';
+
+               var birthday='<input readonly class="row-text" size="10" type="text" name="birthdate_relative[]" value="'+$('#birthdate_relative').val()+'"></input>';
+
+               var relationship='<input readonly class="row-text" type="text" name="relationship_relative[]" value="'+$('#relationship_relative option:selected').text()+'"></input>';
+
+               var occupation='<input readonly class="row-text" size="13" type="text" name="occupation_relative[]" value="'+$('#occupation_relative').val()+'"></input>';
+
+               var workplace='<input readonly class="row-text" size="13" type="text" name="workplace_relative[]" value="'+$('#workplace_relative').val()+'"></input>';
+
+               var phone='<input readonly class="row-text" size="10" type="text" name="phone_relative[]" value="'+$('#phone_relative').val()+'"></input>';
+
+               var html='<tr><td>'+relative+'</td>'+
+                       '<td>'+birthday+'</td>'+
+                       '<td>'+relationship+'</td>'+
+                       '<td>'+occupation+'</td>'+
+                       '<td>'+workplace+'</td>'+
+                       '<td>'+phone+'</td>'+
+                       '<td><button type="button" class="btn btn-icon-toggle delete-row" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></button></td><tr>';
+               $('#relative tbody:last').append(html);
+
+
+           });
+           $(".delete-row").live('click', function() {
+               $(this).parent().parent().fadeTo(400, 0, function () {
+                   $(this).remove();
+               });
+               return false;
+           });
+
+
+           $("#department").on("change", function(e) {
+               $.getJSON('/find-province?data='+ this.value, function(opts){
+                   var province=$("#province");
+                   province.find('option').remove();
+                   $("#district").find('option').remove();
+                   $.each(opts, function() {
+                       province.append($("<option />").val(this.id).text(this.text));
+                   });
+                   //province.addClass('dirty');
+               });
+           });
+
+           $("#province").on("change", function(e) {
+               $.getJSON('/find-district?data='+ this.value, function(opts){
+                   var district=$("#district");
+                   district.find('option').remove();
+                   $.each(opts, function() {
+                       district.append($("<option />").val(this.id).text(this.text));
+                   });
+                   //district.addClass('dirty');
                });
            });
 

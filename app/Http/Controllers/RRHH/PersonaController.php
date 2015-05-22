@@ -26,21 +26,17 @@ class PersonaController extends Controller {
 	{
         $education=array('' => '')+Parameters::where('group_id','edu')->lists('first_value', 'second_value');
         $banks=array('' => '')+Parameters::where('group_id','ban')->lists('first_value','second_value');
-        $maritalStatus=array('' => '')+Parameters::where('group_id','mar')->lists('first_value','second_value');
-        $emergency=array('' => '')+Parameters::where('group_id','vin')->lists('first_value', 'second_value');
+        $marital_status=array('' => '')+Parameters::where('group_id','mar')->lists('first_value','second_value');
+        $emergency=array('' => '')+Parameters::where('group_id','rel')->lists('first_value', 'second_value');
         $districts=array('' => '')+Parameters::where('group_id','dis')->lists('first_value', 'second_value');
         $provinces=array('' => '')+Parameters::where('group_id','pro')->lists('first_value', 'second_value');
         $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
-         //dd($provinces);
+        $job_title=array('' => '')+Parameters::where('group_id','job')->lists('first_value', 'second_value');
 
-        //$conteiner=Parameters::where('group_id','dis')->lists('first_value', 'second_value');
-//        $conteiner=Parameters::where('group_id','dis')->get();
-
-//        dd($conteiner->toArray());
-
-        return view('RRHH.person')->with('education', $education)->with('banks', $banks)->with('maritalStatus', $maritalStatus)
+        return view('RRHH.person')->with('education', $education)->with('banks', $banks)->with('maritalStatus', $marital_status)
             ->with('emergency', $emergency)->with('departments', $departments)->with('provinces', $provinces)
-            ->with('districts', $districts);
+            ->with('districts', $districts)
+            ->with('job_title', $job_title);
 	}
 
 	/**
@@ -123,11 +119,13 @@ class PersonaController extends Controller {
 
         $search=Parameters::where('group_id','pro')->where('second_value',$term)->get();
 
+        $provinces[] = ['id'=>'','text'=>''];
+
         foreach ($search as $result) {
-            $enterprises[] = ['id'=>$result->code,'text'=>$result->first_value];
+            $provinces[] = ['id'=>$result->code,'text'=>$result->first_value];
         }
 
-        return json_encode($enterprises);
+        return json_encode($provinces);
     }
 
     public function findDistrict()
@@ -136,11 +134,13 @@ class PersonaController extends Controller {
 
         $search=Parameters::where('group_id','dis')->where('second_value',$term)->get();
 
+        $districts[] = ['id'=>'','text'=>''];
+
         foreach ($search as $result) {
-            $enterprises[] = ['id'=>$result->code,'text'=>$result->first_value];
+            $districts[] = ['id'=>$result->code,'text'=>$result->first_value];
         }
 
-        return json_encode($enterprises);
+        return json_encode($districts);
     }
 
 

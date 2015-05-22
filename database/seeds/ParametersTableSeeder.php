@@ -12,14 +12,17 @@ class ParametersTableSeeder extends Seeder {
     public function run()
     {
         $data=array(
+            array('group_id'=>'job','code'=>'1','description'=>'combo posicion','first_value'=>'operario','second_value'=>'1'),
+            array('group_id'=>'job','code'=>'2','description'=>'combo posicion','first_value'=>'supervisor','second_value'=>'2'),
             array('group_id'=>'mar','code'=>'1','description'=>'combo estado civil','first_value'=>'Casad@','second_value'=>'1'),
             array('group_id'=>'mar','code'=>'2','description'=>'combo estado civil','first_value'=>'Conviviente','second_value'=>'2'),
             array('group_id'=>'mar','code'=>'3','description'=>'combo estado civil','first_value'=>'Solter@','second_value'=>'3'),
             array('group_id'=>'ser','code'=>'1','description'=>'combo tipo de servicio','first_value'=>'Limpieza','second_value'=>'1'),
-            array('group_id'=>'vin','code'=>'1','description'=>'combo vinculo emergencia','first_value'=>'Conyugue','second_value'=>'1'),
-            array('group_id'=>'vin','code'=>'2','description'=>'combo vinculo emergencia','first_value'=>'Padre/Madre','second_value'=>'2'),
-            array('group_id'=>'vin','code'=>'3','description'=>'combo vinculo emergencia','first_value'=>'Herman@','second_value'=>'3'),
-            array('group_id'=>'vin','code'=>'4','description'=>'combo vinculo emergencia','first_value'=>'Amig@','second_value'=>'4'),
+            array('group_id'=>'rel','code'=>'1','description'=>'combo vinculo familiar','first_value'=>'Conyugue','second_value'=>'1'),
+            array('group_id'=>'rel','code'=>'2','description'=>'combo vinculo familiar','first_value'=>'Padre/Madre','second_value'=>'2'),
+            array('group_id'=>'rel','code'=>'3','description'=>'combo vinculo familiar','first_value'=>'Herman@','second_value'=>'3'),
+            array('group_id'=>'rel','code'=>'4','description'=>'combo vinculo familiar','first_value'=>'Amig@','second_value'=>'4'),
+            array('group_id'=>'rel','code'=>'5','description'=>'combo vinculo familiar','first_value'=>'Hij@','second_value'=>'5'),
             array('group_id'=>'edu','code'=>'1','description'=>'combo Educacion','first_value'=>'Educacion Basica','second_value'=>'1'),
             array('group_id'=>'edu','code'=>'2','description'=>'combo Educacion','first_value'=>'Educacion Superior','second_value'=>'2'),
             array('group_id'=>'edu','code'=>'3','description'=>'combo Educacion','first_value'=>'Primaria completa','second_value'=>'3'),

@@ -5,9 +5,9 @@ use Illuminate\Database\Eloquent\Model;
 class Workplace extends Model {
 
 
-    public function assignment()
+    public function enterprise()
     {
-        return $this->belongsToMany('TORUSlimpium\Models\Role');
+        return $this->belongsTo('TORUSlimpium\Models\Enterprise');
     }
 
 }

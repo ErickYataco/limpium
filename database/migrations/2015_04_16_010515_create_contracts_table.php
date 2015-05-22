@@ -17,7 +17,7 @@ class CreateContractsTable extends Migration {
             $table->increments('id');
             $table->integer('enterprise_id');
             $table->integer('workplace_id');
-            $table->integer('services_id');
+            $table->integer('service_id');
             $table->dateTime('start_contract');
             $table->dateTime('end_contract');
             $table->integer('workers');
@@ -25,6 +25,13 @@ class CreateContractsTable extends Migration {
             $table->string('end_work');
             $table->string('start_lunch');
             $table->string('end_lunch');
+            $table->boolean('monday');
+            $table->boolean('tuesday');
+            $table->boolean('wednesday');
+            $table->boolean('thursday');
+            $table->boolean('friday');
+            $table->boolean('saturday');
+            $table->boolean('sunday');
             $table->timestamps();
         });
 	}
