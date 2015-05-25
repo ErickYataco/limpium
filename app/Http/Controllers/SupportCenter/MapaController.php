@@ -14,7 +14,7 @@ class MapaController extends Controller {
 	 */
 	public function index()
 	{
-        return view('operaciones.mapa');
+        //return view('operaciones.mapa');
 	}
 
 	/**
