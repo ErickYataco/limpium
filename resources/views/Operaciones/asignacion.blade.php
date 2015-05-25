@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Asignacion Colaboradores')
+@section('title','Backups')
 @section('css')
 
     <link href="{{ asset('css/theme-1/libs/wizard/wizard.css?1425466601') }}" rel="stylesheet">
@@ -20,7 +20,7 @@
         <section>
             <div class="section-header">
                 <ol class="breadcrumb">
-                    <li class="active">Asignacion de Personal</li>
+                    <li class="active">Soporte/Backups</li>
                 </ol>
             </div>
             <div class="section-body ">
@@ -28,7 +28,7 @@
 
                     <!-- BEGIN SEARCH HEADER -->
                     <div class="card-head style-primary">
-                        <header>Asignacion</header>
+                        <header>Backups</header>
                         <div class="tools">
                             <button href="#offcanvas-filter-contracts" data-toggle="offcanvas" id="searchLocal" class="btn btn-raised btn-floating-action btn-default-light"><i class="fa fa-search"></i></button>
                         </div>
@@ -38,7 +38,7 @@
                     <!-- BEGIN SEARCH RESULTS -->
                     <div class="card-body">
                         <div class="row">
-                            <!-- BEGIN CONTACTS COMMON DETAILS -->
+                            <!-- BEGIN CONTRACT DETAILS -->
                             <div class="hbox-column col-md-2 style-default-light">
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -95,13 +95,11 @@
                                     </div><!--end .col -->
                                 </div><!--end .row -->
                             </div><!--end .hbox-column -->
-                            <!-- END CONTACTS COMMON DETAILS -->
-
-
+                            <!-- END CONTRACT DETAILS -->
                             <div class="col-sm-8 col-md-9 ">
                                 <!-- BEGIN SEARCH RESULTS LIST -->
                                 <div class="margin-bottom-xxl">
-                                    <span class="text-light text-lg">Personal Asignado <strong>20</strong> Faltantes <strong>10</strong></span>
+                                    <span class="text-light text-lg">Personal Asignado {{--<strong>20</strong> Faltantes <strong>10</strong>--}}</span>
                                     <div class="btn-group btn-group-sm pull-right">
                                         <button type="button" class="btn btn-default-light dropdown-toggle" data-toggle="dropdown">
                                             <span class="glyphicon glyphicon-arrow-down"></span> Ordenar
@@ -134,6 +132,7 @@
                                                         <div class="clearfix">
                                                             <div class="col-lg-12 margin-bottom-lg">
                                                                 <a class="text-lg text-medium worker-details" href="#offcanvas-details-worker" data-toggle="offcanvas">{{$assignment->worker->full_name}}</a>
+                                                               {{$assignment->id}}
                                                             </div>
                                                         </div>
                                                         <div class="clearfix opacity-75">
@@ -142,9 +141,18 @@
                                                             </div>
                                                             <div class="col-md-7">
                                                                 @if(count($assignment->attendance)>0)
+                                                                    {{$assignment->attendance->first()->id}}
                                                                     <span class="md md-schedule text-sm"></span> {{$assignment->attendance->first()->start_work_hour}}
                                                                 @else
-                                                                    <span class="md md-schedule text-sm"></span> AUSENTE
+                                                                    @if($assignment->type_assignment==1)
+                                                                        <span class="md md-schedule text-sm"></span> AUSENTE
+                                                                    @endif
+                                                                    @if($assignment->type_assignment==2)
+                                                                        <span class="md md-schedule text-sm"></span> BACKUP - AUSENTE
+                                                                    @endif
+                                                                    @if($assignment->type_assignment==3)
+                                                                        <span class="md md-schedule text-sm"></span> REEMPLAZADO
+                                                                    @endif
                                                                 @endif
 
                                                             </div>
@@ -161,7 +169,15 @@
                                                             @if(count($assignment->attendance)>0)
                                                                 <i class="fa fa-check-circle fa-2x text-success"></i>
                                                             @else
-                                                                <i class="fa fa-info-circle fa-2x text-danger"></i>
+                                                                @if($assignment->type_assignment==1)
+                                                                    <i class="fa fa-info-circle fa-2x text-danger"></i>
+                                                                @endif
+                                                                @if($assignment->type_assignment==2)
+                                                                        <span class="fa fa-user-plus fa-2x  text-info"></span>
+                                                                @endif
+                                                                @if($assignment->type_assignment==3)
+                                                                    <span class="fa fa-minus-circle fa-2x text-warning"></span>
+                                                                @endif
                                                             @endif
 
                                                         </div>
@@ -213,7 +229,7 @@
                     <div class="col-sm-9">
                         <div class="form-group">
                             {!! Form::text('enterprise', null, array('id' => 'enterprise','class' => 'form-control input-sm', 'data-rule-minlength' => '2', 'required')) !!}
-                            <input type="hidden" name="enterprise_id" id="workplace_id" value="">
+                            <input type="hidden" name="enterprise_id" id="enterprise_id" value="">
                         </div>
                     </div>
                 </div>
@@ -370,42 +386,50 @@
                     <strong id="name-backup-details" class="text-xxxl text-default-bright">Sin Asignar</strong>
                 </div>
             </div>
-            <div class="offcanvas-body">
-                <div class="row">
-                    <div class="hbox-column col-sm-12 style-default-light">
-                        <h4>Remplazara a:</h4>
-                        <ul class="list ">
-                            <li class="tile">
-                                <a class="tile-content ink-reaction "  data-backdrop="false">
-                                    <div class="tile-icon">
-                                        <img id="replace-image" class="img-circle img-responsive pull-left width-4" src="" alt="" />
-                                    </div>
-                                    <div class="tile-text">
-                                        <span id="replace-name" class="text-medium" >aa</span><br/>
-                                        <span class="opacity-50 col-sm-6 ">
-                                            <span class="text-small glyphicon glyphicon-phone text-sm"></span>&nbsp;<span id="replace-phone"></span>
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
+            {!! Form::open(array('url' => '/soporte/backups', 'id'=>'formCreate','method' => 'post','role' => 'form', 'novalidate'=>'novalidate', 'class'=>'form floating-label form-validation'))!!}
+                <div class="offcanvas-body">
+                    <div class="row">
+                        <div class="hbox-column col-sm-12 style-default-light">
+                            <h4>Remplazara a:</h4>
+                            <ul class="list ">
+                                <li class="tile">
+                                    <a class="tile-content ink-reaction"  data-backdrop="false">
+                                        <div class="tile-icon">
+                                            <img id="replace-image" class="img-circle img-responsive pull-left width-4" src="" alt="" />
+                                        </div>
+                                        <div class="tile-text">
+                                            <span id="replace-name" class="text-medium" >aa</span><br/>
+                                            <span class="opacity-50 col-sm-6 ">
+                                                <span class="text-small glyphicon glyphicon-phone text-sm"></span>&nbsp;<span id="replace-phone"></span>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    <input type="hidden" name="replacer_worker_id" id="replacer_worker_id" value="">
+                    <input type="hidden" name="replaced_worker_id" id="replaced_worker_id" value="">
+                    <input type="hidden" name="assignment_id" id="assignment_id" value="">
+                    <h4>Informacion</h4>
+                    <ul class="list-divided">
+                        <li><strong>Posicion</strong><br/><span class="glyphicon glyphicon-user text-sm"></span> &nbsp;<span id="job-backup-details">Sin Asignar</span></li>
+                        <li><strong>Telefono</strong><br/><span class="glyphicon glyphicon-phone-alt text-sm"></span>&nbsp;<span id="phone-backup-details">Sin Asignar</span></li>
+                        <li><strong>Direccion</strong><br/><span class="opacity-75"><span class="glyphicon glyphicon-map-marker text-sm"></span>&nbsp;<span id="address-backup-details">Sin Asignar</span></li>
+                    </ul>
                 </div>
-                <h4>Informacion</h4>
-                <ul class="list-divided">
-                    <li><strong>Posicion</strong><br/><span class="glyphicon glyphicon-user text-sm"></span> &nbsp;<span id="job-backup-details">Sin Asignar</span></li>
-                    <li><strong>Telefono</strong><br/><span class="glyphicon glyphicon-phone-alt text-sm"></span>&nbsp;<span id="phone-backup-details">Sin Asignar</span></li>
-                    <li><strong>Direccion</strong><br/><span class="opacity-75"><span class="glyphicon glyphicon-map-marker text-sm"></span>&nbsp;<span id="address-backup-details">Sin Asignar</span></li>
-                </ul>
-            </div>
-            <div class="force-padding stick-bottom-right ">
-                <a class="btn btn-icon-toggle btn-accent " href="#offcanvas-filter-backups" data-toggle="offcanvas">
-                    <i class="md md-arrow-back"></i>
-                </a>
-                <a class="btn btn-floating-action btn-accent " href="#offcanvas-demo-size3" data-toggle="offcanvas">
-                    <i class="md md-save"></i>
-                </a>
-            </div>
+                <div class="force-padding stick-bottom-right ">
+                    <a class="btn btn-icon-toggle btn-accent " href="#offcanvas-filter-backups" data-toggle="offcanvas">
+                        <i class="md md-arrow-back"></i>
+                    </a>
+                    {{--<a class="btn btn-floating-action btn-accent " href="#offcanvas-demo-size3" data-toggle="offcanvas">
+                        <i class="md md-save"></i>
+                    </a>--}}
+                    <button type="submit"  id="searchLocal" class="btn btn-raised btn-floating-action btn-accent">
+                        <i class="md md-save"></i>
+                    </button>
+                </div>
+            </form>
         </div>
         <!-- END OFFCANVAS BACKUP WORKER RIGHT -->
 
@@ -445,8 +469,9 @@
                         @endforeach
                         workers.push({name:"{{$assignment->worker->full_name}}",profile:(url==''?'{{asset('img/avatar640.jpg?')}}':url),
                                         face:(urlface==''?'{{asset('img/avatar1.jpg?')}}':urlface),
+                                        assignment:"{{$assignment->id}}",
                                         job:"{{$assignment->worker->job_title}}",phone:"{{$assignment->worker->mobile}}",
-                                        address:"{{$assignment->worker->full_address}}"});
+                                        address:"{{$assignment->worker->full_address}}",id:"{{$assignment->worker->id}}"});
                     @endforeach
                 @endif
             @endif
@@ -462,6 +487,8 @@
                 $("#phone-worker-details").text(worker.phone);
                 $("#replace-phone").text(worker.phone);
                 $("#address-worker-details").text(worker.address);
+                $("#replaced_worker_id").val(worker.id);
+                $("#assignment_id").val(worker.assignment);
             });
 
             $( "#btnSearchContracts").click(function(){

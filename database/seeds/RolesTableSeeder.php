@@ -13,7 +13,7 @@ class RolesTableSeeder extends Seeder {
     {
         $data=array(
             array('role_title'=>'Administrador'),
-            array('role_title'=>'Operaciones'),
+            array('role_title'=>'Central de Soporte'),
             array('role_title'=>'Recursos Humanos'),
             array('role_title'=>'Comercial'),
         );

@@ -1,4 +1,4 @@
-<?php namespace TORUSlimpium\Http\Controllers\operaciones;
+<?php namespace TORUSlimpium\Http\Controllers\SupportCenter;
 
 use Illuminate\Support\Facades\Input;
 use TORUSlimpium\Http\Requests;
@@ -11,7 +11,7 @@ use TORUSlimpium\Models\Worker;
 use TORUSlimpium\Models\Parameters;
 use TORUSlimpium\Models\Workplace;
 
-class AsignacionesController extends Controller {
+class BackupsController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -33,6 +33,33 @@ class AsignacionesController extends Controller {
 	public function create()
 	{
 		//
+
+
+        $assignment=Assignment::find(Input::get('assignment_id'));
+        $id=$assignment->contract_id;
+
+        $new_assignment=new Assignment();
+        $new_assignment->contract_id=$assignment->contract_id;
+        $new_assignment->workplace_id=$assignment->workplace_id;
+        $new_assignment->worker_id=Input::get('replacer_worker_id');
+        $new_assignment->monday=$assignment->monday;
+        $new_assignment->tuesday=$assignment->tuesday;
+        $new_assignment->wednesday=$assignment->wednesday;
+        $new_assignment->thursday=$assignment->thursday;
+        $new_assignment->friday=$assignment->friday;
+        $new_assignment->saturday=$assignment->saturday;
+        $new_assignment->sunday=$assignment->sunday;
+        $new_assignment->start_work_hour=$assignment->start_work_hour;
+        $new_assignment->end_work_hour=$assignment->end_work_hour;
+        $new_assignment->start_break_hour=$assignment->start_break_hour;
+        $new_assignment->end_break_hour=$assignment->end_break_hour;
+        $new_assignment->type_assignment=2;
+        $new_assignment->save();
+
+        $assignment->type_assignment=3;
+        $assignment->save();
+
+       return redirect('soporte/backups/requerimiento/'.$id);
 	}
 
 	/**
@@ -43,6 +70,8 @@ class AsignacionesController extends Controller {
 	public function store()
 	{
 		//
+
+
 	}
 
 	/**
@@ -53,10 +82,10 @@ class AsignacionesController extends Controller {
 	 */
 	public function show($id)
 	{
-//        $assignments=Assignment::with('worker.attachments','attendance')->get();
-//        dd($assignments);
-        $assignments=Assignment::with('worker.attachments','attendance')->paginate(8);
-        $contract=Contract::with('enterprise')->where('id',1)->first();
+       //$assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->get();
+       //dd($assignments);
+        $assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->orderBy('type_assignment','desc')->paginate(8);
+        $contract=Contract::with('enterprise')->where('id',$id)->first();
         $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
         $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
         return view('operaciones.asignacion')->with('assignments',$assignments)->with('contract',$contract)->with('departments',$departments)

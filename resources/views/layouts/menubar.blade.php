@@ -31,13 +31,13 @@
                 <li class="gui-folder">
                     <a>
                         <div class="gui-icon"><i class="fa fa-area-chart"></i></div>
-                        <span class="title">Operaciones</span>
+                        <span class="title">Central de Soporte</span>
                     </a>
                     <!--start submenu -->
                     <ul>
-                        <li><a href="/operaciones/dashboard" class="item-menu-bar"><span class="title">Dashboard</span></a></li>
-                        <li><a href="/operaciones/locales" class="item-menu-bar"><span class="title">Locales</span></a></li>
-                        <li><a href="/operaciones/asignaciones" class="item-menu-bar"><span class="title">Asignaciones</span></a></li>
+                        <li><a href="/soporte/dashboard" class="item-menu-bar"><span class="title">Dashboard</span></a></li>
+                        <li><a href="/soporte/locales" class="item-menu-bar"><span class="title">Locales</span></a></li>
+                        <li><a href="/soporte/backups" class="item-menu-bar"><span class="title">Backups</span></a></li>
                     </ul><!--end /submenu -->
                 </li><!--end /menu-li -->
                 <!-- END DASHBOARD -->
@@ -72,7 +72,7 @@
                                 <li><a href="/rrhh/colaborador/foto" ><span class="title">Foto</span></a></li>
                             </ul><!--end /submenu -->
                         </li>
-                        <li><a href="/rrhh/programacion" class="item-menu-bar"><span class="title">Programacion</span></a></li>
+                        <li><a href="/rrhh/asignacion" class="item-menu-bar"><span class="title">Asignacion</span></a></li>
                         <li><a href="/rrhh/asistencia" class="item-menu-bar" ><span class="title">Asistencia</span></a></li>
 
                     </ul><!--end /submenu -->

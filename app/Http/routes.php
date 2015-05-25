@@ -26,37 +26,37 @@ Route::controllers([
 
 
 Route::get('operaciones/mapa',[
-    'uses'=>'Operaciones\MapaController@index',
+    'uses'=>'SupportCenter\MapaController@index',
     'permission'=>'operaciones_mapa',
     'middleware'=>['auth','acl']
 ] );
 
-Route::get('operaciones/dashboard',[
-    'uses'=>'Operaciones\DashboardController@index',
+Route::get('soporte/dashboard',[
+    'uses'=>'SupportCenter\DashboardController@index',
     'permission'=>'operaciones_dasboard',
     'middleware'=>['auth','acl']
 ] );
 
-Route::get('operaciones/locales',[
-    'uses'=>'Operaciones\LocalesController@index',
+Route::get('soporte/locales',[
+    'uses'=>'SupportCenter\LocalesController@index',
     'permission'=>'operaciones_locales',
     'middleware'=>['auth','acl']
 ] );
 
-Route::get('operaciones/asignaciones',[
-    'uses'=>'Operaciones\AsignacionesController@index',
+Route::get('soporte/backups',[
+    'uses'=>'SupportCenter\BackupsController@index',
     'permission'=>'operaciones_asignaciones',
     'middleware'=>['auth','acl']
 ] );
 
-Route::post('operaciones/asignaciones',[
-    'uses'=>'Operaciones\AsignacionesController@show',
+Route::post('soporte/backups',[
+    'uses'=>'SupportCenter\BackupsController@create',
     'permission'=>'operaciones_asignaciones',
     'middleware'=>['auth','acl']
 ] );
 
-Route::get('operaciones/asignaciones/requerimiento/{id}',[
-    'uses'=>'Operaciones\AsignacionesController@show',
+Route::get('soporte/backups/requerimiento/{id}',[
+    'uses'=>'SupportCenter\BackupsController@show',
     'permission'=>'operaciones_asignaciones',
     'middleware'=>['auth','acl']
 ] );
@@ -129,9 +129,15 @@ Route::post('rrhh/colaborador/foto/face/{id}',[
 
 Route::post('form',  array('before' => 'csrf','uses'=>'PersonaController@postProfileCrop'));
 
-Route::get('rrhh/programacion',[
-    'uses'=>'RRHH\PersonaController@index',
+Route::get('rrhh/asignacion',[
+    'uses'=>'RRHH\AssignmentsController@index',
     'permission'=>'rrhh_persona_programacion',
+    'middleware'=>['auth','acl']
+] );
+
+Route::get('rrhh/asignacion/requerimiento/{id}',[
+    'uses'=>'RRHH\AssignmentsController@show',
+    'permission'=>'operaciones_asignaciones',
     'middleware'=>['auth','acl']
 ] );
 
@@ -151,8 +157,9 @@ Route::get('find-empresa','Admin\EmpresaController@find');
 Route::get('find-local','Admin\LocalController@find');
 Route::get('find-province','RRHH\PersonaController@findProvince');
 Route::get('find-district','RRHH\PersonaController@findDistrict');
-Route::get('find-backups','Operaciones\AsignacionesController@findBackups');
-Route::get('find-requirements','Operaciones\AsignacionesController@findRequirements');
+Route::get('find-backups','SupportCenter\BackupsController@findBackups');
+Route::get('find-requirements','SupportCenter\BackupsController@findRequirements');
+Route::get('find-requirements-assignment','RRHH\AssignmentsController@findRequirements');
 
 
 Route::get('comercial/buscar-empresa',[

@@ -25,7 +25,7 @@
                     </td>
                     <td>{{$contract->start_work}} - {{$contract->end_work}}</td>
                     <td>{{$contract->start_lunch}} - {{$contract->end_lunch}}</td>
-                    <td><a  href="{{url('soporte/backups/requerimiento/'.$id)}}" class="btn btn-icon-toggle"><i class="md md-open-in-browser"></i></a></td><tr>
+                    <td><a  href="{{url('rrhh/asignacion/requerimiento/'.$id)}}" class="btn btn-icon-toggle"><i class="md md-open-in-browser"></i></a></td><tr>
                 </tr>
             @endforeach
             </tbody>

@@ -58,7 +58,7 @@
                     @endforeach
                     backups.push({name:"{{$worker->full_name}}",profile:(url==''?'{{asset('img/avatar640.jpg?')}}':url),
                                 job:"{{$worker->job_title}}",phone:"{{$worker->mobile}}",
-                                address:"{{$worker->full_address}}"});
+                                address:"{{$worker->full_address}}",id:"{{$worker->id}}" });
                 @endforeach
             @endif
 
@@ -69,7 +69,8 @@
                 $("#name-backup-details").text(backup.name);
                 $("#job-backup-details").text(backup.job);
                 $("#phone-backup-details").text(backup.phone);
-                $("#address-backup-details").text(backup.address)
+                $("#address-backup-details").text(backup.address);
+                $("#replacer_worker_id").val(backup.id);
                 $('#detailBackup').trigger('click');
             });
         </script>
