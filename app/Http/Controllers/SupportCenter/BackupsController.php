@@ -88,7 +88,7 @@ class BackupsController extends Controller {
         $contract=Contract::with('enterprise')->where('id',$id)->first();
         $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
         $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
-        return view('operaciones.asignacion')->with('assignments',$assignments)->with('contract',$contract)->with('departments',$departments)
+        return view('Operaciones.asignacion')->with('assignments',$assignments)->with('contract',$contract)->with('departments',$departments)
                 ->with('services', $services)->with('contract', $contract);
 	}
 
