@@ -132,7 +132,6 @@
                                                         <div class="clearfix">
                                                             <div class="col-lg-12 margin-bottom-lg">
                                                                 <a class="text-lg text-medium worker-details" href="#offcanvas-details-worker" data-toggle="offcanvas">{{$assignment->worker->full_name}}</a>
-                                                               {{$assignment->id}}
                                                             </div>
                                                         </div>
                                                         <div class="clearfix opacity-75">
@@ -141,7 +140,6 @@
                                                             </div>
                                                             <div class="col-md-7">
                                                                 @if(count($assignment->attendance)>0)
-                                                                    {{$assignment->attendance->first()->id}}
                                                                     <span class="md md-schedule text-sm"></span> {{$assignment->attendance->first()->start_work_hour}}
                                                                 @else
                                                                     @if($assignment->type_assignment==1)
