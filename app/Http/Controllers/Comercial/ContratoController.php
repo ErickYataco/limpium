@@ -20,7 +20,7 @@ class ContratoController extends Controller {
 	public function index()
 	{
         $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
-        return view('comercial.contrato')->with('services', $services);
+        return view('Comercial.contrato')->with('services', $services);
 	}
 
 	/**
@@ -72,7 +72,7 @@ class ContratoController extends Controller {
         }
         $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
 
-        return view('comercial.contrato')->with('message', 'success')->with('services', $services);
+        return view('Comercial.contrato')->with('message', 'success')->with('services', $services);
 	}
 
 	/**
