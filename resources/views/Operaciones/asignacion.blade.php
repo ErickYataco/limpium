@@ -99,7 +99,7 @@
                             <div class="col-sm-8 col-md-9 ">
                                 <!-- BEGIN SEARCH RESULTS LIST -->
                                 <div class="margin-bottom-xxl">
-                                    <span class="text-light text-lg">Personal Asignado {{date_default_timezone_set("America/Lima")}} {{date("H:i:s")}}{{--<strong>20</strong> Faltantes <strong>10</strong>--}}</span>
+                                    <span class="text-light text-lg">Personal Asignado  {{date("H:i:s")}}{{--<strong>20</strong> Faltantes <strong>10</strong>--}}</span>
                                     <div class="btn-group btn-group-sm pull-right">
                                         <button type="button" class="btn btn-default-light dropdown-toggle" data-toggle="dropdown">
                                             <span class="glyphicon glyphicon-arrow-down"></span> Ordenar
