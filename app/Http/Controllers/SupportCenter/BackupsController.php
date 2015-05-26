@@ -130,7 +130,7 @@ class BackupsController extends Controller {
         $workers = Worker::with('attachments')->where('department_id',Input::get('department_id'))
             ->where('province_id',Input::get('province_id'))->where('district_id',Input::get('district_id'))->paginate(5);
 
-        return response()->json(view('operaciones.backupList', array('workers' => $workers))->render());
+        return response()->json(view('Operaciones.backupList', array('workers' => $workers))->render());
     }
 
     public function findRequirements()
@@ -139,7 +139,7 @@ class BackupsController extends Controller {
         $contracts=Contract::where('workplace_id',Input::get('workplace_id'))->where('service_id',Input::get('service_id'))->paginate(8);
         //$contracts = Worker::with('attachments')->paginate(8);
 
-        return response()->json(view('operaciones.requirementsList', array('id'=>Input::get('workplace_id'),'contracts' => $contracts))->render());
+        return response()->json(view('Operaciones.requirementsList', array('id'=>Input::get('workplace_id'),'contracts' => $contracts))->render());
     }
 
 }
