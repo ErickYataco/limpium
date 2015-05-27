@@ -126,7 +126,7 @@
                                                             @endif
                                                         @endforeach
                                                         @if($i==0)
-                                                                    <img class="img-circle img-responsive pull-left" src="{{asset('img/avatar9.jpg')}}" alt="" />
+                                                                    <img class="img-circle img-responsive pull-left" src="{{asset('img/avatar8.jpg')}}" alt="" />
                                                         @endif
                                                     </div><!--end .hbox-column -->
                                                     <div class="hbox-column v-top">
