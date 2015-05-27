@@ -12,7 +12,8 @@ class ContractsTableSeeder extends Seeder {
     public function run()
     {
         $data=array(
-            array('enterprise_id'=>'1','workplace_id'=>'1','service_id'=>'1','workers'=>'10','start_work'=>'8:00 am','end_work'=>'5:00 pm'),
+            array('enterprise_id'=>'1','workplace_id'=>'1','service_id'=>'1','workers'=>'10','start_work'=>'8:00 am','end_work'=>'5:00 pm',
+                'monday'=>'1','tuesday'=>'1','wednesday'=>'1','thursday'=>'1','friday'=>'1',),
         );
 
         \DB::table('contracts')->insert($data);

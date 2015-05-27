@@ -19,11 +19,16 @@
             <ul id="main-menu" class="gui-controls">
 
                 <!-- BEGIN ADMIN -->
-                <li>
-                    <a href="../../html/dashboards/dashboard.html" >
+                <li class="gui-folder">
+                    <a>
                         <div class="gui-icon"><i class="md md-home"></i></div>
                         <span class="title">Admin  </span>
                     </a>
+                    <!--start submenu -->
+                    <ul>
+                        <li><a href="/admin/empresa" class="item-menu-bar"><span class="title">Empresa</span></a></li>
+                        <li><a href="/admin/locales" class="item-menu-bar"><span class="title">Locales</span></a></li>
+                    </ul><!--end /submenu -->
                 </li><!--end /menu-li -->
                 <!-- END ADMIN-->
 

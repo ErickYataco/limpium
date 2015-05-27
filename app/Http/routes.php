@@ -153,6 +153,30 @@ Route::post('comercial/contrato',[
     'middleware'=>['auth','acl']
 ] );
 
+Route::get('admin/empresa',[
+    'uses'=>'Admin\EmpresaController@index',
+    'permission'=>'rrhh_persona',
+    'middleware'=>['auth','acl']
+] );
+
+Route::post('admin/empresa',[
+    'uses'=>'Admin\EmpresaController@create',
+    'permission'=>'rrhh_persona',
+    'middleware'=>['auth','acl']
+] );
+
+Route::get('admin/locales',[
+    'uses'=>'Admin\LocalController@index',
+    'permission'=>'rrhh_persona',
+    'middleware'=>['auth','acl']
+] );
+
+Route::post('admin/locales',[
+    'uses'=>'Admin\LocalController@create',
+    'permission'=>'rrhh_persona',
+    'middleware'=>['auth','acl']
+] );
+
 Route::get('find-empresa','Admin\EmpresaController@find');
 Route::get('find-local','Admin\LocalController@find');
 Route::get('find-province','RRHH\PersonaController@findProvince');
@@ -160,6 +184,7 @@ Route::get('find-district','RRHH\PersonaController@findDistrict');
 Route::get('find-backups','SupportCenter\BackupsController@findBackups');
 Route::get('find-requirements','SupportCenter\BackupsController@findRequirements');
 Route::get('find-requirements-assignment','RRHH\AssignmentsController@findRequirements');
+Route::get('find-workers','RRHH\AssignmentsController@findWorkers');
 
 
 Route::get('comercial/buscar-empresa',[

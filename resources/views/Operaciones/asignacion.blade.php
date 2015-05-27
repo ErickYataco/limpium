@@ -111,6 +111,7 @@
                                         </ul>
                                     </div>
                                 </div><!--end .margin-bottom-xxl -->
+
                                 <div class="list-results">
                                     @if(isset($assignments))
                                         @if(count($assignments)>0)

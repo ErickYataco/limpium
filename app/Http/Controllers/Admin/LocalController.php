@@ -17,6 +17,7 @@ class LocalController extends Controller {
 	public function index()
 	{
 		//
+        return view('Admin.workplaces');
 	}
 
 	/**
@@ -27,6 +28,13 @@ class LocalController extends Controller {
 	public function create()
 	{
 		//
+        $workplace=new Workplace();
+        $workplace->enterprise_id=Input::get('enterprise_id');
+        $workplace->address=Input::get('address');
+        $workplace->reference=Input::get('reference');
+        $workplace->name=Input::get('local');
+        $workplace->save();
+        return view('Admin.workplaces');
 	}
 
 	/**

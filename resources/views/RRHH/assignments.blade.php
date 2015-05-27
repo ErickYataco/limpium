@@ -6,7 +6,7 @@
     <link href="{{ asset('css/theme-1/libs/select2/select2.css?1424887856') }}" rel="stylesheet">
     <link href="{{ asset('css/theme-1/libs/jquery-ui/jquery-ui-theme.css?1423393666') }}" rel="stylesheet">
     <link href="{{ asset('css/theme-1/libs/toastr/toastr.css?1425466569') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/theme-1/libs/fullcalendar/fullcalendar.css?1425466619') }}" rel="stylesheet">
     <style>
         .ui-autocomplete {
             z-index: 5000;
@@ -119,74 +119,159 @@
                             </div><!--end .hbox-column -->
                             <!-- END CONTRACT DETAILS -->
                             <div class="col-sm-8 col-md-9 ">
-                                <div class="list-results">
-                                    @if(isset($assignments))
-                                        @if(count($assignments)>0)
-                                            @foreach ($assignments as $assignment)
-                                                <div class="col-xs-12 col-lg-6 hbox-xs">
-                                                    <div class="hbox-column width-2">
-                                                        <?php $i=0 ?>
-                                                        @foreach ($assignment->worker->attachments as $attachment)
-                                                            @if($attachment->type==2)
-                                                                <?php $i++ ?>
-                                                                <img class="img-circle img-responsive pull-left" src="{{$attachment->url}}" alt="" />
-                                                            @endif
-                                                        @endforeach
-                                                        @if($i==0)
-                                                            <img class="img-circle img-responsive pull-left" src="{{asset('img/avatar9.jpg')}}" alt="" />
-                                                        @endif
-                                                    </div><!--end .hbox-column -->
-                                                    <div class="hbox-column v-top">
-                                                        <div class="clearfix">
-                                                            <div class="col-lg-12 margin-bottom-lg">
-                                                                <a class="text-lg text-medium worker-details" href="#offcanvas-details-worker" data-toggle="offcanvas">{{$assignment->worker->full_name}}</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="clearfix opacity-75">
-                                                            <div class="col-md-5">
-                                                                <span class="glyphicon glyphicon-phone text-sm"></span> {{$assignment->worker->mobile}}
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                @if(count($assignment->attendance)>0)
-                                                                    <span class="md md-schedule text-sm"></span> {{$assignment->attendance->first()->start_work_hour}}
-                                                                @else
-                                                                    <span class="md md-schedule text-sm"></span> AUSENTE
-                                                                @endif
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="fc fc-ltr fc-unthemed" id="calendar">
+                                                <div style="" class="fc-view-container">
+                                                    <div style="" class="fc-view fc-agendaWeek-view fc-agenda-view">
+                                                        <!--begin days of week-->
+                                                        <table>
+                                                            <thead>
+                                                            <tr>
+                                                                <td class="fc-widget-header">
+                                                                    <div style="border-right-width: 1px; margin-right: 16px;" class="fc-row fc-widget-header">
+                                                                        <table>
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th style="width: 38px;" class="fc-axis fc-widget-header">
+                                                                                    <div class="tools1">
+                                                                                        <a class="btn btn-floating-action btn-sm btn-primary-dark" data-toggle="modal" data-target="#formModal" >
+                                                                                            <i class="fa fa-plus"></i>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </th>
+                                                                                <th class="fc-day-header fc-widget-header fc-sun">Lunes</th>
+                                                                                <th class="fc-day-header fc-widget-header fc-mon">Martes</th>
+                                                                                <th class="fc-day-header fc-widget-header fc-tue">Miercoles</th>
+                                                                                <th class="fc-day-header fc-widget-header fc-wed">Jueves</th>
+                                                                                <th class="fc-day-header fc-widget-header fc-thu">Viernes</th>
+                                                                                <th class="fc-day-header fc-widget-header fc-fri">Sabado</th>
+                                                                                <th class="fc-day-header fc-widget-header fc-sat">Domingo</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                        </table>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td class="fc-widget-content">
+                                                                    <div class="fc-day-grid">
+                                                                    </div>
+                                                                    <hr class="fc-widget-header">
+                                                                    <div style="" class="fc-time-grid-container fc-scroller">
+                                                                        <div class="fc-time-grid">
+                                                                            <div class="fc-bg">
+                                                                                <table>
+                                                                                    <tbody>
+                                                                                    <tr>
+                                                                                        <td style="width: 38px;" class="fc-axis fc-widget-content"></td>
+                                                                                        <td class="fc-day fc-widget-content fc-sun fc-past" data-date="2015-04-19"></td>
+                                                                                        <td class="fc-day fc-widget-content fc-mon fc-past" data-date="2015-04-20"></td>
+                                                                                        <td class="fc-day fc-widget-content fc-tue fc-today" data-date="2015-04-21"></td>
+                                                                                        <td class="fc-day fc-widget-content fc-wed fc-future" data-date="2015-04-22"></td>
+                                                                                        <td class="fc-day fc-widget-content fc-thu fc-future" data-date="2015-04-23"></td>
+                                                                                        <td class="fc-day fc-widget-content fc-fri fc-future" data-date="2015-04-24"></td>
+                                                                                        <td class="fc-day fc-widget-content fc-sat fc-future" data-date="2015-04-25"></td>
+                                                                                    </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="fc-slats">
+                                                                                <table>
+                                                                                    <tbody>
+                                                                                    @if(isset($contract))
+                                                                                        @for($i=1;$i<=$contract->workers;$i++)
+                                                                                            <tr>
+                                                                                                <td style="width: 38px;" class="fc-axis fc-time fc-widget-content"><span>{{$i}}</span></td>
+                                                                                                <td class="fc-widget-content"></td>
+                                                                                            </tr>
+                                                                                            <tr class="fc-minor">
+                                                                                                <td style="width: 38px;" class="fc-axis fc-time fc-widget-content"></td>
+                                                                                                <td class="fc-widget-content"></td>
+                                                                                            </tr>
+                                                                                        @endfor
+                                                                                    @endif
 
-                                                            </div>
-                                                        </div>
-                                                        <div class="clearfix">
-                                                            <div class="col-lg-12">
-                                                                <span class="opacity-75">
-                                                                    <span class="glyphicon glyphicon-map-marker text-sm"></span>
-                                                                    &nbsp;{{$assignment->worker->full_address}}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="stick-top-right small-padding">
-                                                            @if(count($assignment->attendance)>0)
-                                                                <i class="fa fa-check-circle fa-2x text-success"></i>
-                                                            @else
-                                                                <i class="fa fa-info-circle fa-2x text-danger"></i>
-                                                            @endif
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <hr style="display: none;" class="fc-widget-header">
+                                                                            {{--<div class="fc-content-skeleton">
+                                                                                <table>
+                                                                                    <tbody>
+                                                                                    <tr>
+                                                                                        <td class="fc-axis" style="width:38px"></td>
+                                                                                        <td>
+                                                                                            <div class="fc-event-container"></div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="fc-event-container"></div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="fc-event-container">
+                                                                                                <a style="top: 0px; bottom: -753px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event fc-event fc-start fc-end  fc-draggable fc-resizable">
+                                                                                                    <div class="fc-content">
+                                                                                                        <div class="fc-time" data-start="6:00" data-full="6:00 AM - 4:30 PM"><span>6:00 - 4:30</span></div>
+                                                                                                        <div class="fc-title">Call clients for follow-up</div>
+                                                                                                    </div>
+                                                                                                    <div class="fc-bg"></div>
+                                                                                                    <div class="fc-resizer"></div>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="fc-event-container">
+                                                                                                <a style="top: 864.5px; bottom: -1026px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event fc-event fc-start fc-end fc-draggable fc-resizable">
+                                                                                                    <div class="fc-content">
+                                                                                                        <div class="fc-time" data-start="7:00" data-full="7:00 PM - 10:30 PM"><span>7:00 - 10:30</span></div>
+                                                                                                        <div class="fc-title">Birthday Party</div>
+                                                                                                    </div>
+                                                                                                    <div class="fc-bg"></div>
+                                                                                                    <div class="fc-resizer"></div>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="fc-event-container"></div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="fc-event-container"></div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="fc-event-container">
+                                                                                                <div class="fc-event-container">
+                                                                                                    <a style="top: 864.5px; bottom: -1026px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event fc-event fc-start fc-end fc-draggable fc-resizable">
+                                                                                                        <div class="fc-content">
+                                                                                                            <div class="fc-time" data-start="9:00" data-full="7:00 PM - 10:30 PM"><span>7:00 - 10:30</span></div>
+                                                                                                            <div class="fc-title">Birthday Party</div>
+                                                                                                        </div>
+                                                                                                        <div class="fc-bg"></div>
+                                                                                                        <div class="fc-resizer"></div>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>--}}
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <!--end days of week-->
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                                        </div>
-                                                    </div><!--end .hbox-column -->
-                                                </div><!--end .hbox-xs -->
-                                            @endforeach
-                                        @endif
-                                    @endif
-
-                                </div><!--end .list-results -->
-                                <!-- BEGIN SEARCH RESULTS LIST -->
-
-                                <!-- BEGIN SEARCH RESULTS PAGING -->
-                                <div class="text-center">
-                                    @if(isset($assignments) && count($assignments)>0)
-                                        {!! $assignments->render() !!}
-                                    @endif
-                                </div><!--end .text-center -->
-                                <!-- BEGIN SEARCH RESULTS PAGING -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div><!--end .col -->
                         </div><!--end .row -->
                     </div><!--end .card-body -->
@@ -328,7 +413,7 @@
 
                     <div class="row">
                         <div class="col-sm-3">
-                            <button type="button" id="btnSearchBackups" class="btn btn-raised btn-primary ink-reaction btn-block">
+                            <button type="button" id="btnSearchWorkers" class="btn btn-raised btn-primary ink-reaction btn-block">
                             <span class="pull-left">
                                 <i class="fa fa-search"></i>
                             </span>Buscar
@@ -409,21 +494,21 @@
             });
 
 
-            $( "#btnSearchBackups").click(function(){
+            $( "#btnSearchWorkers").click(function(){
                 var form=$('#form-filter-backups');
                 var valid = form.valid();
                 if(!valid) {
                     form.data('validator').focusInvalid();
                     return false;
                 }
-                getBackups(0);
+                getWorkers(0);
             });
 
 
-            function getBackups(page) {
+            function getWorkers(page) {
                 $.ajax({
-                    url : '/find-backups?page=' + page,
-                    data : { department_id : $('#department').val(), province_id : $('#province').val(),district_id : $('#district').val()},
+                    url : '/find-workers?page=' + page,
+                    data : { department_id : $('#department').val(), province_id : $('#province').val(),district_id : $('#district').val(),days_id : $('#days').val()},
                     dataType: 'json'
                 }).done(function (data) {
                     $('#list-backups').html(data);

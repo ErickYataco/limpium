@@ -21,7 +21,7 @@ class AssignmentsController extends Controller {
 		//
         $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
         $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
-        return view('rrhh.assignments')->with('departments',$departments)->with('services', $services);
+        return view('RRHH.assignments')->with('departments',$departments)->with('services', $services);
 	}
 
 	/**
@@ -81,6 +81,9 @@ class AssignmentsController extends Controller {
         if ($contract->sunday==1){
             $days=$days+ array('7'=>'Domingo');
         }
+        $days=$days+ array('8'=>'Todos');
+
+        //dd($contract);
 
         return view('RRHH.assignments')->with('assignments',$assignments)->with('contract',$contract)->with('departments',$departments)
             ->with('services', $services)->with('contract', $contract)->with('days',$days);
@@ -121,20 +124,26 @@ class AssignmentsController extends Controller {
 
     public function findWorkers()
     {
-        $workers=DB::table('workers')
-            ->leftjoin('assignments', function($join) use ($idusuario)
+
+        $day=Input::get('days_id');
+        $workers=\DB::table('workers')
+            ->leftjoin('assignments', function($join) use ($day)
             {
-                $join->on('assignments.worker_id', '=', 'workers.id');
-                //$join->on('pronosticos.idusuario', '=', DB::raw($idusuario));
+                if($day==1){
+                    $join->on('assignments.worker_id', '=', 'workers.id')
+                        ->where('assignments.monday','=',1);
+                    //$join->on('pronosticos.idusuario', '=', DB::raw($idusuario));
+                }
+
             })
             ->where('workers.department_id',Input::get('department_id'))
             ->where('workers.province_id',Input::get('province_id'))
             ->where('workers.district_id',Input::get('district_id'))
             ->paginate(5);
 
+        dd($workers);
 
-
-        return response()->json(view('operaciones.backupList', array('workers' => $workers))->render());
+        return response()->json(view('RRHH.workersList', array('workers' => $workers))->render());
     }
 
     public function findRequirements()

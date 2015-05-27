@@ -7,7 +7,6 @@ use TORUSlimpium\Http\Controllers\Controller;
 use TORUSlimpium\Models\Enterprise;
 use Input;
 
-
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller {
@@ -20,6 +19,8 @@ class EmpresaController extends Controller {
 	public function index()
 	{
 		//
+
+        return view('Admin.enterprise');
 	}
 
 	/**
@@ -30,6 +31,14 @@ class EmpresaController extends Controller {
 	public function create()
 	{
 		//
+        $enterprise=new Enterprise();
+        $enterprise->name=Input::get('enterprise');
+        $enterprise->contact=Input::get('contact');
+        $enterprise->mobile_phone=Input::get('mobile_phone');
+        $enterprise->office_phone=Input::get('office_phone');
+        $enterprise->email_contact=Input::get('email_contact');
+        $enterprise->save();
+        return view('Admin.enterprise');
 	}
 
 	/**
