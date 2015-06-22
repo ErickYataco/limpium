@@ -9,7 +9,7 @@
                 <ul class="list ">
                     @foreach ($workers as $worker)
                         <li class="tile">
-                            <a class="tile-content ink-reaction backup-details"  data-backdrop="false">
+                            <a href="{{url('/rrhh/colaborador/foto/'.$worker->dni)}}" class="tile-content ink-reaction backup-details"  data-backdrop="false">
                                 <div class="tile-icon">
                                     <?php $i=0 ?>
                                     @if(count($worker->attachments)>0)

@@ -18,6 +18,7 @@ class CreateBackupsTable extends Migration {
             $table->integer('assignment_id');
             $table->integer('replacer_worker_id');
             $table->integer('replaced_worker_id');
+            $table->date('day_backup');
             $table->integer('type_cause');
 			$table->timestamps();
 		});

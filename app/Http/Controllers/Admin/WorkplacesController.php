@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use TORUSlimpium\Models\Workplace;
 use Input;
 
-class LocalController extends Controller {
+class WorkplacesController extends Controller {
 
 	/**
 	 * Display a listing of the resource.

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Registro de Empresas')
+@section('title','Registro de Locales')
 @section('css')
 
     <link href="{{ asset('css/theme-1/libs/bootstrap-datepicker/datepicker3.css?1424887858') }}" rel="stylesheet">
@@ -33,7 +33,7 @@
         <section>
             <div class="section-header">
                 <ol class="breadcrumb">
-                    <li class="active">Admin/Empresa</li>
+                    <li class="active">Admin/Locales</li>
                 </ol>
             </div>
             <div class="section-body contain-lg">
@@ -42,7 +42,7 @@
                     <div class="col-lg-8">
                         <article class="margin-bottom-xxl">
                             <p class="lead">
-                                Registro de Empresas.
+                                Registro de Locales.
                             </p>
                         </article>
                     </div><!--end .col -->
@@ -53,16 +53,15 @@
                 <div class="row">
                     <div class="col-lg-12">
                         {{--<form method="POST" class="form floating-label form-validation" role="form" id="formCreate" novalidate="novalidate" action="{{url('comercial/contrato')}}">--}}
-                        {!! Form::open(array('url' => '/admin/empresa', 'id'=>'formCreate','method' => 'post','role' => 'form', 'novalidate'=>'novalidate', 'class'=>'form floating-label form-validation'))!!}
+                        {!! Form::open(array('url' => '/admin/locales', 'id'=>'formCreate','method' => 'post','role' => 'form', 'novalidate'=>'novalidate', 'class'=>'form floating-label form-validation'))!!}
                         <div class="card">
                             <div class="card-head style-primary">
-                                <header>Empresa</header>
+                                <header>Local</header>
                                 <div class="tools">
                                     <button type="submit" id="crear" class="btn btn-floating-action btn-default-light"><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                             <div class="card-body ">
-
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -73,38 +72,28 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            {!! Form::text('contact', null, array('id' => 'contact','class' => 'form-control', 'data-rule-minlength' => '2', 'required')) !!}
-                                            <label for="contact" class="control-label">Contacto</label>
+                                            {!! Form::text('local', null, array('id' => 'local','class' => 'form-control', 'data-rule-minlength' => '5', 'required')) !!}
+                                            <label for="local" class="control-label">Local</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            {!! Form::text('mobile_phone', null, array('id' => 'mobile_phone','class' => 'form-control', 'data-inputmask' => "'mask': '(99) (9) 999-999-999'", 'required')) !!}
-                                            <label for="mobile_phone" class="control-label">Telefono Movil contacto</label>
-                                            <p class="help-block">Ejemplo: (51) (1) 987-654-321</p>
+                                            {!! Form::text('address', null, array('id' => 'address','class' => 'form-control','data-rule-minlength' => '10' , 'required')) !!}
+                                            <label for="address" class="control-label">Direccion</label>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            {!! Form::text('office_phone', null, array('id' => 'office_phone','class' => 'form-control', 'data-inputmask' => "'mask': '(99) 999-9999'", 'required')) !!}
-                                            <label for="office_phone" class="control-label">Telefono Fijo contacto</label>
-                                            <p class="help-block">Ejemplo: (064) 765-4321</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            {!! Form::email('email_contact', null, array('id' => 'email_contact', 'class' => 'form-control', 'data-rule-email' => 'true', 'required')) !!}
-                                            <label for="email_contact" class="control-label">Email contacto</label>
+                                            {!! Form::text('reference', null, array('id' => 'reference','class' => 'form-control', 'data-rule-minlength' => '10', 'required')) !!}
+                                            <label for="reference" class="control-label">Referencia</label>
                                         </div>
                                     </div>
                                 </div>
                             </div><!--end .card-body -->
                         </div><!--end .card -->
-                        <em class="text-caption">Cuentas</em>
+                        <em class="text-caption">Centros laborales</em>
                         </form>
                     </div><!--end .col -->
                 </div><!--end .row -->
@@ -149,6 +138,18 @@
     <script src="{{ asset('js/libs/toastr/toastr.js') }}" ></script>
     <script type="text/javascript">
         jQuery(function(){
+
+            $( "#enterprise" ).autocomplete({
+                source: '/find-empresa',
+                minLength:3,
+                dataType: 'json',
+                focus: function( event, ui ) {
+                    return false;
+                },
+                select: function( event, ui ) {
+                    $("#enterprise_id").val(ui.item.id);
+                }
+            });
 
             $('input[type=text]').on('keydown', function(e) {
                 if (e.which == 13) {

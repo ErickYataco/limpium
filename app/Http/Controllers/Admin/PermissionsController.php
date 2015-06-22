@@ -1,15 +1,11 @@
 <?php namespace TORUSlimpium\Http\Controllers\Admin;
 
-
 use TORUSlimpium\Http\Requests;
 use TORUSlimpium\Http\Controllers\Controller;
 
-use TORUSlimpium\Models\Enterprise;
-use Input;
-
 use Illuminate\Http\Request;
 
-class EmpresaController extends Controller {
+class PermissionsController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -19,8 +15,6 @@ class EmpresaController extends Controller {
 	public function index()
 	{
 		//
-
-        return view('Admin.enterprise');
 	}
 
 	/**
@@ -31,14 +25,6 @@ class EmpresaController extends Controller {
 	public function create()
 	{
 		//
-        $enterprise=new Enterprise();
-        $enterprise->name=Input::get('enterprise');
-        $enterprise->contact=Input::get('contact');
-        $enterprise->mobile_phone=Input::get('mobile_phone');
-        $enterprise->office_phone=Input::get('office_phone');
-        $enterprise->email_contact=Input::get('email_contact');
-        $enterprise->save();
-        return view('Admin.enterprise');
 	}
 
 	/**
@@ -95,17 +81,4 @@ class EmpresaController extends Controller {
 		//
 	}
 
-    public function find()
-    {
-        $term = Input::get('term');
-        $search=Enterprise::where('name', 'LIKE', '%' .$term . '%')->get();
-
-        foreach ($search as $result) {
-            $enterprises[] = ['label'=>$result->name,'id'=>$result->id,'contact'=>$result->contact,
-                                'mobile_phone'=>$result->mobile_phone,'office_phone'=>$result->office_phone,'email_contact'=>$result->email_contact];
-        }
-
-        return json_encode($enterprises);
-    }
 }
-

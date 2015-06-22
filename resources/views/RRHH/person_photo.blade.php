@@ -24,6 +24,9 @@
                                 <div class="card">
                                     <div class="card-head style-primary">
                                         <header>Perfil:</header>
+                                        <div class="tools">
+                                            <button id="searchWorkers" href="#offcanvas-filter-workers" data-toggle="offcanvas" class="btn btn-raised btn-floating-action btn-default-light"><i class="fa fa-search"></i></button>
+                                        </div>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
@@ -69,34 +72,6 @@
                     </div><!--end .row -->
                     <!-- END VERTICAL FORM -->
 
-                    <!-- BEGIN FORM MODAL MARKUP -->
-                    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true" >
-                        {!! Form::open(array('url' => 'rrhh/colaborador/foto', 'method' => 'post'))!!}
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="exampleModalLabel">Ingrese el DNI</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="control-label">DNI:</label>
-                                            <input type="text" class="form-control" name="dni" id="dni">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">cerrar</button>
-                                    <button type="button" class="btn btn-primary">buscar</button>
-                                </div>
-                            </div>
-                        </div>
-                        {!! Form::close()!!}
-                    </div>
-                    <!-- END FORM MODAL MARKUP -->
-
-
                 @else
                         <!-- BEGIN VERTICAL FORM -->
                     <div class="row">
@@ -104,7 +79,10 @@
                             <form class="form">
                                 <div class="card">
                                     <div class="card-head style-primary">
-                                        <header>Colaborador: {{ $worker->names.' '.$worker->first_last_name.' '.$worker->second_last_name }}</header>
+                                        <header>Colaborador: {{ $worker->full_name}}</header>
+                                        <div class="tools">
+                                            <button id="searchWorkers" href="#offcanvas-filter-workers" data-toggle="offcanvas" class="btn btn-raised btn-floating-action btn-default-light"><i class="fa fa-search"></i></button>
+                                        </div>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
@@ -191,8 +169,60 @@
         </section>
     </div><!--end #content-->
     <!-- END CONTENT -->
+
+    <!-- BEGIN OFFCANVAS RIGHT -->
+    <div class="offcanvas">
+        <!-- BEGIN OFFCANVAS FILTER CONTRACTS RIGHT -->
+        <div id="offcanvas-filter-workers" class="offcanvas-pane width-12 " style="width:580px;">
+            <div class="offcanvas-head style-primary-dark ">
+                <header class="height-1">Colaborador</header>
+                <div class="offcanvas-tools">
+                    <a class="btn btn-lg btn-icon-toggle btn-default-light pull-right" data-dismiss="offcanvas">
+                        <i class="md md-close"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="offcanvas-body">
+                <form id="form-filter-workers">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label for="enterprise" class="control-label">DNI</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                {!! Form::text('dni', null, array('id' => 'dni','class' => 'form-control input-sm', 'data-rule-minlength' => '8', 'required')) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/><br/><br/>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <button type="button" id="btnSearchWorkers" class="btn btn-raised btn-primary ink-reaction btn-block">
+                            <span class="pull-left">
+                                <i class="fa fa-search"></i>
+                            </span>Buscar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="list-contracts"></div>
+                </form>
+            </div>
+        </div>
+        <!-- END OFFCANVAS FILTER CONTRACTS RIGHT -->
+
+    </div><!--end .offcanvas-->
+    <!-- END OFFCANVAS RIGHT -->
+
 @stop
 @section('script')
+    <script src="{{ asset('js/libs/jquery-validation/dist/jquery.validate.min.js') }}" ></script>
+    <script src="{{ asset('js/libs/jquery-validation/dist/additional-methods.min.js') }}" ></script>
+    <script src="{{ asset('js/libs/jquery-validation/dist/localization/messages_es.js') }}" ></script>
+    <script src="{{ asset('js/core/demo/DemoFormComponents.js') }}" ></script>
     <script src="{{ asset('js/libs/spin.js/spin.min.js')}}"></script>
     <script src="{{  asset('js/libs/jquery-ui-widget/jquery.ui.widget.js')}}"></script>
     <script src="{{ asset('js/libs/jquery-file-upload/jquery.iframe-transport.js')}}"></script>
@@ -205,17 +235,47 @@
     @if(!isset($worker))
         <script type="text/javascript">
             jQuery(function(){
-                if ($('#formModal').length)$('#formModal').modal('show');
+                //if ($('#formModal').length)$('#formModal').modal('show');
+                $('#searchWorkers').trigger('click');
+
+                $( "#btnSearchWorkers").click(function(){
+                    var form=$('#form-filter-workers');
+                    var valid = form.valid();
+                    if(!valid) {
+                        form.data('validator').focusInvalid();
+                        return false;
+                    }
+                    getWorker(0);
+                });
+
+                function getWorker(page) {
+                    $.ajax({
+                        url : '/find-worker?page=' + page,
+                        data : { dni : $('#dni').val()},
+                        dataType: 'json'
+                    }).done(function (data) {
+                        $('#list-contracts').html(data);
+                        //location.hash = page;
+                    }).fail(function () {
+                        alert('No se pudo cargar los contratos.');
+                    });
+                }
             });
         </script>
     @else
         <script type="text/javascript">
         jQuery(function(){
 
+            $( "#btnSearchWorkers").click(function(){
+                var form=$('#form-filter-workers');
+                var valid = form.valid();
+                if(!valid) {
+                    form.data('validator').focusInvalid();
+                    return false;
+                }
+            });
+
             $('.progress').hide();
-
-            if ($('#formModal').length)$('#formModal').modal('show');
-
 
             function resetCoords()
             {
@@ -241,7 +301,7 @@
             $('#files img').Jcrop({
                 onChange: updateCoords,
                 onSelect: updateCoords,
-
+                aspectRatio: 3/2,
                 minSize: 200,
                 maxSize: 200,
                 boxWidth: 640,
@@ -274,12 +334,10 @@
                         $('.jcrop-preview').attr('src',file);
                     });
 
-
-
                     $('#files img').Jcrop({
                         onChange: updateCoords,
                         onSelect: updateCoords,
-
+                        aspectRatio: 3/2,
                         minSize: 200,
                         maxSize: 200,
                         boxWidth: 640,

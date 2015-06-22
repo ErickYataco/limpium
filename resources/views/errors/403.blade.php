@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Limpium - 404 page</title>
+    <title>Limpium - 403 page</title>
 
     <!-- BEGIN META -->
     <meta charset="utf-8">
@@ -12,7 +12,7 @@
 
     <!-- BEGIN STYLESHEETS -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
-    <link type="text/css" rel="stylesheet" href="../css/theme-1/bootstrap.css?1422792965" />
+    <link href="{{ asset('css/theme-1/bootstrap.css?1422792965') }}" rel="stylesheet">
     <link href="{{ asset('css/theme-1/materialadmin.css?1425466319') }}" rel="stylesheet">
     <link href="{{ asset('css/theme-1/font-awesome.min.css?1422529194') }}" rel="stylesheet">
     <link href="{{ asset('css/theme-1/material-design-iconic-font.min.css?1421434286') }}" rel="stylesheet">
@@ -69,9 +69,6 @@
 <script src="{{ asset('js/libs/jquery/jquery-1.11.2.min.js') }}" ></script>
 <script src="{{ asset('js/libs/jquery/jquery-migrate-1.2.1.min.js') }}" ></script>
 <script src="{{ asset('js/libs/bootstrap/bootstrap.min.js') }}" ></script>
-<script src="../js/libs/spin.js/spin.min.js"></script>
-<script src="../js/libs/autosize/jquery.autosize.min.js"></script>
-<script src="../js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
 
 <!-- END JAVASCRIPT -->
 

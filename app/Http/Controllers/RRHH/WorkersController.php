@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use TORUSlimpium\Models\Worker;
 use TORUSlimpium\Models\Attachment;
 
-class PersonaController extends Controller {
+class WorkersController extends Controller {
 
 
 	/**
@@ -47,6 +47,49 @@ class PersonaController extends Controller {
 	public function create()
 	{
 		//
+		$worker=new Worker();
+		$worker->dni=Input::get('dni');
+		$worker->first_name=Input::get('firstname');
+		$worker->second_name=Input::get('secondname');
+		$worker->first_last_name=Input::get('firstlastname');
+		$worker->second_last_name=Input::get('secondlastname');
+		$worker->job_title=Input::get('job_title');
+		$worker->marital_status_id=Input::get('maritalstatus');
+		$worker->address=Input::get('address');
+		$worker->department_id=Input::get('department');
+		$worker->province_id=Input::get('province');
+		$worker->district_id=Input::get('district');
+		$worker->zone=Input::get('zone');
+		//$worker->full_address=Input::get('email_contact');
+		$worker->emergency_person=Input::get('emergencyperson');
+		$worker->emergency_phone=Input::get('emergencyphone');
+		$worker->emergency_id=Input::get('emergency_relationship');
+		$worker->mobile=Input::get('mobile');
+		$worker->phone=Input::get('phone');
+		$worker->email=Input::get('email');
+		$worker->birthdate=Input::get('birthdate');
+		$worker->gender_id=Input::get('gender');
+		$worker->size_t_shirt=Input::get('sizetshirt');
+		$worker->size_pant=Input::get('sizepant');
+		$worker->size_shirt=Input::get('sizeshirt');
+		$worker->size_shoes=Input::get('sizeshoes');
+		$worker->active=1;
+		$worker->save();
+
+
+		$education=array('' => '')+Parameters::where('group_id','edu')->lists('first_value', 'second_value');
+		$banks=array('' => '')+Parameters::where('group_id','ban')->lists('first_value','second_value');
+		$marital_status=array('' => '')+Parameters::where('group_id','mar')->lists('first_value','second_value');
+		$emergency=array('' => '')+Parameters::where('group_id','rel')->lists('first_value', 'second_value');
+		$districts=array('' => '')+Parameters::where('group_id','dis')->lists('first_value', 'second_value');
+		$provinces=array('' => '')+Parameters::where('group_id','pro')->lists('first_value', 'second_value');
+		$departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
+		$job_title=array('' => '')+Parameters::where('group_id','job')->lists('first_value', 'second_value');
+
+		return view('RRHH.person')->with('education', $education)->with('banks', $banks)->with('maritalStatus', $marital_status)
+			->with('emergency', $emergency)->with('departments', $departments)->with('provinces', $provinces)
+			->with('districts', $districts)
+			->with('job_title', $job_title);
 	}
 
 	/**
@@ -141,6 +184,14 @@ class PersonaController extends Controller {
         }
 
         return json_encode($districts);
+    }
+
+    public function findWorker()
+    {
+        $dni=Input::get('dni');
+        $workers=Worker::where('dni','=',$dni)->paginate(5);
+
+        return response()->json(view('RRHH.workersList', array('workers' => $workers))->render());
     }
 
 

@@ -18,6 +18,14 @@ class PermissionsRolesTableSeeder extends Seeder {
             array('role_id'=>'1','permission_id'=>'3'),
             array('role_id'=>'1','permission_id'=>'4'),
             array('role_id'=>'1','permission_id'=>'5'),
+            array('role_id'=>'1','permission_id'=>'6'),
+            array('role_id'=>'1','permission_id'=>'7'),
+            array('role_id'=>'1','permission_id'=>'8'),
+            array('role_id'=>'1','permission_id'=>'9'),
+            array('role_id'=>'1','permission_id'=>'10'),
+            array('role_id'=>'1','permission_id'=>'11'),
+            array('role_id'=>'1','permission_id'=>'12'),
+
             //operaciones
             array('role_id'=>'2','permission_id'=>'1'),
             array('role_id'=>'2','permission_id'=>'2'),

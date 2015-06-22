@@ -17,178 +17,149 @@ Route::get('/', 'HomeController@index');
 
 Route::get('home', 'HomeController@index');
 
-//Route::get('/', 'HomeController@index');
+Route::controllers([ 'auth' => 'Auth\AuthController', 'password' => 'Auth\PasswordController', ]);
 
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
+Route::get('soporte/mapa', [
+	'uses'       => 'SupportCenter\MapsController@index',
+	'permission' => 'support_maps',
+	'middleware' => [ 'auth', 'acl' ]
 ]);
 
+Route::get('soporte/dashboard', [
+	'uses'       => 'SupportCenter\DashboardController@index',
+	'permission' => 'support_dashboard',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('operaciones/mapa',[
-    'uses'=>'SupportCenter\MapaController@index',
-    'permission'=>'operaciones_mapa',
-    'middleware'=>['auth','acl']
-] );
+Route::get('soporte/locales', [
+	'uses'       => 'SupportCenter\LocalesController@index',
+	'permission' => 'support_workplaces',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('soporte/dashboard',[
-    'uses'=>'SupportCenter\DashboardController@index',
-    'permission'=>'operaciones_dasboard',
-    'middleware'=>['auth','acl']
-] );
+Route::get('soporte/backups', [
+	'uses'       => 'SupportCenter\BackupsController@index',
+	'permission' => 'support_backups',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('soporte/locales',[
-    'uses'=>'SupportCenter\LocalesController@index',
-    'permission'=>'operaciones_locales',
-    'middleware'=>['auth','acl']
-] );
+Route::post('soporte/backups', [
+	'uses'       => 'SupportCenter\BackupsController@create',
+	'permission' => 'support_backups',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('soporte/backups',[
-    'uses'=>'SupportCenter\BackupsController@index',
-    'permission'=>'operaciones_asignaciones',
-    'middleware'=>['auth','acl']
-] );
+Route::get('soporte/backups/requerimiento/{id}', [
+	'uses'       => 'SupportCenter\BackupsController@show',
+	'permission' => 'support_backups',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::post('soporte/backups',[
-    'uses'=>'SupportCenter\BackupsController@create',
-    'permission'=>'operaciones_asignaciones',
-    'middleware'=>['auth','acl']
-] );
+Route::get('rrhh/colaborador/crear',
+	[ 'uses' => 'RRHH\WorkersController@index', 'permission' => 'rrhh_worker_add', 'middleware' => [ 'auth', 'acl' ] ]);
 
-Route::get('soporte/backups/requerimiento/{id}',[
-    'uses'=>'SupportCenter\BackupsController@show',
-    'permission'=>'operaciones_asignaciones',
-    'middleware'=>['auth','acl']
-] );
+Route::post('rrhh/colaborador/crear', [
+	'uses'       => 'RRHH\WorkersController@create',
+	'permission' => 'rrhh_worker_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('rrhh/colaborador/crear',[
-    'uses'=>'RRHH\PersonaController@index',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::get('rrhh/colaborador/editar',
+	[ 'uses' => 'RRHH\WorkersController@edit', 'permission' => 'rrhh_worker_edit', 'middleware' => [ 'auth', 'acl' ] ]);
 
-Route::get('rrhh/colaborador/editar',[
-    'uses'=>'RRHH\PersonaController@edit',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::get('rrhh/colaborador/editar/{dni}', [
+	'uses'       => 'RRHH\WorkersController@update',
+	'permission' => 'rrhh_worker_edit',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('rrhh/colaborador/editar/{dni}',[
-    'uses'=>'RRHH\PersonaController@update',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+/*Route::get('rrhh/colaborador/buscar',['uses'=>'RRHH\WorkersController@find','permission'=>'rrhh_persona', 'middleware'=>['auth','acl']]);
 
-Route::post('rrhh/colaborador/crear',[
-    'uses'=>'RRHH\PersonaController@create',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::post('rrhh/colaborador/buscar/{dni}',[ 'uses'=>'RRHH\WorkersController@show','permission'=>'rrhh_persona','middleware'=>['auth','acl']]);*/
 
-Route::get('rrhh/colaborador/buscar',[
-    'uses'=>'RRHH\PersonaController@find',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::get('rrhh/colaborador/foto', [
+	'uses'       => 'RRHH\WorkersController@photo',
+	'permission' => 'rrhh_workers_photo_edit',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::post('rrhh/colaborador/buscar/{dni}',[
-    'uses'=>'RRHH\PersonaController@show',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::get('rrhh/colaborador/foto/{id}', [
+	'uses'       => 'RRHH\WorkersController@editPhoto',
+	'permission' => 'rrhh_workers_photo_edit',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('rrhh/colaborador/foto',[
-    'uses'=>'RRHH\PersonaController@photo',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::post('rrhh/colaborador/foto/upload/{id}', [
+	'uses'       => 'RRHH\WorkersController@postUpload',
+	'permission' => 'rrhh_workers_photo_edit',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::post('rrhh/colaborador/foto',[
-    'uses'=>'RRHH\PersonaController@postPhoto',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::post('rrhh/colaborador/foto/face/{id}', [
+	'uses'       => 'RRHH\WorkersController@postProfileCrop',
+	'permission' => 'rrhh_workers_photo_edit',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('rrhh/colaborador/foto/edit/{id}',[
-    'uses'=>'RRHH\PersonaController@editPhoto',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::get('rrhh/asignacion', [
+	'uses'       => 'RRHH\AssignmentsController@index',
+	'permission' => 'rrhh_workers_assignment_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::post('rrhh/colaborador/foto/upload/{id}',[
-    'uses'=>'RRHH\PersonaController@postUpload',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::get('rrhh/asignacion/requerimiento/{id}', [
+	'uses'       => 'RRHH\AssignmentsController@show',
+	'permission' => 'rrhh_workers_assignment_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::post('rrhh/colaborador/foto/face/{id}',[
-    'uses'=>'RRHH\PersonaController@postProfileCrop',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::get('comercial/contrato', [
+	'uses'       => 'Comercial\ContractsController@index',
+	'permission' => 'rrhh_contracts_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::post('form',  array('before' => 'csrf','uses'=>'PersonaController@postProfileCrop'));
+Route::post('comercial/contrato', [
+	'uses'       => 'Comercial\ContractsController@create',
+	'permission' => 'rrhh_contracts_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('rrhh/asignacion',[
-    'uses'=>'RRHH\AssignmentsController@index',
-    'permission'=>'rrhh_persona_programacion',
-    'middleware'=>['auth','acl']
-] );
+Route::get('admin/empresa', [
+	'uses'       => 'Admin\EnterprisesController@index',
+	'permission' => 'admin_enterprises_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('rrhh/asignacion/requerimiento/{id}',[
-    'uses'=>'RRHH\AssignmentsController@show',
-    'permission'=>'operaciones_asignaciones',
-    'middleware'=>['auth','acl']
-] );
+Route::post('admin/empresa', [
+	'uses'       => 'Admin\EnterprisesController@create',
+	'permission' => 'admin_enterprises_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('comercial/contrato',[
-    'uses'=>'Comercial\ContratoController@index',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::get('admin/locales', [
+	'uses'       => 'Admin\WorkplacesController@index',
+	'permission' => 'rrhh_workplaces_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::post('comercial/contrato',[
-    'uses'=>'Comercial\ContratoController@create',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
+Route::post('admin/locales', [
+	'uses'       => 'Admin\WorkplacesController@create',
+	'permission' => 'rrhh_workplaces_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
 
-Route::get('admin/empresa',[
-    'uses'=>'Admin\EmpresaController@index',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
-
-Route::post('admin/empresa',[
-    'uses'=>'Admin\EmpresaController@create',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
-
-Route::get('admin/locales',[
-    'uses'=>'Admin\LocalController@index',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
-
-Route::post('admin/locales',[
-    'uses'=>'Admin\LocalController@create',
-    'permission'=>'rrhh_persona',
-    'middleware'=>['auth','acl']
-] );
-
-Route::get('find-empresa','Admin\EmpresaController@find');
-Route::get('find-local','Admin\LocalController@find');
-Route::get('find-province','RRHH\PersonaController@findProvince');
-Route::get('find-district','RRHH\PersonaController@findDistrict');
-Route::get('find-backups','SupportCenter\BackupsController@findBackups');
-Route::get('find-requirements','SupportCenter\BackupsController@findRequirements');
-Route::get('find-requirements-assignment','RRHH\AssignmentsController@findRequirements');
-Route::get('find-workers','RRHH\AssignmentsController@findWorkers');
-
-
-Route::get('comercial/buscar-empresa',[
-    'uses'=>'Comercial\ContratoController@find',
-    'permission'=>'comercial_contrato_buscar',
-    'middleware'=>['auth','acl']
-] );
+Route::get('find-empresa', 'Admin\EnterprisesController@find');
+Route::get('find-local', 'Admin\WorkplacesController@find');
+Route::get('find-province', 'RRHH\WorkersController@findProvince');
+Route::get('find-district', 'RRHH\WorkersController@findDistrict');
+Route::get('find-backups', 'SupportCenter\BackupsController@findBackups');
+Route::get('find-requirements', 'SupportCenter\BackupsController@findRequirements');
+Route::get('find-requirements-assignment', 'RRHH\AssignmentsController@findRequirements');
+Route::get('find-workers', 'RRHH\AssignmentsController@findWorkers');
+Route::get('find-worker', 'RRHH\WorkersController@findWorker');
+Route::get('comercial/buscar-empresa', [
+	'uses'       => 'Comercial\ContratoController@find',
+	'permission' => 'comercial_contrato_buscar',
+	'middleware' => [ 'auth', 'acl' ]
+]);

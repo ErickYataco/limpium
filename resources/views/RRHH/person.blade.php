@@ -64,7 +64,7 @@
                                                 <li class="active"><a href="#step1" data-toggle="tab"><span class="step">1</span> <span class="title">DATOS</span></a></li>
                                                 <li><a href="#step2" data-toggle="tab"><span class="step">2</span> <span class="title">DOMICILIO</span></a></li>
                                                 <li><a href="#step3" data-toggle="tab"><span class="step">3</span> <span class="title">FAMILIARES</span></a></li>
-                                                <li><a href="#step4" data-toggle="tab"><span class="step">4</span> <span class="title">CONTRATO</span></a></li>
+                                                {{--<li><a href="#step4" data-toggle="tab"><span class="step">4</span> <span class="title">CONTRATO</span></a></li>--}}
                                             </ul>
                                         </div><!--end .form-wizard-nav -->
                                         <div class="tab-content clearfix">
@@ -79,7 +79,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            {!! Form::text('secondname', null, array('class' => 'form-control', 'data-rule-minlength' => '2', 'required')) !!}
+                                                            {!! Form::text('secondname', null, array('class' => 'form-control', 'data-rule-minlength' => '2')) !!}
                                                             <label for="secondname" class="control-label">Segundo Nombre</label>
                                                         </div>
                                                     </div>
@@ -93,7 +93,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            {!! Form::text('secondlastname', null, array('class' => 'form-control', 'data-rule-minlength' => '2', 'required')) !!}
+                                                            {!! Form::text('secondlastname', null, array('class' => 'form-control', 'data-rule-minlength' => '2')) !!}
                                                             <label for="secondlastname" class="control-label">Apellido Materno</label>
                                                         </div>
                                                     </div>
@@ -114,8 +114,8 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="nacimiento" data-rule-date="true" data-inputmask="'mask': 'd/m/y'" required>
-                                                            <label for="nacimiento" class="control-label">Fecha de Nacimiento</label>
+                                                            <input type="text" class="form-control" name="birthdate" data-rule-date="true" data-inputmask="'mask': 'd/m/y'" required>
+                                                            <label for="birthdate" class="control-label">Fecha de Nacimiento</label>
                                                         </div>
                                                     </div>
 
@@ -123,20 +123,20 @@
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            <input type="text" name="emergencyperson" class="form-control" data-rule-minlength="10" required>
+                                                            <input type="text" name="emergencyperson" class="form-control" data-rule-minlength="10" >
                                                             <label for="emergencyperson" class="control-label">En Emergencias llamar</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            <input type="text" name="emergencyphone" class="form-control"  data-rule-minlength="7" required>
+                                                            <input type="text" name="emergencyphone" class="form-control"  data-rule-minlength="7" >
                                                             <label for="emergencyphone" class="control-label">Telefono a llamar</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            {!!Form::select('vinculo', $emergency, null, array('class' => 'form-control','required'=>'required'))!!}
-                                                            <label for="vinculo" class="control-label">Vinculo</label>
+                                                            {!!Form::select('emergency_relationship', $emergency, null, array('class' => 'form-control',))!!}
+                                                            <label for="emergency_relationship" class="control-label">Vinculo</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -167,10 +167,10 @@
                                                         <div class="form-group">
                                                             <div>
                                                                 <label class="radio-inline radio-styled">
-                                                                    <input type="radio" name="gendre" checked><span>Hombre</span>
+                                                                    <input type="radio" name="gender" value="1" checked><span>Hombre</span>
                                                                 </label>
                                                                 <label class="radio-inline radio-styled">
-                                                                    <input type="radio" name="gendre" ><span>Mujer</span>
+                                                                    <input type="radio" name="gender" value="2" ><span>Mujer</span>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -233,7 +233,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="form-group">
-                                                        <input type="text" name="reference"  class="form-control" data-rule-minlength="10" required>
+                                                        <input type="text" name="reference"  class="form-control" data-rule-minlength="10" >
                                                         <label for="reference" class="control-label">Referencia</label>
                                                     </div>
                                                 </div>
@@ -269,25 +269,25 @@
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id='first_name_relative' name="firs_name_relative" required>
+                                                            <input type="text" class="form-control" id='first_name_relative' name="firs_name_relative" >
                                                             <label for="firs_name_relative" class="control-label">Primer Nombre Familiar</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id='second_name_relative' name="second_name_relative" required>
+                                                            <input type="text" class="form-control" id='second_name_relative' name="second_name_relative" >
                                                             <label for="second_name_relative" class="control-label">Segundo Nombre Familiar</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id='first_last_name_relative' name="first_last_name_relative" required>
+                                                            <input type="text" class="form-control" id='first_last_name_relative' name="first_last_name_relative" >
                                                             <label for="first_last_name_relative" class="control-label">Apellido Paterno Familiar</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id='second_last_name_relative' name="second_last_name_relative" required>
+                                                            <input type="text" class="form-control" id='second_last_name_relative' name="second_last_name_relative" >
                                                             <label for="second_last_name_relative" class="control-label">Apellido Materno Familiar</label>
                                                         </div>
                                                     </div>
@@ -295,25 +295,25 @@
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id='birthdate_relative' name="birthdate_relative" data-rule-date="true" data-inputmask="'mask': 'd/m/y'" required>
+                                                            <input type="text" class="form-control" id='birthdate_relative' name="birthdate_relative" data-rule-date="true" data-inputmask="'mask': 'd/m/y'" >
                                                             <label for="birthdate_relative" class="control-label">Fecha de Nacimiento</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id='occupation_relative' name="occupation_relative" required>
+                                                            <input type="text" class="form-control" id='occupation_relative' name="occupation_relative" >
                                                             <label for="occupation_relative" class="control-label">Ocupacion</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id='workplace_relative' name="workplace_relative" required>
+                                                            <input type="text" class="form-control" id='workplace_relative' name="workplace_relative" >
                                                             <label for="workplace_relative" class="control-label">Centro Laboral</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id='phone_relative' name="phone_relative" required>
+                                                            <input type="text" class="form-control" id='phone_relative' name="phone_relative" >
                                                             <label for="phone_relative" class="control-label">Telefono Familiar</label>
                                                         </div>
                                                     </div>
@@ -321,8 +321,8 @@
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            {!!Form::select('relationship_relative', $emergency, null, array('id'=>'relationship_relative','class' => 'form-control','required'=>'required'))!!}
-                                                            <label for="relationship_relative" class="control-label">Telefono Familiar</label>
+                                                            {!!Form::select('relationship_relative', $emergency, null, array('id'=>'relationship_relative','class' => 'form-control'))!!}
+                                                            <label for="relationship_relative" class="control-label">Tipo de Vinculo</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -355,7 +355,7 @@
                                                     </table>
                                                 </div>
                                             </div><!--end #step3 -->
-                                            <div class="tab-pane" id="step4">
+                                            {{--<div class="tab-pane" id="step4">
                                                 <br/>
                                                 <div class="row">
                                                     <div class="col-sm-4">
@@ -378,7 +378,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div><!--end #step4 -->
+                                            </div><!--end #step4 -->--}}
                                         </div><!--end .tab-content -->
                                         <ul class="pager wizard">
                                             <li class="previous first"><a class="btn-raised" href="javascript:void(0);">Primero</a></li>

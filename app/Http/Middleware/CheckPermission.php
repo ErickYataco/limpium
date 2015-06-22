@@ -21,7 +21,7 @@ class CheckPermission implements Middleware {
             return $next($request);
         }
 
-        return redirect()->route('home');
+        return response()->view('errors.403');//redirect()->route('home');
     }
 
     /*

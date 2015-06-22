@@ -1,4 +1,4 @@
-<?php namespace TORUSlimpium\Http\Controllers\Operaciones;
+<?php namespace TORUSlimpium\Http\Controllers\SupportCenter;
 
 use TORUSlimpium\Http\Requests;
 use TORUSlimpium\Http\Controllers\Controller;
