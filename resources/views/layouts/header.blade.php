@@ -98,7 +98,7 @@
                             <img src="/img/avatar1.jpg" alt="" />
 								<span class="profile-info">
 									{{ Auth::user()->name }}
-									<small>{{ Auth::user()->worker->job_title}}</small>
+									{{--<small> {{ Auth::user()->worker->job_title}} </small>--}}
 								</span>
                         </a>
                         <ul class="dropdown-menu animation-dock">
