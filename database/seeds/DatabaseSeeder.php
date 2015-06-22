@@ -17,15 +17,15 @@ class DatabaseSeeder extends Seeder {
         $this->call('PermissionsTableSeeder');
         $this->call('RolesTableSeeder');
         $this->call('PermissionsRolesTableSeeder');
-        $this->call('WorkersTableSeeder');
+        //$this->call('WorkersTableSeeder');
         $this->call('UsersTableSeeder');
         $this->call('ParametersTableSeeder');
-        $this->call('EnterprisesTableSeeder');
-        $this->call('WorkplacesTableSeeder');
+        //$this->call('EnterprisesTableSeeder');
+        //$this->call('WorkplacesTableSeeder');
         $this->call('AssignmentsTableSeeder');
-        $this->call('AttachmentsTableSeeder');
-        $this->call('AttendancesTableSeeder');
-        $this->call('ContractsTableSeeder');
+        //$this->call('AttachmentsTableSeeder');
+        //$this->call('AttendancesTableSeeder');
+        //$this->call('ContractsTableSeeder');
 	}
 
 }
