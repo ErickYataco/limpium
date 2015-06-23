@@ -73,12 +73,18 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            {!! Form::text('contact', null, array('id' => 'contact','class' => 'form-control', 'data-rule-minlength' => '2', 'required')) !!}
-                                            <label for="contact" class="control-label">Contacto</label>
+                                            {!! Form::text('ruc', null, array('id' => 'ruc','class' => 'form-control input-sm','data-inputmask' => '"mask": "99999999999"', 'data-rule-minlength' => '11', 'required')) !!}
+                                            <label for="ruc" class="control-label">RUC</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            {!! Form::text('contact', null, array('id' => 'contact','class' => 'form-control', 'data-rule-minlength' => '2', 'required')) !!}
+                                            <label for="contact" class="control-label">Contacto</label>
+                                        </div>
+                                    </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             {!! Form::text('mobile_phone', null, array('id' => 'mobile_phone','class' => 'form-control', 'data-inputmask' => "'mask': '(99) (9) 999-999-999'", 'required')) !!}
@@ -86,6 +92,8 @@
                                             <p class="help-block">Ejemplo: (51) (1) 987-654-321</p>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             {!! Form::text('office_phone', null, array('id' => 'office_phone','class' => 'form-control', 'data-inputmask' => "'mask': '(99) 999-9999'", 'required')) !!}
@@ -93,8 +101,6 @@
                                             <p class="help-block">Ejemplo: (064) 765-4321</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             {!! Form::email('email_contact', null, array('id' => 'email_contact', 'class' => 'form-control', 'data-rule-email' => 'true', 'required')) !!}

@@ -102,7 +102,7 @@
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
                                                             {!! Form::text('dni', null, array('class' => 'form-control', 'data-inputmask' => '"mask": "99999999"', 'required')) !!}
-                                                            <label for="dni" class="control-label">dni</label>
+                                                            <label for="dni" class="control-label">DNI</label>
                                                             <p class="help-block">Ejemplo: 41738129</p>
                                                         </div>
                                                     </div>

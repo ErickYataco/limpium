@@ -4,6 +4,7 @@ use TORUSlimpium\Http\Requests;
 use TORUSlimpium\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use TORUSlimpium\Models\Enterprise;
 
 class DashboardController extends Controller {
 
@@ -14,7 +15,8 @@ class DashboardController extends Controller {
 	 */
 	public function index()
 	{
-        return view('operaciones.dashboard');
+		$enterprise=Enterprise::find(1);
+        return view('operaciones.dashboard')->with('enterprise', $enterprise);
 	}
 
 	/**

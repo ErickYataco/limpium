@@ -16,8 +16,8 @@
                 <div class="overlay overlay-shade-top stick-top-left height-3"></div>
                 <div class="row">
                     <div class="col-md-3 col-xs-5">
-                        <img class="img-circle border-white border-xl img-responsive auto-width" src="../img/enterprise/logoMaestro.jpg" alt="" />
-                        <h3>Daniel Johnson<br/><small>Consultant at CodeCovers</small></h3>
+                        <img class="img-circle border-white border-xl img-responsive auto-width" src="../img/enterprise/main_enterprise.png" alt="" />
+                        <h3>{{$enterprise->name}}<br/><small>{{$enterprise->slogan}}</small></h3>
                     </div><!--end .col -->
                     <div class="col-md-9 col-xs-7">
                         <div class="width-3 text-center pull-right">

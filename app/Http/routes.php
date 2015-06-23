@@ -126,13 +126,13 @@ Route::post('comercial/contrato', [
 ]);
 
 Route::get('admin/empresa', [
-	'uses'       => 'Admin\EnterprisesController@index',
+	'uses'       => 'Admin\AccountController@index',
 	'permission' => 'admin_enterprises_add',
 	'middleware' => [ 'auth', 'acl' ]
 ]);
 
 Route::post('admin/empresa', [
-	'uses'       => 'Admin\EnterprisesController@create',
+	'uses'       => 'Admin\AccountController@create',
 	'permission' => 'admin_enterprises_add',
 	'middleware' => [ 'auth', 'acl' ]
 ]);
@@ -149,7 +149,7 @@ Route::post('admin/locales', [
 	'middleware' => [ 'auth', 'acl' ]
 ]);
 
-Route::get('find-empresa', 'Admin\EnterprisesController@find');
+Route::get('find-empresa', 'Admin\AccountController@find');
 Route::get('find-local', 'Admin\WorkplacesController@find');
 Route::get('find-province', 'RRHH\WorkersController@findProvince');
 Route::get('find-district', 'RRHH\WorkersController@findDistrict');

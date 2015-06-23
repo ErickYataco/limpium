@@ -4,12 +4,13 @@
 use TORUSlimpium\Http\Requests;
 use TORUSlimpium\Http\Controllers\Controller;
 
+use TORUSlimpium\Models\Account;
 use TORUSlimpium\Models\Enterprise;
 use Input;
 
 use Illuminate\Http\Request;
 
-class EnterprisesController extends Controller {
+class AccountController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -31,13 +32,14 @@ class EnterprisesController extends Controller {
 	public function create()
 	{
 		//
-        $enterprise=new Enterprise();
-        $enterprise->name=Input::get('enterprise');
-        $enterprise->contact=Input::get('contact');
-        $enterprise->mobile_phone=Input::get('mobile_phone');
-        $enterprise->office_phone=Input::get('office_phone');
-        $enterprise->email_contact=Input::get('email_contact');
-        $enterprise->save();
+        $account=new Account();
+        $account->name=Input::get('enterprise');
+		$account->ruc=Input::get('ruc');
+        $account->contact=Input::get('contact');
+        $account->mobile_phone=Input::get('mobile_phone');
+        $account->office_phone=Input::get('office_phone');
+        $account->email_contact=Input::get('email_contact');
+        $account->save();
         return view('Admin.enterprise');
 	}
 
@@ -98,14 +100,14 @@ class EnterprisesController extends Controller {
     public function find()
     {
         $term = Input::get('term');
-        $search=Enterprise::where('name', 'LIKE', '%' .$term . '%')->get();
+        $search=Account::where('name', 'LIKE', '%' .$term . '%')->get();
 
         foreach ($search as $result) {
-            $enterprises[] = ['label'=>$result->name,'id'=>$result->id,'contact'=>$result->contact,
+            $accounts[] = ['label'=>$result->name,'id'=>$result->id,'contact'=>$result->contact,
                                 'mobile_phone'=>$result->mobile_phone,'office_phone'=>$result->office_phone,'email_contact'=>$result->email_contact];
         }
 
-        return json_encode($enterprises);
+        return json_encode($accounts);
     }
 }
 

@@ -12,8 +12,7 @@ class EnterprisesTableSeeder extends Seeder {
     public function run()
     {
         $data=array(
-            array('name'=>'Maestro','contact'=>'Ivan Martinez','mobile_phone'=>'987 777 321','office_phone'=>'555 3624','email_contact'=>'gerente1@maestro.com.pe'),
-            array('name'=>'Cencosud','contact'=>'Juan Oropeza','mobile_phone'=>'995 297 987','office_phone'=>'365 4777','email_contact'=>'gerente_regional@cencosud.com.pe'),
+			array('name'=>'Grupo Limpium','slogan'=>'Primero Las Personas','site'=>'www.grupolimpium.com'),
         );
 
         \DB::table('enterprises')->insert($data);

@@ -29,7 +29,7 @@ class WorkplacesController extends Controller {
 	{
 		//
         $workplace=new Workplace();
-        $workplace->enterprise_id=Input::get('enterprise_id');
+        $workplace->enterprise_id=Input::get('account_id');
         $workplace->address=Input::get('address');
         $workplace->reference=Input::get('reference');
         $workplace->name=Input::get('local');
@@ -94,7 +94,7 @@ class WorkplacesController extends Controller {
     public function find()
     {
         $term = Input::get('data');
-        $search=Workplace::where('enterprise_id', $term)->get();
+        $search=Workplace::where('account_id', $term)->get();
 
         foreach ($search as $result) {
             $enterprises[] = ['id'=>$result->id,'text'=>$result->name];
