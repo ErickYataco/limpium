@@ -188,9 +188,11 @@
 
 		// Create random data
 		this.rickshawRandomData = new Rickshaw.Fixtures.RandomData(50);
-		for (var i = 0; i < 75; i++) {
+		//for (var i = 0; i < 75; i++) {
+        for (var i = 0; i < 7; i++) {
 			this.rickshawRandomData.addData(this.rickshawSeries);
 		}
+        //para backups
 		
 		// Update knob charts
 		this._updateKnob();
@@ -263,6 +265,7 @@
 	p._updateKnob = function () {
 		var val1 = this.rickshawSeries[0][this.rickshawSeries[0].length - 2];
 		var val2 = this.rickshawSeries[0][this.rickshawSeries[0].length - 1];
+
 
 		$({animatedVal: val1.y}).animate({animatedVal: val2.y}, {
 			duration: 1200,

@@ -51,6 +51,11 @@ class WorkersTableSeeder extends Seeder {
 			array('active'=>'1','birthdate'=>'1979-10-04','dni'=>'41738510','department_id'=>'14','province_id'=>'127','district_id'=>'1257','full_address'=>'Lima, Lima, Jesus Maria,','job_title'=>'operario','mobile'=>'(51) (1) 999-385-905','email'=>'camila.sierra1@limpium.com','first_name'=>'Camila','first_last_name'=>'Sierra','second_last_name'=>'Ibarcena'),
 			array('active'=>'1','birthdate'=>'1987-09-06','dni'=>'41738503','department_id'=>'14','province_id'=>'127','district_id'=>'1261','full_address'=>'Lima, Lima, Lince, ','job_title'=>'operario','mobile'=>'(51) (1) 975-369-903','email'=>'paola.palacios1@limpium.com','first_name'=>'Paola','first_last_name'=>'Palacios','second_last_name'=>'Canales'),
 
+			array('active'=>'1','birthdate'=>'1985-11-09','dni'=>'41738608','department_id'=>'14','province_id'=>'127','district_id'=>'1257','full_address'=>'Lima, Lima, Jesus Maria,','job_title'=>'operario','mobile'=>'(51) (1) 964-344-907','email'=>'Josep.molina1@limpium.com','first_name'=>'Josep','first_last_name'=>'Molina','second_last_name'=>'Alvarez'),
+			array('active'=>'1','birthdate'=>'1987-09-06','dni'=>'41738609','department_id'=>'14','province_id'=>'127','district_id'=>'1257','full_address'=>'Lima, Lima, Jesus Maria,','job_title'=>'operario','mobile'=>'(51) (1) 988-784-906','email'=>'Camilo.rojas1@limpium.com','first_name'=>'Camilo','first_last_name'=>'Rojas','second_last_name'=>'Campos'),
+			array('active'=>'1','birthdate'=>'1979-10-04','dni'=>'41738610','department_id'=>'14','province_id'=>'127','district_id'=>'1257','full_address'=>'Lima, Lima, Jesus Maria,','job_title'=>'operario','mobile'=>'(51) (1) 999-385-905','email'=>'Juan.sierra1@limpium.com','first_name'=>'Juan Pablo','first_last_name'=>'Sierra','second_last_name'=>'Ibarcena'),
+			array('active'=>'1','birthdate'=>'1987-09-06','dni'=>'41738603','department_id'=>'14','province_id'=>'127','district_id'=>'1261','full_address'=>'Lima, Lima, Lince, ','job_title'=>'operario','mobile'=>'(51) (1) 975-369-903','email'=>'Marta.palacios1@limpium.com','first_name'=>'Marta','first_last_name'=>'Palacios','second_last_name'=>'Canales')
+
 
         );
 

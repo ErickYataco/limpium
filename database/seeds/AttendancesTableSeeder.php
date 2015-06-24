@@ -64,6 +64,11 @@ class AttendancesTableSeeder extends Seeder {
 			array('day_attendance'=>date("Y-m-d H:i:s"),'assignment_id'=>'32','start_work_hour'=>'7:20','end_work_hour'=>'1','start_lunch_hour'=>'1','end_lunch_hour'=>'1'),
 			array('day_attendance'=>date("Y-m-d H:i:s"),'assignment_id'=>'33','start_work_hour'=>'7:30','end_work_hour'=>'2','start_lunch_hour'=>'1','end_lunch_hour'=>'1'),
 
+			array('day_attendance'=>date("Y-m-d H:i:s"),'assignment_id'=>'34','start_work_hour'=>'7:20','end_work_hour'=>'1','start_lunch_hour'=>'1','end_lunch_hour'=>'1'),
+			array('day_attendance'=>date("Y-m-d H:i:s"),'assignment_id'=>'35','start_work_hour'=>'7:30','end_work_hour'=>'2','start_lunch_hour'=>'1','end_lunch_hour'=>'1'),
+			array('day_attendance'=>date("Y-m-d H:i:s"),'assignment_id'=>'36','start_work_hour'=>'7:20','end_work_hour'=>'1','start_lunch_hour'=>'1','end_lunch_hour'=>'1'),
+			array('day_attendance'=>date("Y-m-d H:i:s"),'assignment_id'=>'37','start_work_hour'=>'7:30','end_work_hour'=>'2','start_lunch_hour'=>'1','end_lunch_hour'=>'1'),
+
         );
 
         \DB::table('attendances')->insert($data);

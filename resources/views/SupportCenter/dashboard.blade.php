@@ -49,8 +49,8 @@
                             <div class="card-body no-padding">
                                 <div class="alert alert-callout alert-info no-margin">
                                     <strong class="pull-right text-success text-lg">0,38% <i class="md md-trending-up"></i></strong>
-                                    <strong class="text-xl">$ 32,829</strong><br/>
-                                    <span class="opacity-50">Revenue</span>
+                                    <strong class="text-xl"> 32,829</strong><br/>
+                                    <span class="opacity-50">Cosoto</span>
                                     <div class="stick-bottom-left-right">
                                         <div class="height-2 sparkline-revenue" data-line-color="#bdc1c1"></div>
                                     </div>
@@ -64,9 +64,9 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="card">
                             <div class="card-body no-padding">
-                                <div class="alert alert-callout alert-warning no-margin">
-                                    <strong class="pull-right text-warning text-lg">21,25% <i class="md md-swap-vert"></i></strong>
-                                    <strong class="text-xl">17</strong><br/>
+                                <div class="alert alert-callout alert-danger no-margin">
+                                    <strong class="pull-right text-danger text-lg">{{round((7/8)*100)}}% <i class="md md-trending-down"></i></strong>
+                                    <strong class="text-xl">7</strong><br/>
                                     <span class="opacity-50">Locales sin Apertura</span>
                                     <div class="stick-bottom-right">
                                         <div class="height-1 sparkline-visits" data-bar-color="#e5e6e6"></div>
@@ -82,12 +82,12 @@
                         <div class="card">
                             <div class="card-body no-padding">
                                 <div class="alert alert-callout alert-danger no-margin">
-                                    <strong class="pull-right text-danger text-lg">4% <i class="md md-trending-down"></i></strong>
-                                    <strong class="text-xl">40</strong><br/>
+                                    <strong class="pull-right text-danger text-lg">{{round((14/33)*100)}}% <i class="md md-trending-down"></i></strong>
+                                    <strong class="text-xl">14</strong><br/>
                                     <span class="opacity-50">Faltas Totales</span>
                                     <div class="stick-bottom-left-right">
                                         <div class="progress progress-hairline no-margin">
-                                            <div class="progress-bar progress-bar-danger" style="width:4%"></div>
+                                            <div class="progress-bar progress-bar-danger" style="width:{{(14/33)*100}}%"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +133,7 @@
                                 </div><!--end .col -->
                                 <div class="col-md-5">
                                     <div class="card-head">
-                                        <header>Locales sin Apertura</header>
+                                        <header><a class="" href="/soporte/locales/" >Locales sin Apertura</a></header>
                                     </div>
                                     <div class="card-body height-10">
                                         @foreach ($contracts as $contract)

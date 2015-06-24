@@ -84,6 +84,15 @@ class AssignmentsTableSeeder extends Seeder {
 			array('contract_id' =>'5','workplace_id'=>'5','worker_id'=>'35','monday'=>'1','tuesday'=>'1','wednesday'=>'1','thursday'=>'1','friday'=>'1','saturday'=>'1',
 				  'sunday'=>'','start_work_hour'=>'7:00 am','end_work_hour'=>'5:00 pm','start_break_hour'=>'12:00 pm','end_break_hour'=>'1:00pm','validity'=>'1','type_assignment'=>'1',),
 
+			array('contract_id' =>'8','workplace_id'=>'8','worker_id'=>'36','monday'=>'1','tuesday'=>'1','wednesday'=>'1','thursday'=>'1','friday'=>'1','saturday'=>'1',
+				  'sunday'=>'','start_work_hour'=>'7:00 am','end_work_hour'=>'5:00 pm','start_break_hour'=>'12:00 pm','end_break_hour'=>'1:00pm','validity'=>'1','type_assignment'=>'1',),
+			array('contract_id' =>'8','workplace_id'=>'8','worker_id'=>'37','monday'=>'1','tuesday'=>'1','wednesday'=>'1','thursday'=>'1','friday'=>'1','saturday'=>'1',
+				  'sunday'=>'','start_work_hour'=>'7:00 am','end_work_hour'=>'5:00 pm','start_break_hour'=>'12:00 pm','end_break_hour'=>'1:00pm','validity'=>'1','type_assignment'=>'1',),
+			array('contract_id' =>'8','workplace_id'=>'8','worker_id'=>'38','monday'=>'1','tuesday'=>'1','wednesday'=>'1','thursday'=>'1','friday'=>'1','saturday'=>'1',
+				  'sunday'=>'','start_work_hour'=>'7:00 am','end_work_hour'=>'5:00 pm','start_break_hour'=>'12:00 pm','end_break_hour'=>'1:00pm','validity'=>'1','type_assignment'=>'1',),
+			array('contract_id' =>'8','workplace_id'=>'8','worker_id'=>'39','monday'=>'1','tuesday'=>'1','wednesday'=>'1','thursday'=>'1','friday'=>'1','saturday'=>'1',
+				  'sunday'=>'','start_work_hour'=>'7:00 am','end_work_hour'=>'5:00 pm','start_break_hour'=>'12:00 pm','end_break_hour'=>'1:00pm','validity'=>'1','type_assignment'=>'1',),
+
         );
 
         \DB::table('assignments')->insert($data);
