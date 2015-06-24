@@ -48,9 +48,9 @@
                         <div class="card">
                             <div class="card-body no-padding">
                                 <div class="alert alert-callout alert-info no-margin">
-                                    <strong class="pull-right text-success text-lg">0,38% <i class="md md-trending-up"></i></strong>
-                                    <strong class="text-xl"> 32,829</strong><br/>
-                                    <span class="opacity-50">Cosoto</span>
+                                    <strong class="pull-right text-success text-lg">10,8% <i class="md md-trending-down"></i></strong>
+                                    <strong class="text-xl">180 H</strong><br/>
+                                    <span class="opacity-50">Horas Perdidas</span>
                                     <div class="stick-bottom-left-right">
                                         <div class="height-2 sparkline-revenue" data-line-color="#bdc1c1"></div>
                                     </div>
