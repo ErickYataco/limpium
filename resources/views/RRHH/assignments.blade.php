@@ -70,12 +70,12 @@
                                                 <dt><span class="fa fa-fw fa-university fa-lg opacity-50"></span></dt>
                                                 <dd>
                                                     <span class="opacity-50">Empresa</span><br/>
-                                                    <span class="text-medium">{{$contract->enterprise->name}}</span>
+                                                    <span class="text-medium">{{$contract->account->name}}</span>
                                                 </dd>
                                                 <dt><span class="fa fa-fw fa-home fa-lg opacity-50"></span></dt>
                                                 <dd>
                                                     <span class="opacity-50">Local</span><br/>
-                                                    <span class="text-medium">{{$contract->enterprise->name}}</span>
+                                                    <span class="text-medium">{{$contract->account->name}}</span>
                                                 </dd>
                                                 <dt><span class="fa fa-fw fa-calendar fa-lg opacity-50"></span></dt>
                                                 <dd>
@@ -99,18 +99,18 @@
                                                 <dt><span class="fa fa-fw fa-user fa-lg opacity-50"></span></dt>
                                                 <dd>
                                                     <span class="opacity-50">Contacto</span><br/>
-                                                    <span class="text-medium">{{$contract->enterprise->contact}}</span>
+                                                    <span class="text-medium">{{$contract->account->contact}}</span>
                                                 </dd>
                                                 <dt><span class="fa fa-fw fa-mobile fa-lg opacity-50"></span></dt>
                                                 <dd>
                                                     <span class="opacity-50">Telefonos</span><br/>
-                                                    <span class="text-medium">{{$contract->enterprise->office_phone}}</span> &nbsp;<span class="opacity-50">trabajo</span><br/>
-                                                    <span class="text-medium">{{$contract->enterprise->mobile_phone}}</span> &nbsp;<span class="opacity-50">mobil</span>
+                                                    <span class="text-medium">{{$contract->account->office_phone}}</span> &nbsp;<span class="opacity-50">trabajo</span><br/>
+                                                    <span class="text-medium">{{$contract->account->mobile_phone}}</span> &nbsp;<span class="opacity-50">mobil</span>
                                                 </dd>
                                                 <dt><span class="fa fa-fw fa-envelope-square fa-lg opacity-50"></span></dt>
                                                 <dd>
                                                     <span class="opacity-50">Email</span><br/>
-                                                    <a class="text-medium" href="../../../html/mail/compose.html">{{$contract->enterprise->email_contact}}</a>
+                                                    <a class="text-medium" href="../../../html/mail/compose.html">{{$contract->account->email_contact}}</a>
                                                 </dd>
                                             </dl><!--end .dl-horizontal -->
                                         @endif
@@ -514,7 +514,7 @@
                     $('#list-backups').html(data);
                     //location.hash = page;
                 }).fail(function () {
-                    alert('No se pudo cargar los backups.');
+                    alert('No se pudo cargar los trabajadores.');
                 });
             }
 

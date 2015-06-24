@@ -14,7 +14,7 @@ class LocalesController extends Controller {
 	 */
 	public function index()
 	{
-        return view('operaciones.locales');
+        return view('SupportCenter.locales');
 	}
 
 	/**

@@ -53,7 +53,7 @@
                                             <dt><span class="fa fa-fw fa-home fa-lg opacity-50"></span></dt>
                                             <dd>
                                                 <span class="opacity-50">Local</span><br/>
-                                                <span class="text-medium">{{$contract->account->name}}</span>
+                                                <span class="text-medium">{{$contract->workplace->name}}</span>
                                             </dd>
                                             <dt><span class="fa fa-fw fa-calendar fa-lg opacity-50"></span></dt>
                                             <dd>

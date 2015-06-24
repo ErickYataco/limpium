@@ -16,6 +16,11 @@ class WorkplacesTableSeeder extends Seeder {
             array('account_id'=>'1' ,'name' =>'Santa Anita' ,'address'=>'calle 202' ,'reference'=>'Por Registrar' ,'latitude'=>'' ,'longitude'=>''),
             array('account_id'=>'2' ,'name' =>'Canta Callao' ,'address'=>'calle 203' ,'reference'=>'Por Registrar' ,'latitude'=>'' ,'longitude'=>''),
             array('account_id'=>'2' ,'name' =>'Puente Piedra' ,'address'=>'calle 203' ,'reference'=>'Por Registrar' ,'latitude'=>'' ,'longitude'=>''),
+			array('account_id'=>'3' ,'name' =>'San Miguel' ,'address'=>'calle 203' ,'reference'=>'Por Registrar' ,'latitude'=>'' ,'longitude'=>''),
+			array('account_id'=>'3' ,'name' =>'San Isidro' ,'address'=>'calle 203' ,'reference'=>'Por Registrar' ,'latitude'=>'' ,'longitude'=>''),
+			array('account_id'=>'4' ,'name' =>'Santiago de Surco' ,'address'=>'calle 203' ,'reference'=>'Por Registrar' ,'latitude'=>'' ,'longitude'=>''),
+			array('account_id'=>'4' ,'name' =>'Breña' ,'address'=>'calle 203' ,'reference'=>'Por Registrar' ,'latitude'=>'' ,'longitude'=>''),
+
         );
 
         \DB::table('workplaces')->insert($data);

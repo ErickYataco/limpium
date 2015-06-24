@@ -54,7 +54,7 @@ class AssignmentsController extends Controller {
 	{
 		//
         $assignments=Assignment::with('worker.attachments','attendance')->paginate(8);
-        $contract=Contract::with('enterprise')->where('id',1)->first();
+        $contract=Contract::with('account')->where('id',1)->first();
         $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
         $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
 
@@ -141,7 +141,7 @@ class AssignmentsController extends Controller {
             ->where('workers.district_id',Input::get('district_id'))
             ->paginate(5);
 
-        dd($workers);
+        //dd($workers);
 
         return response()->json(view('RRHH.workersList', array('workers' => $workers))->render());
     }

@@ -22,7 +22,7 @@ class BackupsController extends Controller {
 	{
         $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
         $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
-        return view('operaciones.asignacion')->with('departments',$departments)->with('services', $services);
+        return view('SupportCenter.asignacion')->with('departments',$departments)->with('services', $services);
 	}
 
 	/**
@@ -84,13 +84,14 @@ class BackupsController extends Controller {
 	{
        //$assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->get();
        //dd($assignments);
-        $assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->orderBy('type_assignment','desc')->paginate(8);
-		//$assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->orderBy('type_assignment','desc')->toSql();
+		$assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->paginate(8);
+        //$assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->orderBy('type_assignment','desc')->paginate(8);
+		//$assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->orderBy('type_assignment','desc')->get();
 		//dd($assignments);
-        $contract=Contract::with('account')->where('id',$id)->first();
+        $contract=Contract::with('account','workplace')->where('id',$id)->first();
         $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
         $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
-        return view('Operaciones.asignacion')->with('assignments',$assignments)->with('contract',$contract)->with('departments',$departments)
+        return view('SupportCenter.asignacion')->with('assignments',$assignments)->with('contract',$contract)->with('departments',$departments)
                 ->with('services', $services)->with('contract', $contract);
 	}
 
@@ -132,7 +133,7 @@ class BackupsController extends Controller {
         $workers = Worker::with('attachments')->where('department_id',Input::get('department_id'))
             ->where('province_id',Input::get('province_id'))->where('district_id',Input::get('district_id'))->paginate(5);
 
-        return response()->json(view('Operaciones.backupList', array('workers' => $workers))->render());
+        return response()->json(view('SupportCenter.backupList', array('workers' => $workers))->render());
     }
 
     public function findRequirements()
@@ -141,7 +142,7 @@ class BackupsController extends Controller {
         $contracts=Contract::where('workplace_id',Input::get('workplace_id'))->where('service_id',Input::get('service_id'))->paginate(8);
         //$contracts = Worker::with('attachments')->paginate(8);
 
-        return response()->json(view('Operaciones.requirementsList', array('id'=>Input::get('workplace_id'),'contracts' => $contracts))->render());
+        return response()->json(view('SupportCenter.requirementsList', array('id'=>Input::get('workplace_id'),'contracts' => $contracts))->render());
     }
 
 }

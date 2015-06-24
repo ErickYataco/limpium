@@ -163,3 +163,8 @@ Route::get('comercial/buscar-empresa', [
 	'permission' => 'comercial_contrato_buscar',
 	'middleware' => [ 'auth', 'acl' ]
 ]);
+
+Event::listen('illuminate.query', function($query)
+{
+	//var_dump($query);
+});

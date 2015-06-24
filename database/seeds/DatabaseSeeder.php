@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder {
 	public function run()
 	{
 		//Model::unguard();
-		if ( App::environment() === 'dev' )
+		if ( App::environment() === 'local' )
 		{
 			$this->call('EnterprisesTableSeeder');
 			$this->call('PermissionsTableSeeder');

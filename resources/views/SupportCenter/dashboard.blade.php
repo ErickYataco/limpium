@@ -21,26 +21,26 @@
                     </div><!--end .col -->
                     <div class="col-md-9 col-xs-7">
                         <div class="width-3 text-center pull-right">
-                            <strong class="text-xl">643</strong><br/>
-                            <span class="text-light opacity-75">followers</span>
+                            <strong class="text-xxl">{{$numberWorkplaces}}</strong><br/>
+                            <span class="text-light opacity-75">Locales</span>
                         </div>
                         <div class="width-3 text-center pull-right">
-                            <strong class="text-xl">108</strong><br/>
-                            <span class="text-light opacity-75">following</span>
+                            <strong class="text-xxl">{{$numberWorkers}}</strong><br/>
+                            <span class="text-light opacity-75">Operarios</span>
                         </div>
                     </div><!--end .col -->
                 </div><!--end .row -->
-                <div class="overlay overlay-shade-bottom stick-bottom-left force-padding text-right">
-                    <a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Contact me"><i class="fa fa-envelope"></i></a>
-                    <a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Follow me"><i class="fa fa-twitter"></i></a>
-                    <a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Personal info"><i class="fa fa-facebook"></i></a>
-                </div>
+                {{--<div class="overlay overlay-shade-bottom stick-bottom-left force-padding text-right">--}}
+                    {{--<a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Contact me"><i class="fa fa-envelope"></i></a>--}}
+                    {{--<a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Follow me"><i class="fa fa-twitter"></i></a>--}}
+                    {{--<a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Personal info"><i class="fa fa-facebook"></i></a>--}}
+                {{--</div>--}}
             </div><!--end .section-body -->
         </section>
         <!-- END PROFILE HEADER  -->
 
         <section>
-            <div class="section-body">
+            <div class="section-body" style="margin-top: 0px">
                 <div class="row">
 
                     <!-- BEGIN ALERT - REVENUE -->
@@ -136,31 +136,14 @@
                                         <header>Locales sin Apertura</header>
                                     </div>
                                     <div class="card-body height-10">
-                                        8 Metro - Alfonso Ugarte
-                                        <span class="pull-right text-success text-sm">80% <i class="md md-trending-up"></i></span>
-                                        <div class="progress progress-hairline">
-                                            <div class="progress-bar progress-bar-danger" style="width:80%"></div>
-                                        </div>
-                                        <strong>10</strong> Maestro - San Miguel
-                                        <span class="pull-right text-success text-sm">50% <i class="md md-trending-up"></i></span>
-                                        <div class="progress progress-hairline">
-                                            <div class="progress-bar progress-bar-danger" style="width:50%"></div>
-                                        </div>
-                                        5 Cencosud - La Perla
-                                        <span class="pull-right text-success text-sm">41,6% <i class="md md-trending-up"></i></span>
-                                        <div class="progress progress-hairline">
-                                            <div class="progress-bar progress-bar-danger" style="width:41%"></div>
-                                        </div>
-                                        4 Maestro - Idenpencia
-                                        <span class="pull-right text-success text-sm">40% <i class="md md-trending-up"></i></span>
-                                        <div class="progress progress-hairline">
-                                            <div class="progress-bar progress-bar-danger" style="width:40%"></div>
-                                        </div>
-                                        3 Hiraoka - Miraflores
-                                        <span class="pull-right text-success text-sm">37,5% <i class="md md-trending-up"></i></span>
-                                        <div class="progress progress-hairline">
-                                            <div class="progress-bar progress-bar-danger" style="width:37%"></div>
-                                        </div>
+                                        @foreach ($contracts as $contract)
+                                            {{--{{dd($contract)}}--}}
+                                            <a class="" href="/soporte/backups/requerimiento/{{$contract->id}}" >{{ $contract->workplace->account->name}} - {{$contract->workplace->name }}</a>
+                                            <span class="pull-right text-danger text-sm">{{$contract->workers-$contract->assignmentsCount}}<i class="md md-trending-down"></i></span>
+                                            <div class="progress progress-hairline">
+                                                <div class="progress-bar progress-bar-success" style="width:{{($contract->assignmentsCount/$contract->workers)*100}}%"></div>
+                                            </div>
+                                        @endforeach
                                     </div><!--end .card-body -->
                                 </div><!--end .col -->
                             </div><!--end .row -->
@@ -185,14 +168,14 @@
                                         <div class="force-padding text-sm text-default-light">
                                             <p>
                                                 <i class="md md-mode-comment text-primary-light"></i>
-                                                The registrations are measured from the time that the redesign was fully implemented and after the first e-mailing.
+                                                Historico de los reeemplazos efectuados en los ultimos 5 meses.
                                             </p>
                                         </div>
                                     </div><!--end .col -->
                                     <div class="col-sm-6">
                                         <div class="force-padding pull-right text-default-light">
                                             <h2 class="no-margin text-primary-dark"><span class="text-xxl">66.05%</span></h2>
-                                            <i class="fa fa-caret-up text-success fa-fw"></i> more registrations
+                                            <i class="fa fa-caret-up text-success fa-fw"></i> % de reemplazos del mes.
                                         </div>
                                     </div><!--end .col -->
                                 </div><!--end .row -->
