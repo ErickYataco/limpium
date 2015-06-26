@@ -19,8 +19,8 @@ class CreateWorkplacesTable extends Migration {
             $table->string('name',150);
             $table->string('address',150);
             $table->string('reference',150);
-            $table->string('latitude',150);
-            $table->string('longitude',150);
+            $table->float('latitude');
+            $table->float('longitude');
             $table->timestamps();
 
         });

@@ -53,7 +53,7 @@
                                                 <div class="col-xs-12 col-lg-6 hbox-xs">
                                                     <div class="hbox-column width-2">
 
-                                                            <img class="img-circle img-responsive pull-left" src="{{asset('img/avatar8.jpg')}}" alt="" />
+                                                            <img class="img-circle img-responsive pull-left" src="{{asset($contract->account->logo)}}" alt="" />
 
                                                     </div><!--end .hbox-column -->
                                                     <div class="hbox-column v-top">

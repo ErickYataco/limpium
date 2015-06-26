@@ -21,7 +21,7 @@ class CreateAccountsTable extends Migration {
 			$table->string('mobile_phone',20);
 			$table->string('office_phone',14);
 			$table->string('email_contact');
-			$table->string('img',150);
+			$table->string('logo',150);
 
 		});
 	}
