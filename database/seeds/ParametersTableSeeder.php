@@ -12,6 +12,8 @@ class ParametersTableSeeder extends Seeder {
     public function run()
     {
         $data=array(
+			array('group_id'=>'geo','code'=>'1','description'=>'distancia permitida para registro de horario','first_value'=>'10','second_value'=>'10'),
+			array('group_id'=>'geo','code'=>'2','description'=>'unidad de medida para localizacion','first_value'=>'M','second_value'=>'M'),
             array('group_id'=>'job','code'=>'1','description'=>'combo posicion','first_value'=>'operario','second_value'=>'1'),
             array('group_id'=>'job','code'=>'2','description'=>'combo posicion','first_value'=>'supervisor','second_value'=>'2'),
             array('group_id'=>'mar','code'=>'1','description'=>'combo estado civil','first_value'=>'Casad@','second_value'=>'1'),
