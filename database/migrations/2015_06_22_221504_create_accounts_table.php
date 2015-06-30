@@ -22,7 +22,7 @@ class CreateAccountsTable extends Migration {
 			$table->string('office_phone',14);
 			$table->string('email_contact');
 			$table->string('logo',150);
-
+			$table->timestamps();
 		});
 	}
 

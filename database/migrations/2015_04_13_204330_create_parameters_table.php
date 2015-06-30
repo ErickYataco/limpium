@@ -19,7 +19,6 @@ class CreateParametersTable extends Migration {
             $table->string('description',150);
             $table->string('first_value',50);
             $table->string('second_value',50);
-
             $table->primary(array('group_id', 'code'));
 
 		});

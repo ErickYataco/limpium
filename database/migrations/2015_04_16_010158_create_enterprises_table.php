@@ -22,6 +22,7 @@ class CreateEnterprisesTable extends Migration {
 			$table->string('email_rrhh');
 			$table->string('email_contact');
 			$table->string('img',150);
+			$table->timestamps();
 
         });
 	}
