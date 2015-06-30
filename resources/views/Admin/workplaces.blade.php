@@ -66,7 +66,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             {!! Form::text('enterprise', null, array('id' => 'enterprise','class' => 'form-control input-sm', 'data-rule-minlength' => '5', 'required')) !!}
-                                            <input type="hidden" name="enterprise_id" id="enterprise_id" value="">
+                                            <input type="hidden" name="account_id" id="account_id" value="">
                                             <label for="enterprise" class="control-label">Empresa</label>
                                         </div>
                                     </div>
@@ -147,7 +147,7 @@
                     return false;
                 },
                 select: function( event, ui ) {
-                    $("#enterprise_id").val(ui.item.id);
+                    $("#account_id").val(ui.item.id);
                 }
             });
 

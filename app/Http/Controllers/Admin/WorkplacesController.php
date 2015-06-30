@@ -29,7 +29,7 @@ class WorkplacesController extends Controller {
 	{
 		//
         $workplace=new Workplace();
-        $workplace->enterprise_id=Input::get('account_id');
+        $workplace->account_id=Input::get('account_id');
         $workplace->address=Input::get('address');
         $workplace->reference=Input::get('reference');
         $workplace->name=Input::get('local');
