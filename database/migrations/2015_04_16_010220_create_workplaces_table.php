@@ -21,6 +21,12 @@ class CreateWorkplacesTable extends Migration {
             $table->string('reference',150);
             $table->float('latitude');
             $table->float('longitude');
+			$table->integer('department_id');
+			$table->integer('province_id');
+			$table->integer('district_id');
+			$table->string('department');
+			$table->string('province');
+			$table->string('district');
             $table->timestamps();
 
         });

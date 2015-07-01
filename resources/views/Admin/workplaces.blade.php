@@ -78,6 +78,29 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            {!!Form::select('department', $departments, null, array('id'=>'department','class' => 'form-control ','required'=>'required'))!!}
+                                            <input type="hidden" name="department_text" id="department_text" value="">
+                                            <label for="deparment" class="control-label">Departameto</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <select id="province" class="form-control" name="province" required></select>
+                                            <input type="hidden" name="province_text" id="province_text" value="">
+                                            <label for="province" class="control-label">Provincia</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <select id="district" class="form-control" name="district" required></select>
+                                            <input type="hidden" name="district_text" id="district_text" value="">
+                                            <label for="district" class="control-label">Distrito</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             {!! Form::text('address', null, array('id' => 'address','class' => 'form-control','data-rule-minlength' => '10' , 'required')) !!}
@@ -138,6 +161,35 @@
     <script src="{{ asset('js/libs/toastr/toastr.js') }}" ></script>
     <script type="text/javascript">
         jQuery(function(){
+
+            $("#department").on("change", function(e) {
+                $('#department_text').val(this.options[this.selectedIndex].text);
+                $.getJSON('/find-province?data='+ this.value, function(opts){
+                    var province=$("#province");
+                    province.find('option').remove();
+                    $("#district").find('option').remove();
+                    $.each(opts, function() {
+                        province.append($("<option />").val(this.id).text(this.text));
+                    });
+                    //province.addClass('dirty');
+                });
+            });
+
+            $("#province").on("change", function(e) {
+                $('#province_text').val(this.options[this.selectedIndex].text);
+                $.getJSON('/find-district?data='+ this.value, function(opts){
+                    var district=$("#district");
+                    district.find('option').remove();
+                    $.each(opts, function() {
+                        district.append($("<option />").val(this.id).text(this.text));
+                    });
+                    //district.addClass('dirty');
+                });
+            });
+
+            $("#district").on("change", function(e) {
+                $('#district_text').val(this.options[this.selectedIndex].text);
+            });
 
             $( "#enterprise" ).autocomplete({
                 source: '/find-empresa',

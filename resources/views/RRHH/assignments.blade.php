@@ -75,12 +75,24 @@
                                                 <dt><span class="fa fa-fw fa-home fa-lg opacity-50"></span></dt>
                                                 <dd>
                                                     <span class="opacity-50">Local</span><br/>
-                                                    <span class="text-medium">{{$contract->account->name}}</span>
+                                                    <span class="text-medium">{{$contract->workplace->name}}</span>
                                                 </dd>
                                                 <dt><span class="fa fa-fw fa-calendar fa-lg opacity-50"></span></dt>
                                                 <dd>
                                                     <span class="opacity-50">Horario</span><br/>
-                                                    <span class="text-medium">{{$contract->start_work}} - {{$contract->end_work}}</span>
+                                                    <span class="text-medium">
+                                                        {{$contract->start_work}} - {{$contract->end_work}}
+                                                    </span><br/>
+                                                    <span class="text-medium">
+
+                                                        {{$contract->monday==1?'L':''}}
+                                                        {{$contract->tuesday==1?'MA':''}}
+                                                        {{$contract->wednesday==1?'MI':''}}
+                                                        {{$contract->thursday==1?'J':''}}
+                                                        {{$contract->friday==1?'V':''}}
+                                                        {{$contract->saturday==1?'S':''}}
+                                                        {{$contract->sunday==1?'D':''}}
+                                                    </span>
                                                 </dd>
                                                 <dt><span class="fa fa-fw fa-location-arrow fa-lg opacity-50"></span></dt>
                                                 <dd>
@@ -170,7 +182,7 @@
                                                                                         <td style="width: 38px;" class="fc-axis fc-widget-content"></td>
                                                                                         <td class="fc-day fc-widget-content fc-sun fc-past" data-date="2015-04-19"></td>
                                                                                         <td class="fc-day fc-widget-content fc-mon fc-past" data-date="2015-04-20"></td>
-                                                                                        <td class="fc-day fc-widget-content fc-tue fc-today" data-date="2015-04-21"></td>
+                                                                                        <td class="fc-day fc-widget-content fc-tue fc-past" data-date="2015-04-21"></td>
                                                                                         <td class="fc-day fc-widget-content fc-wed fc-future" data-date="2015-04-22"></td>
                                                                                         <td class="fc-day fc-widget-content fc-thu fc-future" data-date="2015-04-23"></td>
                                                                                         <td class="fc-day fc-widget-content fc-fri fc-future" data-date="2015-04-24"></td>
@@ -199,13 +211,21 @@
                                                                                 </table>
                                                                             </div>
                                                                             <hr style="display: none;" class="fc-widget-header">
-                                                                            {{--<div class="fc-content-skeleton">
+                                                                            <div class="fc-content-skeleton">
                                                                                 <table>
                                                                                     <tbody>
                                                                                     <tr>
                                                                                         <td class="fc-axis" style="width:38px"></td>
                                                                                         <td>
-                                                                                            <div class="fc-event-container"></div>
+                                                                                            <div class="fc-event-container">
+                                                                                                <a style="top: 0px; bottom: -161.5px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event fc-event">
+                                                                                                    <div class="fc-content">
+                                                                                                        <div class="fc-time" data-start="6:00" data-full="6:00 AM - 4:30 PM"><span>6:00 - 4:30</span></div>
+                                                                                                        <div class="fc-title">Amazing work</div>
+                                                                                                    </div>
+                                                                                                    <div class="fc-bg"></div>
+                                                                                                </a>
+                                                                                            </div>
                                                                                         </td>
                                                                                         <td>
                                                                                             <div class="fc-event-container"></div>
@@ -257,7 +277,7 @@
                                                                                     </tr>
                                                                                     </tbody>
                                                                                 </table>
-                                                                            </div>--}}
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </td>

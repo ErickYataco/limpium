@@ -13,9 +13,17 @@ class DatabaseSeeder extends Seeder {
 	public function run()
 	{
 		//Model::unguard();
-		if ( App::environment() === 'production' )
+		if ( App::environment() === 'local' )
 		{
+
 			$this->call('EnterprisesTableSeeder');
+			$this->call('PermissionsTableSeeder');
+			$this->call('RolesTableSeeder');
+			$this->call('PermissionsRolesTableSeeder');
+			$this->call('UsersTableSeeder');
+			$this->call('ParametersTableSeeder');
+
+			/*$this->call('EnterprisesTableSeeder');
 			$this->call('PermissionsTableSeeder');
 			$this->call('RolesTableSeeder');
 			$this->call('PermissionsRolesTableSeeder');
@@ -27,9 +35,9 @@ class DatabaseSeeder extends Seeder {
 			$this->call('AssignmentsTableSeeder');
 			$this->call('AttachmentsTableSeeder');
 			$this->call('AttendancesTableSeeder');
-			$this->call('ContractsTableSeeder');
+			$this->call('ContractsTableSeeder');*/
 		}
-		elseif ( App::environment() === 'local' )
+		elseif ( App::environment() === 'production' )
 		{
 			$this->call('EnterprisesTableSeeder');
 			$this->call('PermissionsTableSeeder');

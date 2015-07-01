@@ -16,7 +16,6 @@ use TORUSlimpium\Models\Attachment;
 
 class WorkersController extends Controller {
 
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -24,20 +23,23 @@ class WorkersController extends Controller {
 	 */
 	public function index()
 	{
-        $education=array('' => '')+Parameters::where('group_id','edu')->lists('first_value', 'second_value');
-        $banks=array('' => '')+Parameters::where('group_id','ban')->lists('first_value','second_value');
-        $marital_status=array('' => '')+Parameters::where('group_id','mar')->lists('first_value','second_value');
-        $emergency=array('' => '')+Parameters::where('group_id','rel')->lists('first_value', 'second_value');
-        $districts=array('' => '')+Parameters::where('group_id','dis')->lists('first_value', 'second_value');
-        $provinces=array('' => '')+Parameters::where('group_id','pro')->lists('first_value', 'second_value');
-        $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
-        $job_title=array('' => '')+Parameters::where('group_id','job')->lists('first_value', 'second_value');
+		$education      = array( '' => '' ) + Parameters::where('group_id', 'edu')->lists('first_value',
+				'second_value');
+		$banks          = array( '' => '' ) + Parameters::where('group_id', 'ban')->lists('first_value',
+				'second_value');
+		$marital_status = array( '' => '' ) + Parameters::where('group_id', 'mar')->lists('first_value',
+				'second_value');
+		$emergency      = array( '' => '' ) + Parameters::where('group_id', 'rel')->lists('first_value',
+				'second_value');
 
-        return view('RRHH.person')->with('education', $education)->with('banks', $banks)->with('maritalStatus', $marital_status)
-            ->with('emergency', $emergency)->with('departments', $departments)->with('provinces', $provinces)
-            ->with('districts', $districts)
-            ->with('job_title', $job_title);
+		$departments = array( '' => '' ) + Parameters::where('group_id', 'dep')->lists('first_value', 'second_value');
+		$job_title   = array( '' => '' ) + Parameters::where('group_id', 'job')->lists('first_value', 'second_value');
+
+		return view('RRHH.person')->with('education', $education)->with('banks', $banks)->with('maritalStatus',
+			$marital_status)->with('emergency', $emergency)->with('departments', $departments)->with('job_title',
+				$job_title);
 	}
+
 
 	/**
 	 * Show the form for creating a new resource.
@@ -47,50 +49,57 @@ class WorkersController extends Controller {
 	public function create()
 	{
 		//
-		$worker=new Worker();
-		$worker->dni=Input::get('dni');
-		$worker->first_name=Input::get('firstname');
-		$worker->second_name=Input::get('secondname');
-		$worker->first_last_name=Input::get('firstlastname');
-		$worker->second_last_name=Input::get('secondlastname');
-		$worker->job_title=Input::get('job_title');
-		$worker->marital_status_id=Input::get('maritalstatus');
-		$worker->address=Input::get('address');
-		$worker->department_id=Input::get('department');
-		$worker->province_id=Input::get('province');
-		$worker->district_id=Input::get('district');
-		$worker->zone=Input::get('zone');
+		$worker                    = new Worker();
+		$worker->dni               = Input::get('dni');
+		$worker->first_name        = Input::get('firstname');
+		$worker->second_name       = Input::get('secondname');
+		$worker->first_last_name   = Input::get('firstlastname');
+		$worker->second_last_name  = Input::get('secondlastname');
+		$worker->job_title         = Input::get('job_title');
+		$worker->marital_status_id = Input::get('maritalstatus');
+		$worker->address           = Input::get('address');
+		$worker->department_id     = Input::get('department');
+		$worker->province_id       = Input::get('province');
+		$worker->district_id       = Input::get('district');
+		$worker->zone              = Input::get('zone');
 		//$worker->full_address=Input::get('email_contact');
-		$worker->emergency_person=Input::get('emergencyperson');
-		$worker->emergency_phone=Input::get('emergencyphone');
-		$worker->emergency_id=Input::get('emergency_relationship');
-		$worker->mobile=Input::get('mobile');
-		$worker->phone=Input::get('phone');
-		$worker->email=Input::get('email');
-		$worker->birthdate=Input::get('birthdate');
-		$worker->gender_id=Input::get('gender');
-		$worker->size_t_shirt=Input::get('sizetshirt');
-		$worker->size_pant=Input::get('sizepant');
-		$worker->size_shirt=Input::get('sizeshirt');
-		$worker->size_shoes=Input::get('sizeshoes');
-		$worker->active=1;
+		$worker->emergency_person = Input::get('emergencyperson');
+		$worker->emergency_phone  = Input::get('emergencyphone');
+		$worker->emergency_id     = Input::get('emergency_relationship');
+		$worker->mobile           = Input::get('mobile');
+		$worker->phone            = Input::get('phone');
+		$worker->email            = Input::get('email');
+		$worker->birthdate        = Input::get('birthdate');
+		$worker->gender_id        = Input::get('gender');
+		$worker->size_t_shirt     = Input::get('sizetshirt');
+		$worker->size_pant        = Input::get('sizepant');
+		$worker->size_shirt       = Input::get('sizeshirt');
+		$worker->size_shoes       = Input::get('sizeshoes');
+		$worker->active           = 1;
 		$worker->save();
 
+		$education      = array( '' => '' ) + Parameters::where('group_id', 'edu')->lists('first_value',
+				'second_value');
+		$banks          = array( '' => '' ) + Parameters::where('group_id', 'ban')->lists('first_value',
+				'second_value');
+		$marital_status = array( '' => '' ) + Parameters::where('group_id', 'mar')->lists('first_value',
+				'second_value');
+		$emergency      = array( '' => '' ) + Parameters::where('group_id', 'rel')->lists('first_value',
+				'second_value');
+		$districts      = array( '' => '' ) + Parameters::where('group_id', 'dis')->lists('first_value',
+				'second_value');
+		$provinces      = array( '' => '' ) + Parameters::where('group_id', 'pro')->lists('first_value',
+				'second_value');
+		$departments    = array( '' => '' ) + Parameters::where('group_id', 'dep')->lists('first_value',
+				'second_value');
+		$job_title      = array( '' => '' ) + Parameters::where('group_id', 'job')->lists('first_value',
+				'second_value');
 
-		$education=array('' => '')+Parameters::where('group_id','edu')->lists('first_value', 'second_value');
-		$banks=array('' => '')+Parameters::where('group_id','ban')->lists('first_value','second_value');
-		$marital_status=array('' => '')+Parameters::where('group_id','mar')->lists('first_value','second_value');
-		$emergency=array('' => '')+Parameters::where('group_id','rel')->lists('first_value', 'second_value');
-		$districts=array('' => '')+Parameters::where('group_id','dis')->lists('first_value', 'second_value');
-		$provinces=array('' => '')+Parameters::where('group_id','pro')->lists('first_value', 'second_value');
-		$departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
-		$job_title=array('' => '')+Parameters::where('group_id','job')->lists('first_value', 'second_value');
-
-		return view('RRHH.person')->with('education', $education)->with('banks', $banks)->with('maritalStatus', $marital_status)
-			->with('emergency', $emergency)->with('departments', $departments)->with('provinces', $provinces)
-			->with('districts', $districts)
-			->with('job_title', $job_title);
+		return view('RRHH.person')->with('education', $education)->with('banks', $banks)->with('maritalStatus',
+			$marital_status)->with('emergency', $emergency)->with('departments', $departments)->with('provinces',
+				$provinces)->with('districts', $districts)->with('job_title', $job_title);
 	}
+
 
 	/**
 	 * Store a newly created resource in storage.
@@ -102,31 +111,36 @@ class WorkersController extends Controller {
 		//
 	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function find()
-    {
-        //
-    }
 
 	/**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function find()
+	{
+		//
+	}
+
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int $id
+	 *
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		//
+	}
+
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function edit($id)
@@ -134,10 +148,12 @@ class WorkersController extends Controller {
 		//
 	}
 
+
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function update($id)
@@ -145,10 +161,12 @@ class WorkersController extends Controller {
 		//
 	}
 
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function destroy($id)
@@ -156,215 +174,236 @@ class WorkersController extends Controller {
 		//
 	}
 
-    public function findProvince()
-    {
-        $term = Input::get('data');
 
-        $search=Parameters::where('group_id','pro')->where('second_value',$term)->get();
+	public function findProvince()
+	{
+		$term = Input::get('data');
 
-        $provinces[] = ['id'=>'','text'=>''];
+		$search = Parameters::where('group_id', 'pro')->where('second_value', $term)->get();
 
-        foreach ($search as $result) {
-            $provinces[] = ['id'=>$result->code,'text'=>$result->first_value];
-        }
+		$provinces[] = [ 'id' => '', 'text' => '' ];
 
-        return json_encode($provinces);
-    }
+		foreach ($search as $result)
+		{
+			$provinces[] = [ 'id' => $result->code, 'text' => $result->first_value ];
+		}
 
-    public function findDistrict()
-    {
-        $term = Input::get('data');
-
-        $search=Parameters::where('group_id','dis')->where('second_value',$term)->get();
-
-        $districts[] = ['id'=>'','text'=>''];
-
-        foreach ($search as $result) {
-            $districts[] = ['id'=>$result->code,'text'=>$result->first_value];
-        }
-
-        return json_encode($districts);
-    }
-
-    public function findWorker()
-    {
-        $dni=Input::get('dni');
-        $workers=Worker::where('dni','=',$dni)->paginate(5);
-
-        return response()->json(view('RRHH.workersList', array('workers' => $workers))->render());
-    }
+		return json_encode($provinces);
+	}
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function photo()
-    {
-        return view('RRHH.person_photo');
-    }
+	public function findDistrict()
+	{
+		$term = Input::get('data');
 
-    public function postPhoto()
-    {
-        return redirect('/rrhh/colaborador/foto/edit/'.Input::get('dni'));
-    }
+		$search = Parameters::where('group_id', 'dis')->where('second_value', $term)->get();
 
-    public function editPhoto($dni)
-    {
-        //$dni = Input::get('dni');
-        $worker=Worker::where('dni','=',$dni)->first();
-        //dd($worker->id);
+		$districts[] = [ 'id' => '', 'text' => '' ];
 
-        $attachments=Attachment::where('worker_id',$worker->id)->photos()->get();
+		foreach ($search as $result)
+		{
+			$districts[] = [ 'id' => $result->code, 'text' => $result->first_value ];
+		}
 
-        $photoProfile= $attachments->filter(function($attachment)
-        {
-            if ($attachment->type== 1) {
-                return true;
-            }
-        });
+		return json_encode($districts);
+	}
 
-        $photoFace= $attachments->filter(function($attachment)
-        {
-            if ($attachment->type== 2) {
-                return true;
-            }
-        });
 
-        $urlProfile='';
-        $urlFace='';
-        if (count($photoProfile)>0){
-            $urlProfile=$photoProfile->first()->url;
-        }
-        if (count($photoFace)>0){
-            $urlFace=$photoFace->first()->url;
-        }
+	public function findWorker()
+	{
+		$dni     = Input::get('dni');
+		$workers = Worker::where('dni', '=', $dni)->paginate(5);
 
-        return view('RRHH.person_photo')->with('worker',$worker)->with('photoProfile',$urlProfile)->with('photoFace',$urlFace);
-    }
+		return response()->json(view('RRHH.workersList', array( 'workers' => $workers ))->render());
+	}
 
-    public function postUpload($id)
-    {
-        $file = Input::file('file');
-        $intFile=fopen($file,"r");
 
-        $worker=Worker::find($id);
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int $id
+	 *
+	 * @return Response
+	 */
+	public function photo()
+	{
+		return view('RRHH.person_photo');
+	}
 
-        $attachment=Attachment::where('worker_id',$id)->profile()->get();
 
-        if (count($attachment) > 0){
-            Dropbox::uploadFile('/profile/'.$worker->dni.'_profile'.'.jpg',dbx\WriteMode::force(),$intFile);
-            $url=Dropbox::createShareableLink('/profile/'.$worker->dni.'_profile'.'.jpg');
+	public function postPhoto()
+	{
+		return redirect('/rrhh/colaborador/foto/edit/' . Input::get('dni'));
+	}
 
-            $url=str_replace('www.dropbox.com','dl.dropboxusercontent.com',$url);
-            $url=str_replace('?dl=0','',$url);
 
-            $attachment=$attachment->first();
-            $attachment->url= $url;
-            $attachment->save();
+	public function editPhoto($dni)
+	{
+		//$dni = Input::get('dni');
+		$worker = Worker::where('dni', '=', $dni)->first();
+		//dd($worker->id);
 
-            return response()->json(array('files'=>array('name'=>url($url.'?'.time()))), 200);
-        }else{
-            Dropbox::uploadFile('/profile/'.$worker->dni.'_profile'.'.jpg',dbx\WriteMode::add(),$intFile);
-            $url=Dropbox::createShareableLink('/profile/'.$worker->dni.'_profile'.'.jpg');
+		$attachments = Attachment::where('worker_id', $worker->id)->photos()->get();
 
-            $url=str_replace('www.dropbox.com','dl.dropboxusercontent.com',$url);
-            $url=str_replace('?dl=0','',$url);
+		$photoProfile = $attachments->filter(function ($attachment)
+		{
+			if ( $attachment->type == 1 )
+			{
+				return true;
+			}
+		});
 
-            $attachment = new Attachment();
-            $attachment->worker_id = $id;
-            $attachment->path = '/profile/'.$worker->dni.'_profile'.'.jpg';
-            $attachment->url= $url;
-            $attachment->type= 1;
-            $attachment->save();
+		$photoFace = $attachments->filter(function ($attachment)
+		{
+			if ( $attachment->type == 2 )
+			{
+				return true;
+			}
+		});
 
-            return response()->json(array('files'=>array('name'=>url($url.'?'.time()))), 200);
+		$urlProfile = '';
+		$urlFace    = '';
+		if ( count($photoProfile) > 0 )
+		{
+			$urlProfile = $photoProfile->first()->url;
+		}
+		if ( count($photoFace) > 0 )
+		{
+			$urlFace = $photoFace->first()->url;
+		}
 
-        }
-        //dd($filesystem);
-/*
-        if( $upload_success ) {
-            Image::open($destinationPath.'/'.$filename)->resize(null, 600, true)->save($destinationPath.'/'.$filename);
-            return Response::json(array('files'=>array('name'=>url('https://dl.dropboxusercontent.com/s/07ras6x45vk7fjq/test2.jpg?dl=0'.'?'.time()))), 200);
-        } else {
-            return Response::json('error', 400);
-        }*/
-    }
+		return view('RRHH.person_photo')->with('worker', $worker)->with('photoProfile', $urlProfile)->with('photoFace',
+			$urlFace);
+	}
 
-    public function postProfileCrop($id)
-    {
-        //$id=4;
-        $worker = Worker::find($id);
 
-        $attachment=Attachment::where('worker_id',$id)->profile()->first();
+	public function postUpload($id)
+	{
+		$file    = Input::file('file');
+		$intFile = fopen($file, "r");
 
-        if (Input::get('w') != '' && Input::get('w') != 0) {
+		$worker = Worker::find($id);
 
-            Image::make($attachment->url)
-                ->crop(intval(Input::get('w')), intval(Input::get('h')), intval(Input::get('x')), intval(Input::get('y')))
-                ->save('upload/' . $worker->dni . '_cropped.jpg');
+		$attachment = Attachment::where('worker_id', $id)->profile()->get();
 
-            $intFile = fopen('upload/' . $worker->dni . '_cropped.jpg', 'r');
+		if ( count($attachment) > 0 )
+		{
+			Dropbox::uploadFile('/profile/' . $worker->dni . '_profile' . '.jpg', dbx\WriteMode::force(), $intFile);
+			$url = Dropbox::createShareableLink('/profile/' . $worker->dni . '_profile' . '.jpg');
 
-            $attachment = Attachment::where('worker_id', $id)->face()->get();
+			$url = str_replace('www.dropbox.com', 'dl.dropboxusercontent.com', $url);
+			$url = str_replace('?dl=0', '', $url);
 
-            if (count($attachment) > 0) {
-                Dropbox::uploadFile('/profile/' . $worker->dni . '_face' . '.jpg', dbx\WriteMode::force(), $intFile);
-                $url = Dropbox::createShareableLink('/profile/' . $worker->dni . '_face' . '.jpg');
+			$attachment      = $attachment->first();
+			$attachment->url = $url;
+			$attachment->save();
 
-                $url = str_replace('www.dropbox.com', 'dl.dropboxusercontent.com', $url);
-                $url = str_replace('?dl=0', '', $url);
+			return response()->json(array( 'files' => array( 'name' => url($url . '?' . time()) ) ), 200);
+		}
+		else
+		{
+			Dropbox::uploadFile('/profile/' . $worker->dni . '_profile' . '.jpg', dbx\WriteMode::add(), $intFile);
+			$url = Dropbox::createShareableLink('/profile/' . $worker->dni . '_profile' . '.jpg');
 
-                $attachment = $attachment->first();
-                $attachment->url = $url;
-                $attachment->save();
+			$url = str_replace('www.dropbox.com', 'dl.dropboxusercontent.com', $url);
+			$url = str_replace('?dl=0', '', $url);
 
-                return response()->json(array('files' => array('name' => url($url . '?' . time()))), 200);
-            } else {
-                Dropbox::uploadFile('/profile/' . $worker->dni . '_face' . '.jpg', dbx\WriteMode::add(), $intFile);
-                $url = Dropbox::createShareableLink('/profile/' . $worker->dni . '_face' . '.jpg');
+			$attachment            = new Attachment();
+			$attachment->worker_id = $id;
+			$attachment->path      = '/profile/' . $worker->dni . '_profile' . '.jpg';
+			$attachment->url       = $url;
+			$attachment->type      = 1;
+			$attachment->save();
 
-                $url = str_replace('www.dropbox.com', 'dl.dropboxusercontent.com', $url);
-                $url = str_replace('?dl=0', '', $url);
+			return response()->json(array( 'files' => array( 'name' => url($url . '?' . time()) ) ), 200);
 
-                $attachment = new Attachment();
-                $attachment->worker_id = $id;
-                $attachment->path = '/profile/' . $worker->dni . '_face' . '.jpg';
-                $attachment->url = $url;
-                $attachment->type = 2;
-                $attachment->save();
+		}
+		//dd($filesystem);
+		/*
+				if( $upload_success ) {
+					Image::open($destinationPath.'/'.$filename)->resize(null, 600, true)->save($destinationPath.'/'.$filename);
+					return Response::json(array('files'=>array('name'=>url('https://dl.dropboxusercontent.com/s/07ras6x45vk7fjq/test2.jpg?dl=0'.'?'.time()))), 200);
+				} else {
+					return Response::json('error', 400);
+				}*/
+	}
 
-                return response()->json(array('files' => array('name' => url($url . '?' . time()))), 200);
-            }
-        }
 
-    }
+	public function postProfileCrop($id)
+	{
+		//$id=4;
+		$worker = Worker::find($id);
 
-        /*Dropbox::uploadFile('/profile/'.$worker->dni.'_face.jpg',dbx\WriteMode::add(),$intFile);
+		$attachment = Attachment::where('worker_id', $id)->profile()->first();
 
-        $url=Dropbox::createShareableLink('/profile/cropped.jpg');
+		if ( Input::get('w') != '' && Input::get('w') != 0 )
+		{
 
-        $url=str_replace('www.dropbox.com','dl.dropboxusercontent.com',$url);
-        $url=str_replace('?dl=0','',$url);
+			Image::make($attachment->url)->crop(intval(Input::get('w')), intval(Input::get('h')),
+					intval(Input::get('x')), intval(Input::get('y')))->save('upload/' . $worker->dni . '_cropped.jpg');
 
-        return response()->json(array('files'=>array('image'=>url($url.'?'.time()))), 200);*/
+			$intFile = fopen('upload/' . $worker->dni . '_cropped.jpg', 'r');
 
-        /*
-              Image::make('https://dl.dropboxusercontent.com/s/d3x5wjartiqcmtk/test.jpg?dl=0')
-            ->crop(50,50,50,50)
-            ->save('upload'.'/cropped.jpg');
-              $intFile=fopen('upload'.'/cropped.jpg','r');
+			$attachment = Attachment::where('worker_id', $id)->face()->get();
 
-            Dropbox::uploadFile('/profile/cropped.jpg',dbx\WriteMode::add(),$intFile);
+			if ( count($attachment) > 0 )
+			{
+				Dropbox::uploadFile('/profile/' . $worker->dni . '_face' . '.jpg', dbx\WriteMode::force(), $intFile);
+				$url = Dropbox::createShareableLink('/profile/' . $worker->dni . '_face' . '.jpg');
 
-            $url=Dropbox::createShareableLink('/profile/cropped.jpg');
+				$url = str_replace('www.dropbox.com', 'dl.dropboxusercontent.com', $url);
+				$url = str_replace('?dl=0', '', $url);
 
-            $url=str_replace('www.dropbox.com','dl.dropboxusercontent.com',$url);
-            $url=str_replace('?dl=0','',$url);
+				$attachment      = $attachment->first();
+				$attachment->url = $url;
+				$attachment->save();
 
-            //return response()->json(array('files'=>array('image'=>url($url.'?'.time()))), 200);
-            return response()->json(array('image'=>url($url.'?'.time())), 200);*/
+				return response()->json(array( 'files' => array( 'name' => url($url . '?' . time()) ) ), 200);
+			}
+			else
+			{
+				Dropbox::uploadFile('/profile/' . $worker->dni . '_face' . '.jpg', dbx\WriteMode::add(), $intFile);
+				$url = Dropbox::createShareableLink('/profile/' . $worker->dni . '_face' . '.jpg');
+
+				$url = str_replace('www.dropbox.com', 'dl.dropboxusercontent.com', $url);
+				$url = str_replace('?dl=0', '', $url);
+
+				$attachment            = new Attachment();
+				$attachment->worker_id = $id;
+				$attachment->path      = '/profile/' . $worker->dni . '_face' . '.jpg';
+				$attachment->url       = $url;
+				$attachment->type      = 2;
+				$attachment->save();
+
+				return response()->json(array( 'files' => array( 'name' => url($url . '?' . time()) ) ), 200);
+			}
+		}
+
+	}
+
+	/*Dropbox::uploadFile('/profile/'.$worker->dni.'_face.jpg',dbx\WriteMode::add(),$intFile);
+
+	$url=Dropbox::createShareableLink('/profile/cropped.jpg');
+
+	$url=str_replace('www.dropbox.com','dl.dropboxusercontent.com',$url);
+	$url=str_replace('?dl=0','',$url);
+
+	return response()->json(array('files'=>array('image'=>url($url.'?'.time()))), 200);*/
+
+	/*
+		  Image::make('https://dl.dropboxusercontent.com/s/d3x5wjartiqcmtk/test.jpg?dl=0')
+		->crop(50,50,50,50)
+		->save('upload'.'/cropped.jpg');
+		  $intFile=fopen('upload'.'/cropped.jpg','r');
+
+		Dropbox::uploadFile('/profile/cropped.jpg',dbx\WriteMode::add(),$intFile);
+
+		$url=Dropbox::createShareableLink('/profile/cropped.jpg');
+
+		$url=str_replace('www.dropbox.com','dl.dropboxusercontent.com',$url);
+		$url=str_replace('?dl=0','',$url);
+
+		//return response()->json(array('files'=>array('image'=>url($url.'?'.time()))), 200);
+		return response()->json(array('image'=>url($url.'?'.time())), 200);*/
 
 }

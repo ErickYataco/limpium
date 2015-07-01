@@ -7,6 +7,7 @@ use TORUSlimpium\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use TORUSlimpium\Models\Parameters;
 use TORUSlimpium\Models\Contract;
+use TORUSlimpium\Models\Worker;
 use TORUSlimpium\Models\Assignment;
 
 class AssignmentsController extends Controller {
@@ -19,10 +20,12 @@ class AssignmentsController extends Controller {
 	public function index()
 	{
 		//
-        $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
-        $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
-        return view('RRHH.assignments')->with('departments',$departments)->with('services', $services);
+		$departments = array( '' => '' ) + Parameters::where('group_id', 'dep')->lists('first_value', 'second_value');
+		$services    = array( '' => '' ) + Parameters::where('group_id', 'ser')->lists('first_value', 'second_value');
+
+		return view('RRHH.assignments')->with('departments', $departments)->with('services', $services);
 	}
+
 
 	/**
 	 * Show the form for creating a new resource.
@@ -34,6 +37,7 @@ class AssignmentsController extends Controller {
 		//
 	}
 
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -44,55 +48,67 @@ class AssignmentsController extends Controller {
 		//
 	}
 
+
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function show($id)
 	{
 		//
-        $assignments=Assignment::with('worker.attachments','attendance')->paginate(8);
-        $contract=Contract::with('account')->where('id',1)->first();
-        $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
-        $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');
+		$assignments = Assignment::with('worker.attachments', 'attendance')->paginate(8);
+		$contract    = Contract::with('account','workplace')->where('id', $id)->first();
+		$departments = array( '' => '' ) + Parameters::where('group_id', 'dep')->lists('first_value', 'second_value');
+		$services    = array( '' => '' ) + Parameters::where('group_id', 'ser')->lists('first_value', 'second_value');
 
-        $days=array('' => '');
+		$days = array( '' => '' );
 
-        if ($contract->monday==1){
-            $days=$days+ array('1'=>'Lunes');
-        }
-        if ($contract->tuesday==1){
-            $days=$days+ array('2'=>'Martes');
-        }
-        if ($contract->wednesday==1){
-            $days=$days+ array('3'=>'Miercoles');
-        }
-        if ($contract->thursday==1){
-            $days=$days+ array('4'=>'Jueves');
-        }
-        if ($contract->friday==1){
-            $days=$days+ array('5'=>'Viernes');
-        }
-        if ($contract->saturday==1){
-            $days=$days+ array('6'=>'Sabado');
-        }
-        if ($contract->sunday==1){
-            $days=$days+ array('7'=>'Domingo');
-        }
-        $days=$days+ array('8'=>'Todos');
+		if ( $contract->monday == 1 )
+		{
+			$days = $days + array( '1' => 'Lunes' );
+		}
+		if ( $contract->tuesday == 1 )
+		{
+			$days = $days + array( '2' => 'Martes' );
+		}
+		if ( $contract->wednesday == 1 )
+		{
+			$days = $days + array( '3' => 'Miercoles' );
+		}
+		if ( $contract->thursday == 1 )
+		{
+			$days = $days + array( '4' => 'Jueves' );
+		}
+		if ( $contract->friday == 1 )
+		{
+			$days = $days + array( '5' => 'Viernes' );
+		}
+		if ( $contract->saturday == 1 )
+		{
+			$days = $days + array( '6' => 'Sabado' );
+		}
+		if ( $contract->sunday == 1 )
+		{
+			$days = $days + array( '7' => 'Domingo' );
+		}
+		$days = $days + array( '8' => 'Todos' );
 
-        //dd($contract);
+		//dd($contract);
 
-        return view('RRHH.assignments')->with('assignments',$assignments)->with('contract',$contract)->with('departments',$departments)
-            ->with('services', $services)->with('contract', $contract)->with('days',$days);
+		return view('RRHH.assignments')->with('assignments', $assignments)->with('contract',
+			$contract)->with('departments', $departments)->with('services', $services)->with('contract',
+				$contract)->with('days', $days);
 	}
+
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function edit($id)
@@ -100,10 +116,12 @@ class AssignmentsController extends Controller {
 		//
 	}
 
+
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function update($id)
@@ -111,10 +129,12 @@ class AssignmentsController extends Controller {
 		//
 	}
 
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function destroy($id)
@@ -122,38 +142,73 @@ class AssignmentsController extends Controller {
 		//
 	}
 
-    public function findWorkers()
-    {
 
-        $day=Input::get('days_id');
-        $workers=\DB::table('workers')
-            ->leftjoin('assignments', function($join) use ($day)
-            {
-                if($day==1){
-                    $join->on('assignments.worker_id', '=', 'workers.id')
-                        ->where('assignments.monday','=',1);
-                    //$join->on('pronosticos.idusuario', '=', DB::raw($idusuario));
-                }
+	public function findWorkers()
+	{
 
-            })
-            ->where('workers.department_id',Input::get('department_id'))
-            ->where('workers.province_id',Input::get('province_id'))
-            ->where('workers.district_id',Input::get('district_id'))
-            ->paginate(5);
+		$day     = Input::get('days_id');
+		$workers = Worker::
+		leftjoin('assignments', function ($join) use ($day)
+		{
+			if ( $day == 1 )
+			{
+				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.monday', '=', 1);
+				//$join->on('pronosticos.idusuario', '=', DB::raw($idusuario));
+			}
+			if ( $day == 2 )
+			{
+				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.tuesday', '=', 1);
+			}
+			if ( $day == 3 )
+			{
+				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.wednesday', '=', 1);
+			}
+			if ( $day == 4 )
+			{
+				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.thursday', '=', 1);
+			}
+			if ( $day == 5 )
+			{
+				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.friday', '=', 1);
+			}
+			if ( $day == 6 )
+			{
+				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.saturday', '=', 1);
+			}
+			if ( $day == 7 )
+			{
+				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.sunday', '=', 1);
+			}
 
-        //dd($workers);
+			if ( $day == 8 )
+			{
+				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.monday', '=',
+						1)->where('assignments.tuesday', '=', 1)->where('assignments.wednesday', '=',
+						1)->where('assignments.thursday', '=', 1)->where('assignments.friday', '=',
+						1)->where('assignments.saturday', '=', 1)->where('assignments.sunday', '=', 1);
+			}
 
-        return response()->json(view('RRHH.workersList', array('workers' => $workers))->render());
-    }
+		})->with('attachments')->where('workers.department_id',
+				Input::get('department_id'))->where('workers.province_id',
+				Input::get('province_id'))->where('workers.district_id', Input::get('district_id'))->paginate(5);
 
-    public function findRequirements()
-    {
+		//dd($workers);
 
-        $contracts=Contract::where('workplace_id',Input::get('workplace_id'))->where('service_id',Input::get('service_id'))->paginate(8);
-        //$contracts = Worker::with('attachments')->paginate(8);
+		return response()->json(view('RRHH.workersList', array( 'workers' => $workers ))->render());
+	}
 
-        return response()->json(view('RRHH.requirementsList', array('id'=>Input::get('workplace_id'),'contracts' => $contracts))->render());
-    }
+
+	public function findRequirements()
+	{
+
+		$contracts = Contract::where('workplace_id', Input::get('workplace_id'))->where('service_id',
+			Input::get('service_id'))->paginate(8);
+
+		//$contracts = Worker::with('attachments')->paginate(8);
+
+		return response()->json(view('RRHH.requirementsList',
+			array( 'id' => Input::get('workplace_id'), 'contracts' => $contracts ))->render());
+	}
 
 
 }

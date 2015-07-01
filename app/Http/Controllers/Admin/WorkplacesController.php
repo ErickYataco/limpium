@@ -5,6 +5,7 @@ use TORUSlimpium\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use TORUSlimpium\Models\Workplace;
+use TORUSlimpium\Models\Parameters;
 use Input;
 
 class WorkplacesController extends Controller {
@@ -17,7 +18,8 @@ class WorkplacesController extends Controller {
 	public function index()
 	{
 		//
-        return view('Admin.workplaces');
+		$departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
+        return view('Admin.workplaces')->with('departments', $departments);
 	}
 
 	/**
@@ -30,11 +32,18 @@ class WorkplacesController extends Controller {
 		//
         $workplace=new Workplace();
         $workplace->account_id=Input::get('account_id');
+		$workplace->name=Input::get('local');
         $workplace->address=Input::get('address');
         $workplace->reference=Input::get('reference');
-        $workplace->name=Input::get('local');
-        $workplace->save();
-        return view('Admin.workplaces');
+        $workplace->department=Input::get('department_text');
+		$workplace->province=Input::get('province_text');
+		$workplace->district=Input::get('district_text');
+		$workplace->department_id=Input::get('department');
+		$workplace->province_id=Input::get('province');
+		$workplace->district_id=Input::get('district');
+
+		$workplace->save();
+        return redirect()->action('Admin\WorkplacesController@index');;
 	}
 
 	/**
