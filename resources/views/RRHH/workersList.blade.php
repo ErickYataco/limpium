@@ -10,8 +10,7 @@
             <ul class="list ">
                 @foreach ($workers as $worker)
                     <li class="tile">
-                        <a href="{{url('/rrhh/colaborador/foto/'.$worker->dni)}}"
-                           class="tile-content ink-reaction backup-details" data-backdrop="false">
+                        <a class="tile-content ink-reaction worker-assignment" data-backdrop="false">
                             <div class="tile-icon">
                                 <?php $i = 0 ?>
                                 @if(count($worker->attachments)>0)
@@ -67,7 +66,11 @@
     </div>
     {{--<script src="{{ asset('js/core/source/AppOffcanvas.js') }}" ></script>--}}
     <script>
-        var backups = [];
+
+        var numerWorkers;
+        var wokersAssignments=0;
+
+        var workers = [];
         @if($workers->count()>0)
         @foreach ($workers as $worker)
         var url = '';
@@ -76,7 +79,7 @@
         url = "{{$attachment->url}}";
         @endif
     @endforeach
-    backups.push({
+    workers.push({
                     name: "{{$worker->full_name}}", profile: (url == '' ? '{{asset('img/avatar640.jpg?')}}' : url),
                     job: "{{$worker->job_title}}", phone: "{{$worker->mobile}}",
                     address: "{{$worker->full_address}}", id: "{{$worker->id}}"
@@ -84,17 +87,66 @@
         @endforeach
     @endif
 
-     $(".backup-details").click(function () {
-                    var index = $(".backup-details").index(this);
-                    var backup = backups[index];
-                    $("#image-backup-details").css("background-image", "url(" + backup.profile + ")");
-                    $("#name-backup-details").text(backup.name);
-                    $("#job-backup-details").text(backup.job);
-                    $("#phone-backup-details").text(backup.phone);
-                    $("#address-backup-details").text(backup.address);
-                    $("#replacer_worker_id").val(backup.id);
-                    $('#detailBackup').trigger('click');
-                });
+        function insertWorker(worker) {
+            var days=selectedDays().split(',');
+            var startHeight=44.5*(wokersAssignments-1);
+            var endHeight=44.5*wokersAssignments;
+
+            for(var i=0;i<days.length;i++){
+                var html='<a style="top: '+startHeight+'px; bottom: -'+endHeight+'px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event fc-event event-success">'+
+                        '<div class="fc-content">'+
+                        '<div class="fc-title" style="text-align: center">'+
+                        '<ad class="btn btn-icon-toggle  pull-right worker-day"><i class="md md-close"></i></ad>'+
+                        worker.name+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="fc-bg"></div>'+
+                        '</a>'
+                $('.'+dayName(days[i])).append(html);
+            }
+
+            $(".worker-day").click(function(){
+                $(this).closest('a[class^="fc-time-grid-event"]').remove();
+            });
+        }
+
+        function selectedDays(){
+            var days;
+            days=$('#Lunes').is(':checked')?"1,":"";
+            days=days+($('#Martes').is(':checked')?"2,":"");
+            days=days+($('#Miercoles').is(':checked')?"3,":"");
+            days=days+($('#Jueves').is(':checked')?"4,":"");
+            days=days+($('#Viernes').is(':checked')?"5,":"");
+            days=days+($('#Sabado').is(':checked')?"6,":"");
+            days=days+($('#Domingo').is(':checked')?"7,":"");
+
+            return days;
+        }
+
+        function dayName(id){
+            if (id==1)
+                return "monday";
+            if (id==2)
+                return "tuesday";
+            if (id==3)
+                return "wednesday";
+            if (id==4)
+                return "thursday";
+            if (id==5)
+                return "friday";
+            if (id==6)
+                return "saturday";
+            if (id==7)
+                return "sunday";
+        }
+
+        $(".worker-assignment").click(function () {
+            var index = $(".worker-assignment").index(this);
+            var worker = workers[index];
+            wokersAssignments++;
+            insertWorker(worker);
+
+        });
     </script>
 @endif
 

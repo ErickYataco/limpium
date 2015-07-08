@@ -60,47 +60,21 @@ class AssignmentsController extends Controller {
 	{
 		//
 		$assignments = Assignment::with('worker.attachments', 'attendance')->paginate(8);
-		$contract    = Contract::with('account','workplace')->where('id', $id)->first();
+		$contract    = Contract::with('account', 'workplace')->where('id', $id)->first();
 		$departments = array( '' => '' ) + Parameters::where('group_id', 'dep')->lists('first_value', 'second_value');
 		$services    = array( '' => '' ) + Parameters::where('group_id', 'ser')->lists('first_value', 'second_value');
 
-		$days = array( '' => '' );
-
-		if ( $contract->monday == 1 )
-		{
-			$days = $days + array( '1' => 'Lunes' );
-		}
-		if ( $contract->tuesday == 1 )
-		{
-			$days = $days + array( '2' => 'Martes' );
-		}
-		if ( $contract->wednesday == 1 )
-		{
-			$days = $days + array( '3' => 'Miercoles' );
-		}
-		if ( $contract->thursday == 1 )
-		{
-			$days = $days + array( '4' => 'Jueves' );
-		}
-		if ( $contract->friday == 1 )
-		{
-			$days = $days + array( '5' => 'Viernes' );
-		}
-		if ( $contract->saturday == 1 )
-		{
-			$days = $days + array( '6' => 'Sabado' );
-		}
-		if ( $contract->sunday == 1 )
-		{
-			$days = $days + array( '7' => 'Domingo' );
-		}
-		$days = $days + array( '8' => 'Todos' );
-
-		//dd($contract);
+		$days = array( array( "day" => "Lunes", "attr" => $contract->monday == 1 ? "" : "readonly " ) );
+		array_push($days, array( "day" => "Martes", "attr" => $contract->tuesday == 1 ? "" : "readonly " ));
+		array_push($days, array( "day" => "Miercoles", "attr" => $contract->wednesday == 1 ? "" : "readonly " ));
+		array_push($days, array( "day" => "Jueves", "attr" => $contract->thursday == 1 ? "" : "readonly " ));
+		array_push($days, array( "day" => "Viernes", "attr" => $contract->friday == 1 ? "" : "readonly " ));
+		array_push($days, array( "day" => "Sabados", "attr" => $contract->saturday == 1 ? "" : "readonly disabled " ));
+		array_push($days, array( "day" => "Domingos", "attr" => $contract->sunday == 1 ? "" : 'readonly disabled ' ));
 
 		return view('RRHH.assignments')->with('assignments', $assignments)->with('contract',
 			$contract)->with('departments', $departments)->with('services', $services)->with('contract',
-				$contract)->with('days', $days);
+			$contract)->with('days', $days);
 	}
 
 
@@ -146,51 +120,24 @@ class AssignmentsController extends Controller {
 	public function findWorkers()
 	{
 
-		$day     = Input::get('days_id');
+		$day = explode(',', Input::get('days'));
+
 		$workers = Worker::
 		leftjoin('assignments', function ($join) use ($day)
 		{
-			if ( $day == 1 )
-			{
-				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.monday', '=', 1);
-				//$join->on('pronosticos.idusuario', '=', DB::raw($idusuario));
-			}
-			if ( $day == 2 )
-			{
-				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.tuesday', '=', 1);
-			}
-			if ( $day == 3 )
-			{
-				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.wednesday', '=', 1);
-			}
-			if ( $day == 4 )
-			{
-				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.thursday', '=', 1);
-			}
-			if ( $day == 5 )
-			{
-				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.friday', '=', 1);
-			}
-			if ( $day == 6 )
-			{
-				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.saturday', '=', 1);
-			}
-			if ( $day == 7 )
-			{
-				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.sunday', '=', 1);
-			}
+			$join->on('assignments.worker_id', '=', 'workers.id')
+					->where('assignments.monday', '=',in_array('1', $day) ? 1 : 0)
+					->where('assignments.tuesday', '=',in_array('2', $day) ? 1 : 0)
+					->where('assignments.wednesday', '=',in_array('3', $day) ? 1 : 0)
+					->where('assignments.thursday', '=',in_array('4', $day) ? 1 : 0)
+					->where('assignments.friday', '=',in_array('5', $day) ? 1 : 0)
+					->where('assignments.saturday', '=',in_array('6', $day) ? 1 : 0)
+					->where('assignments.sunday', '=', in_array('7', $day) ? 1 : 0);
 
-			if ( $day == 8 )
-			{
-				$join->on('assignments.worker_id', '=', 'workers.id')->where('assignments.monday', '=',
-						1)->where('assignments.tuesday', '=', 1)->where('assignments.wednesday', '=',
-						1)->where('assignments.thursday', '=', 1)->where('assignments.friday', '=',
-						1)->where('assignments.saturday', '=', 1)->where('assignments.sunday', '=', 1);
-			}
 
 		})->with('attachments')->where('workers.department_id',
-				Input::get('department_id'))->where('workers.province_id',
-				Input::get('province_id'))->where('workers.district_id', Input::get('district_id'))->paginate(5);
+			Input::get('department_id'))->where('workers.province_id',
+			Input::get('province_id'))->where('workers.district_id', Input::get('district_id'))->paginate(5);
 
 		//dd($workers);
 
