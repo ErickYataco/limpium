@@ -58,7 +58,7 @@
 
     <div class="row">
         <!-- BEGIN SEARCH RESULTS PAGING -->
-        <div class="backups-list text-center">
+        <div class="workers-list text-center">
             {!! $workers->render() !!}
         </div>
         <!--end .text-center -->
@@ -68,36 +68,48 @@
     <script>
 
         var numerWorkers;
-        var wokersAssignments=0;
+        var wokersAssignmentss=0;
 
         var workers = [];
         @if($workers->count()>0)
         @foreach ($workers as $worker)
         var url = '';
         @foreach ($worker->attachments as $attachment)
-        @if($attachment->type==1)
+        @if($attachment->type==2)
         url = "{{$attachment->url}}";
         @endif
     @endforeach
     workers.push({
-                    name: "{{$worker->full_name}}", profile: (url == '' ? '{{asset('img/avatar640.jpg?')}}' : url),
+                    name: "{{$worker->first_name.' '.$worker->first_last_name}}", profile: (url == '' ? '{{asset('img/avatar2.jpg?')}}' : url),
                     job: "{{$worker->job_title}}", phone: "{{$worker->mobile}}",
                     address: "{{$worker->full_address}}", id: "{{$worker->id}}"
                 });
         @endforeach
     @endif
 
+        function validAssignment(idWorker){
+            return assignments().indexOf(idWorker)==-1?true:false;
+        }
+
+        function assignments(){
+            return $('#deleted-workers').attr('assignments').split(',');
+        }
+
         function insertWorker(worker) {
+            var wokersAssignments=assignments().length;
+            //wokersAssignments++;
             var days=selectedDays().split(',');
-            var startHeight=44.5*(wokersAssignments-1);
-            var endHeight=44.5*wokersAssignments;
+            var startHeight=44.8*(wokersAssignments-1);
+            var endHeight=44.8*wokersAssignments;
+
+
 
             for(var i=0;i<days.length;i++){
                 var html='<a style="top: '+startHeight+'px; bottom: -'+endHeight+'px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event fc-event event-success">'+
                         '<div class="fc-content">'+
                         '<div class="fc-title" style="text-align: center">'+
                         '<ad class="btn btn-icon-toggle  pull-right worker-day"><i class="md md-close"></i></ad>'+
-                        worker.name+
+                        '<img alt="" style="text-align: left; width: 40px; height: 40px; border-radius: 40px" src="'+worker.profile+'"> '+worker.name+'</img>'+
                         '</div>'+
                         '</div>'+
                         '<div class="fc-bg"></div>'+
@@ -108,6 +120,10 @@
             $(".worker-day").click(function(){
                 $(this).closest('a[class^="fc-time-grid-event"]').remove();
             });
+
+            var assignmentss =$('#deleted-workers').attr('assignments');
+            assignmentss=assignmentss+worker.id+','
+            $('#deleted-workers').attr('assignments',assignmentss);
         }
 
         function selectedDays(){
@@ -143,8 +159,12 @@
         $(".worker-assignment").click(function () {
             var index = $(".worker-assignment").index(this);
             var worker = workers[index];
-            wokersAssignments++;
-            insertWorker(worker);
+
+            if (validAssignment(worker.id)){
+                insertWorker(worker);
+            }else{
+                alert('El trabajador ya fue asignado');
+            }
 
         });
     </script>

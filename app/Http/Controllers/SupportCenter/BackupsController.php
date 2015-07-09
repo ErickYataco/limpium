@@ -82,12 +82,8 @@ class BackupsController extends Controller {
 	 */
 	public function show($id)
 	{
-       //$assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->get();
-       //dd($assignments);
 		$assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->paginate(8);
-        //$assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->orderBy('type_assignment','desc')->paginate(8);
-		//$assignments=Assignment::with('worker.attachments','attendance')->where('contract_id',$id)->orderBy('type_assignment','desc')->get();
-		//dd($assignments);
+
         $contract=Contract::with('account','workplace')->where('id',$id)->first();
         $departments=array('' => '')+Parameters::where('group_id','dep')->lists('first_value', 'second_value');
         $services=array('' => '')+Parameters::where('group_id','ser')->lists('first_value', 'second_value');

@@ -113,6 +113,12 @@ Route::get('rrhh/asignacion/requerimiento/{id}', [
 	'middleware' => [ 'auth', 'acl' ]
 ]);
 
+Route::post('rrhh/asignacion/requerimiento', [
+	'uses'       => 'RRHH\AssignmentsController@create',
+	'permission' => 'rrhh_workers_assignment_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
 Route::get('comercial/contrato', [
 	'uses'       => 'Comercial\ContractsController@index',
 	'permission' => 'rrhh_contracts_add',

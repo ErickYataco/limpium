@@ -122,7 +122,7 @@ class AssignmentsController extends Controller {
 
 		$day = explode(',', Input::get('days'));
 
-		$workers = Worker::
+		$workers = Worker::with('attachments')->
 		leftjoin('assignments', function ($join) use ($day)
 		{
 			$join->on('assignments.worker_id', '=', 'workers.id')
@@ -135,14 +135,15 @@ class AssignmentsController extends Controller {
 					->where('assignments.sunday', '=', in_array('7', $day) ? 1 : 0);
 
 
-		})->with('attachments')->where('workers.department_id',
+		})->where('workers.department_id',
 			Input::get('department_id'))->where('workers.province_id',
-			Input::get('province_id'))->where('workers.district_id', Input::get('district_id'))->paginate(5);
+			Input::get('province_id'))->where('workers.district_id', Input::get('district_id'))->select('workers.*')->paginate(5);
 
 		//dd($workers);
 
 		return response()->json(view('RRHH.workersList', array( 'workers' => $workers ))->render());
 	}
+
 
 
 	public function findRequirements()

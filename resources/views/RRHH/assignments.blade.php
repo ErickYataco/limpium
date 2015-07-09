@@ -25,61 +25,60 @@
                 </ol>
             </div>
             <div class="section-body ">
-                <div class="card">
-
-                    <!-- BEGIN SEARCH HEADER -->
-                    <div class="card-head style-primary">
-                        <header>Asignacion</header>
-                        <div class="tools">
-                            <button id="searchLocal" class="btn btn-raised btn-floating-action btn-default-light"><i class="fa fa-plus"></i></button>
-                        </div>
-                    </div><!--end .card-head -->
-                    <!-- END SEARCH HEADER -->
-
-                    <!-- BEGIN SEARCH RESULTS -->
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="col-sm-3">
-                                    <button href="#offcanvas-filter-contracts" data-toggle="offcanvas"
-                                            type="button" class="btn btn-raised btn-primary ink-reaction btn-block">
+                <form method="POST" role="form" novalidate="novalidate" action="http://erp.limpium.com/admin/empresa">
+                    <div class="card">
+                        <!-- BEGIN ASSIGNMENT HEADER -->
+                        <div class="card-head style-primary">
+                            <header>Asignacion</header>
+                            <div class="tools">
+                                <button type="submit" id="searchLocal" class="btn btn-raised btn-floating-action btn-default-light"><i class="fa fa-plus"></i></button>
+                            </div>
+                        </div><!--end .card-head -->
+                        <!-- END ASSIGNMENT HEADER -->
+                        <!-- BEGIN ASSIGNMENT WORKERS -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="col-sm-3">
+                                        <button href="#offcanvas-filter-contracts" data-toggle="offcanvas"
+                                                type="button" class="btn btn-raised btn-primary ink-reaction btn-block">
                                                     <span class="pull-left">
                                                         <i class="fa fa-search"></i>
                                                     </span>Contratos
-                                    </button>
-                                </div>
-                                <div class="col-sm-4">
-                                    <button href="#offcanvas-filter-workers" data-toggle="offcanvas"
-                                            type="button" class="btn btn-raised btn-primary ink-reaction btn-block">
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button href="#offcanvas-filter-workers" data-toggle="offcanvas"
+                                                type="button" class="btn btn-raised btn-primary ink-reaction btn-block">
                                                     <span class="pull-left">
                                                         <i class="fa fa-search"></i>
                                                     </span>Colaboradores
-                                    </button>
+                                        </button>
+                                    </div>
                                 </div>
+                                <br/><br/>
                             </div>
-                            <br/><br/>
-                        </div>
-                        <div class="row">
-                            <!-- BEGIN CONTRACT DETAILS -->
-                            <div class="hbox-column col-md-3 style-default-light">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        @if(isset($contract))
-                                            <h3>Detalle Contrato</h3>
-                                            <dl class="dl-horizontal dl-icon">
-                                                <dt><span class="fa fa-fw fa-university fa-lg opacity-50"></span></dt>
-                                                <dd>
-                                                    <span class="opacity-50">Empresa</span><br/>
-                                                    <span class="text-medium">{{$contract->account->name}}</span>
-                                                </dd>
-                                                <dt><span class="fa fa-fw fa-home fa-lg opacity-50"></span></dt>
-                                                <dd>
-                                                    <span class="opacity-50">Local</span><br/>
-                                                    <span class="text-medium">{{$contract->workplace->name}}</span>
-                                                </dd>
-                                                <dt><span class="fa fa-fw fa-calendar fa-lg opacity-50"></span></dt>
-                                                <dd>
-                                                    <span class="opacity-50">Horario</span><br/>
+                            <div class="row">
+                                <!-- BEGIN CONTRACT DETAILS -->
+                                <div class="hbox-column col-md-3 style-default-light">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            @if(isset($contract))
+                                                <h3>Detalle Contrato</h3>
+                                                <dl class="dl-horizontal dl-icon">
+                                                    <dt><span class="fa fa-fw fa-university fa-lg opacity-50"></span></dt>
+                                                    <dd>
+                                                        <span class="opacity-50">Empresa</span><br/>
+                                                        <span class="text-medium">{{$contract->account->name}}</span>
+                                                    </dd>
+                                                    <dt><span class="fa fa-fw fa-home fa-lg opacity-50"></span></dt>
+                                                    <dd>
+                                                        <span class="opacity-50">Local</span><br/>
+                                                        <span class="text-medium">{{$contract->workplace->name}}</span>
+                                                    </dd>
+                                                    <dt><span class="fa fa-fw fa-calendar fa-lg opacity-50"></span></dt>
+                                                    <dd>
+                                                        <span class="opacity-50">Horario</span><br/>
                                                     <span class="text-medium">
                                                         {{$contract->start_work}} - {{$contract->end_work}}
                                                     </span><br/>
@@ -93,216 +92,218 @@
                                                         {{$contract->saturday==1?'S':''}}
                                                         {{$contract->sunday==1?'D':''}}
                                                     </span>
-                                                </dd>
-                                                <dt><span class="fa fa-fw fa-location-arrow fa-lg opacity-50"></span></dt>
-                                                <dd>
-                                                    <span class="opacity-50">Direccion</span><br/>
+                                                    </dd>
+                                                    <dt><span class="fa fa-fw fa-location-arrow fa-lg opacity-50"></span></dt>
+                                                    <dd>
+                                                        <span class="opacity-50">Direccion</span><br/>
 													<span class="text-medium">
                                                         {{$contract->workplace->address}}<br/>
-														{{$contract->workplace->deparment}} ,
+                                                        {{$contract->workplace->deparment}} ,
                                                         {{$contract->workplace->province}} ,
                                                         {{$contract->workplace->district}}<br/>
 
 													</span>
-                                                </dd>
-                                            </dl><!--end .dl-horizontal -->
-                                            <h3>Info Contacto</h3>
-                                            <dl class="dl-horizontal dl-icon">
-                                                <dt><span class="fa fa-fw fa-user fa-lg opacity-50"></span></dt>
-                                                <dd>
-                                                    <span class="opacity-50">Contacto</span><br/>
-                                                    <span class="text-medium">{{$contract->account->contact}}</span>
-                                                </dd>
-                                                <dt><span class="fa fa-fw fa-mobile fa-lg opacity-50"></span></dt>
-                                                <dd>
-                                                    <span class="opacity-50">Telefonos</span><br/>
-                                                    <span class="text-medium">{{$contract->account->office_phone}}</span> &nbsp;<span class="opacity-50">trabajo</span><br/>
-                                                    <span class="text-medium">{{$contract->account->mobile_phone}}</span> &nbsp;<span class="opacity-50">mobil</span>
-                                                </dd>
-                                                <dt><span class="fa fa-fw fa-envelope-square fa-lg opacity-50"></span></dt>
-                                                <dd>
-                                                    <span class="opacity-50">Email</span><br/>
-                                                    <a class="text-medium" href="../../../html/mail/compose.html">{{$contract->account->email_contact}}</a>
-                                                </dd>
-                                            </dl><!--end .dl-horizontal -->
-                                        @endif
-                                    </div><!--end .col -->
-                                </div><!--end .row -->
-                            </div><!--end .hbox-column -->
-                            <!-- END CONTRACT DETAILS -->
-                            <div class="col-sm-8 col-md-9 ">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <div class="fc fc-ltr fc-unthemed" id="calendar">
-                                                <div style="" class="fc-view-container">
-                                                    <div style="" class="fc-view fc-agendaWeek-view fc-agenda-view">
-                                                        <!--begin days of week-->
-                                                        <table>
-                                                            <thead>
-                                                            <tr>
-                                                                <td class="fc-widget-header">
-                                                                    <div style="border-right-width: 1px; margin-right: 16px;" class="fc-row fc-widget-header">
-                                                                        <table>
-                                                                            <thead>
-                                                                            <tr>
-                                                                                <th style="width: 38px;" class="fc-axis fc-widget-header">
-                                                                                    <div class="tools1">
-                                                                                        <a class="btn btn-floating-action btn-sm btn-primary-dark" data-toggle="modal" data-target="#formModal" >
-                                                                                            <i class="fa fa-plus"></i>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                </th>
-                                                                                <th class="fc-day-header fc-widget-header fc-sun">Lunes</th>
-                                                                                <th class="fc-day-header fc-widget-header fc-mon">Martes</th>
-                                                                                <th class="fc-day-header fc-widget-header fc-tue">Miercoles</th>
-                                                                                <th class="fc-day-header fc-widget-header fc-wed">Jueves</th>
-                                                                                <th class="fc-day-header fc-widget-header fc-thu">Viernes</th>
-                                                                                <th class="fc-day-header fc-widget-header fc-fri">Sabado</th>
-                                                                                <th class="fc-day-header fc-widget-header fc-sat">Domingo</th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                        </table>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td class="fc-widget-content">
-                                                                    <div class="fc-day-grid">
-                                                                    </div>
-                                                                    <hr class="fc-widget-header">
-                                                                    <div style="" class="fc-time-grid-container fc-scroller">
-                                                                        <div class="fc-time-grid">
-                                                                            <div class="fc-bg">
-                                                                                <table>
-                                                                                    <tbody>
-                                                                                    <tr>
+                                                    </dd>
+                                                </dl><!--end .dl-horizontal -->
+                                                <h3>Info Contacto</h3>
+                                                <dl class="dl-horizontal dl-icon">
+                                                    <dt><span class="fa fa-fw fa-user fa-lg opacity-50"></span></dt>
+                                                    <dd>
+                                                        <span class="opacity-50">Contacto</span><br/>
+                                                        <span class="text-medium">{{$contract->account->contact}}</span>
+                                                    </dd>
+                                                    <dt><span class="fa fa-fw fa-mobile fa-lg opacity-50"></span></dt>
+                                                    <dd>
+                                                        <span class="opacity-50">Telefonos</span><br/>
+                                                        <span class="text-medium">{{$contract->account->office_phone}}</span> &nbsp;<span class="opacity-50">trabajo</span><br/>
+                                                        <span class="text-medium">{{$contract->account->mobile_phone}}</span> &nbsp;<span class="opacity-50">mobil</span>
+                                                    </dd>
+                                                    <dt><span class="fa fa-fw fa-envelope-square fa-lg opacity-50"></span></dt>
+                                                    <dd>
+                                                        <span class="opacity-50">Email</span><br/>
+                                                        <a class="text-medium" href="../../../html/mail/compose.html">{{$contract->account->email_contact}}</a>
+                                                    </dd>
+                                                </dl><!--end .dl-horizontal -->
+                                            @endif
+                                        </div><!--end .col -->
+                                    </div><!--end .row -->
+                                </div><!--end .hbox-column -->
+                                <!-- END CONTRACT DETAILS -->
+                                <div class="col-sm-8 col-md-9 ">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="fc fc-ltr fc-unthemed" id="calendar">
+                                                    <div style="" class="fc-view-container">
+                                                        <div style="" class="fc-view fc-agendaWeek-view fc-agenda-view">
+                                                            <!--begin days of week-->
+                                                            <table>
+                                                                <thead>
+                                                                <tr>
+                                                                    <td class="fc-widget-header">
+                                                                        <div style="border-right-width: 1px; margin-right: 16px;" class="fc-row fc-widget-header">
+                                                                            <table>
+                                                                                <thead>
+                                                                                <tr>
+                                                                                    <th style="width: 38px;" class="fc-axis fc-widget-header">
+                                                                                        <div class="tools1">
+                                                                                            <a id="deleted-workers" assignments="" class="btn btn-floating-action btn-sm btn-primary-dark" data-toggle="modal" data-target="#formModal" >
+                                                                                                <i class="fa fa-minus"></i>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </th>
+                                                                                    <th class="fc-day-header fc-widget-header fc-sun">Lunes</th>
+                                                                                    <th class="fc-day-header fc-widget-header fc-mon">Martes</th>
+                                                                                    <th class="fc-day-header fc-widget-header fc-tue">Miercoles</th>
+                                                                                    <th class="fc-day-header fc-widget-header fc-wed">Jueves</th>
+                                                                                    <th class="fc-day-header fc-widget-header fc-thu">Viernes</th>
+                                                                                    <th class="fc-day-header fc-widget-header fc-fri">Sabado</th>
+                                                                                    <th class="fc-day-header fc-widget-header fc-sat">Domingo</th>
+                                                                                </tr>
+                                                                                </thead>
+                                                                            </table>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td class="fc-widget-content">
+                                                                        <div class="fc-day-grid">
+                                                                        </div>
+                                                                        <hr class="fc-widget-header">
+                                                                        <div style="" class="fc-time-grid-container fc-scroller">
+                                                                            <div class="fc-time-grid">
+                                                                                <div class="fc-bg">
+                                                                                    <table>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            @if(isset($contract))
+                                                                                                <td style="width: 38px;" class="fc-axis fc-widget-content"></td>
+                                                                                                <td class="fc-day fc-widget-content fc-mon {{$contract->monday==0?'fc-today fc-state-highlight':''}}" ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-tue {{$contract->tuesday==0?'fc-today fc-state-highlight':''}}" ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-wed {{$contract->wednesday==0?'fc-today fc-state-highlight':''}}" ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-thu {{$contract->thursday==0?'fc-today fc-state-highlight':''}}" ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-fri {{$contract->friday==0?'fc-today fc-state-highlight':''}}" ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-sat {{$contract->saturday==0?'fc-today fc-state-highlight':''}}" ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-sun {{$contract->sunday==0?'fc-today fc-state-highlight':''}}" ></td>
+                                                                                            @else
+                                                                                                <td style="width: 38px;" class="fc-axis fc-widget-content"></td>
+                                                                                                <td class="fc-day fc-widget-content fc-mon " ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-tue " ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-wed " ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-thu " ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-fri " ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-sat " ></td>
+                                                                                                <td class="fc-day fc-widget-content fc-sun " ></td>
+                                                                                            @endif
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                <div class="fc-slats">
+                                                                                    <table>
+                                                                                        <tbody>
                                                                                         @if(isset($contract))
-                                                                                        <td style="width: 38px;" class="fc-axis fc-widget-content"></td>
-                                                                                        <td class="fc-day fc-widget-content fc-mon {{$contract->monday==0?'fc-today fc-state-highlight':''}}" ></td>
-                                                                                        <td class="fc-day fc-widget-content fc-tue {{$contract->tuesday==0?'fc-today fc-state-highlight':''}}" ></td>
-                                                                                        <td class="fc-day fc-widget-content fc-wed {{$contract->wednesday==0?'fc-today fc-state-highlight':''}}" ></td>
-                                                                                        <td class="fc-day fc-widget-content fc-thu {{$contract->thursday==0?'fc-today fc-state-highlight':''}}" ></td>
-                                                                                        <td class="fc-day fc-widget-content fc-fri {{$contract->friday==0?'fc-today fc-state-highlight':''}}" ></td>
-                                                                                        <td class="fc-day fc-widget-content fc-sat {{$contract->saturday==0?'fc-today fc-state-highlight':''}}" ></td>
-                                                                                        <td class="fc-day fc-widget-content fc-sun {{$contract->sunday==0?'fc-today fc-state-highlight':''}}" ></td>
-                                                                                        @else
-                                                                                            <td style="width: 38px;" class="fc-axis fc-widget-content"></td>
-                                                                                            <td class="fc-day fc-widget-content fc-mon " ></td>
-                                                                                            <td class="fc-day fc-widget-content fc-tue " ></td>
-                                                                                            <td class="fc-day fc-widget-content fc-wed " ></td>
-                                                                                            <td class="fc-day fc-widget-content fc-thu " ></td>
-                                                                                            <td class="fc-day fc-widget-content fc-fri " ></td>
-                                                                                            <td class="fc-day fc-widget-content fc-sat " ></td>
-                                                                                            <td class="fc-day fc-widget-content fc-sun " ></td>
+                                                                                            @for($i=1;$i<=$contract->workers;$i++)
+                                                                                                <tr>
+                                                                                                    <td style="width: 38px;" class="fc-axis fc-time fc-widget-content"><span>{{$i}}</span></td>
+                                                                                                    <td class="fc-widget-content"></td>
+                                                                                                </tr>
+                                                                                                <tr class="fc-minor">
+                                                                                                    <td style="width: 38px;" class="fc-axis fc-time fc-widget-content"></td>
+                                                                                                    <td class="fc-widget-content"></td>
+                                                                                                </tr>
+                                                                                            @endfor
                                                                                         @endif
-                                                                                    </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                            <div class="fc-slats">
-                                                                                <table>
-                                                                                    <tbody>
-                                                                                    @if(isset($contract))
-                                                                                        @for($i=1;$i<=$contract->workers;$i++)
-                                                                                            <tr>
-                                                                                                <td style="width: 38px;" class="fc-axis fc-time fc-widget-content"><span>{{$i}}</span></td>
-                                                                                                <td class="fc-widget-content"></td>
-                                                                                            </tr>
-                                                                                            <tr class="fc-minor">
-                                                                                                <td style="width: 38px;" class="fc-axis fc-time fc-widget-content"></td>
-                                                                                                <td class="fc-widget-content"></td>
-                                                                                            </tr>
-                                                                                        @endfor
-                                                                                    @endif
 
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                            <hr style="display: none;" class="fc-widget-header">
-                                                                            <div class="fc-content-skeleton">
-                                                                                <table>
-                                                                                    <tbody>
-                                                                                    <tr>
-                                                                                        <td class="fc-axis" style="width:38px"></td>
-                                                                                        <td>
-                                                                                            <div class="fc-event-container monday">
-                                                                                                <a style="top: 0px; bottom: -45.5px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event fc-event">
-                                                                                                    <div class="fc-content">
-                                                                                                        <div class="fc-title">
-                                                                                                            <ad class="btn btn-icon-toggle  pull-right worker-day"><i class="md md-close"></i></ad>
-                                                                                                            Juan Perez Maldonado
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                <hr style="display: none;" class="fc-widget-header">
+                                                                                <div class="fc-content-skeleton">
+                                                                                    <table>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td class="fc-axis" style="width:38px"></td>
+                                                                                            <td>
+                                                                                                <div class="fc-event-container monday">
+                                                                                                    <a style="top: 0px; bottom: -45.5px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event fc-event">
+                                                                                                        <div class="fc-content">
+                                                                                                            <div class="fc-title">
+                                                                                                                <ad class="btn btn-icon-toggle  pull-right worker-day"><i class="md md-close"></i></ad>
+                                                                                                                Juan Perez Maldonado
+                                                                                                            </div>
                                                                                                         </div>
-                                                                                                    </div>
-                                                                                                    <div class="fc-bg"></div>
-                                                                                                </a>
-                                                                                                <a style="top: 45.5px; bottom: -91px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event event-success fc-event">
-                                                                                                    <div class="fc-content">
-                                                                                                        <div class="fc-title">
-                                                                                                            <ad class="btn btn-icon-toggle  pull-right worker-day"><i class="md md-close"></i></ad>
-                                                                                                            xxxx work Amazing Amazing ttdd work Amazing work Amazing work
+                                                                                                        <div class="fc-bg"></div>
+                                                                                                    </a>
+                                                                                                    <a style="top: 45.5px; bottom: -91px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event event-success fc-event">
+                                                                                                        <div class="fc-content">
+                                                                                                            <div class="fc-title">
+                                                                                                                <ad class="btn btn-icon-toggle  pull-right worker-day"><i class="md md-close"></i></ad>
+                                                                                                                xxxx work Amazing Amazing ttdd work Amazing work Amazing work
+                                                                                                            </div>
                                                                                                         </div>
-                                                                                                    </div>
-                                                                                                    <div class="fc-bg"></div>
-                                                                                                </a>
-                                                                                                <a style="top: 91px; bottom: -136.5px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event  fc-event">
-                                                                                                    <div class="fc-content">
-                                                                                                        <div class="fc-title">
-                                                                                                            <ad class="btn btn-icon-toggle  pull-right worker-day"><i class="md md-close"></i></ad>
-                                                                                                            Maria Pelaez
+                                                                                                        <div class="fc-bg"></div>
+                                                                                                    </a>
+                                                                                                    <a style="top: 91px; bottom: -136.5px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event  fc-event">
+                                                                                                        <div class="fc-content">
+                                                                                                            <div class="fc-title">
+                                                                                                                <ad class="btn btn-icon-toggle  pull-right worker-day"><i class="md md-close"></i></ad>
+                                                                                                                Maria Pelaez
+                                                                                                            </div>
                                                                                                         </div>
-                                                                                                    </div>
-                                                                                                    <div class="fc-bg"></div>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <div class="fc-event-container tuesday"></div>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <div class="fc-event-container wednesday"></div>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <div class="fc-event-container thursday"></div>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <div class="fc-event-container friday"></div>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <div class="fc-event-container saturday"></div>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <div class="fc-event-container sunday">
+                                                                                                        <div class="fc-bg"></div>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="fc-event-container tuesday"></div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="fc-event-container wednesday"></div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="fc-event-container thursday"></div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="fc-event-container friday"></div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="fc-event-container saturday"></div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="fc-event-container sunday">
 
 
 
-                                                                                            </div>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    </tbody>
-                                                                                </table>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                        <!--end days of week-->
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <!--end days of week-->
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div><!--end .col -->
-                        </div><!--end .row -->
-                    </div><!--end .card-body -->
-                    <!-- END SEARCH RESULTS -->
-                </div><!--end .card -->
+                                </div><!--end .col -->
+                            </div><!--end .row -->
+                        </div><!--end .card-body -->
+                        <!-- END ASSIGNMENT WORKERS -->
+                    </div><!--end .card -->
+                </form>
+
             </div><!--end .section-body -->
         </section>
     </div><!--end #content-->
@@ -522,7 +523,7 @@
 
             function notWorkable(day,lines){
 
-                var height=44.5*lines;
+                var height=44.8*lines;
 
                 var message='NO LABORABLE';
                 message=message.replace(/(.)/g,"$1<br />");
@@ -538,6 +539,11 @@
 
                 $('.'+day).append(html);
             }
+
+            $( "#deleted-workers").click(function(){
+                $(this).attr('assignments','');
+                $('a[class^="fc-time-grid-event"]').remove();
+            });
 
             $( "#btnSearchContracts").click(function(){
                 var form=$('#form-filter-contracts');
@@ -563,10 +569,11 @@
                 });
             }
 
-            $(document).on('click', '.requirements-list .pagination a', function (e) {
-                getContracts($(this).attr('href').split('page=')[1]);
+            $(document).on('click', '.workers-list .pagination a', function (e) {
+                getWorkers($(this).attr('href').split('page=')[1]);
                 e.preventDefault();
             });
+
 
 
             $( "#btnSearchWorkers").click(function(){
