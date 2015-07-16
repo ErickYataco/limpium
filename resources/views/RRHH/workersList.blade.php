@@ -87,22 +87,43 @@
         @endforeach
     @endif
 
-        function validAssignment(idWorker){
+        $(".worker-assignment").click(function () {
+                    var index = $(".worker-assignment").index(this);
+                    var worker = workers[index];
+
+                   /* if (!isAssignment(worker.id))
+                        alert('El trabajador ya fue asignado');
+                    if (!isSameShift(worker.id))
+                        alert('El trabajador no tiene el mismo horario');
+*/
+                    insertWorker(worker);
+                });
+
+        function isAssignment(idWorker){
+            return assignments().indexOf(idWorker)==-1?true:false;
+        }
+
+        function isSameShift(idWorker){
             return assignments().indexOf(idWorker)==-1?true:false;
         }
 
         function assignments(){
-            return $('#deleted-workers').attr('assignments').split(',');
+            return $('#add-workers').attr('assignments').split(',');
         }
 
         function insertWorker(worker) {
-            var wokersAssignments=assignments().length;
-            //wokersAssignments++;
+            var img='<img class="img-circle width-1" src="'+worker.profile+'" alt="" /><input type="hidden" name="workerIds[]" value="'+worker.id+'" />';
+            var text='<p class="text-info">'+worker.name+'</p>';
+
+            $('.worker-photo-unused').first().removeClass('worker-photo-unused').addClass('worker-photo-used').html('').append(img);
+            $('.worker-name-unused').first().removeClass('worker-name-unused').addClass('worker-name-used').html('').append(text);
+
+
+
+            /*var wokersAssignments=assignments().length;
             var days=selectedDays().split(',');
             var startHeight=44.8*(wokersAssignments-1);
             var endHeight=44.8*wokersAssignments;
-
-
 
             for(var i=0;i<days.length;i++){
                 var html='<a style="top: '+startHeight+'px; bottom: -'+endHeight+'px; z-index: 1; left: 0%; right: 0%;" class="fc-time-grid-event fc-event event-success">'+
@@ -123,7 +144,7 @@
 
             var assignmentss =$('#deleted-workers').attr('assignments');
             assignmentss=assignmentss+worker.id+','
-            $('#deleted-workers').attr('assignments',assignmentss);
+            $('#deleted-workers').attr('assignments',assignmentss);*/
         }
 
         function selectedDays(){
@@ -156,17 +177,7 @@
                 return "sunday";
         }
 
-        $(".worker-assignment").click(function () {
-            var index = $(".worker-assignment").index(this);
-            var worker = workers[index];
 
-            if (validAssignment(worker.id)){
-                insertWorker(worker);
-            }else{
-                alert('El trabajador ya fue asignado');
-            }
-
-        });
     </script>
 @endif
 

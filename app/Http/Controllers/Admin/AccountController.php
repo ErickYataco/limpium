@@ -17,11 +17,21 @@ class AccountController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
 		//
+		$column = array( '' => '', '1' => 'empresa','2' => 'ruc','3' => 'movil contacto','4' => 'fijo contacto')  ;
+		$values= array( '' => '', '1' => 'name','2' => 'ruc','3' => 'mobile_phone','4' => 'office_phone')  ;
 
-        return view('Admin.enterprise');
+		$enterprises=null;
+
+		if($request->get('column')!=""){
+			$enterprises=Account::where($values[$request->get('column')],'LIKE','%'.$request->get('value').'%')->paginate(1);
+			$enterprises->appends(Input::except('page'));
+		}
+
+		return view('Admin.Account.index', compact('column'), compact('enterprises') );
+
 	}
 
 	/**
@@ -31,16 +41,8 @@ class AccountController extends Controller {
 	 */
 	public function create()
 	{
-		//
-        $account=new Account();
-        $account->name=Input::get('enterprise');
-		$account->ruc=Input::get('ruc');
-        $account->contact=Input::get('contact');
-        $account->mobile_phone=Input::get('mobile_phone');
-        $account->office_phone=Input::get('office_phone');
-        $account->email_contact=Input::get('email_contact');
-        $account->save();
-        return view('Admin.enterprise');
+		return view('Admin.Account.create' );
+
 	}
 
 	/**
@@ -50,7 +52,15 @@ class AccountController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$account=new Account();
+		$account->name=Input::get('enterprise');
+		$account->ruc=Input::get('ruc');
+		$account->contact=Input::get('contact');
+		$account->mobile_phone=Input::get('mobile_phone');
+		$account->office_phone=Input::get('office_phone');
+		$account->email_contact=Input::get('email_contact');
+		$account->save();
+		return view('Admin.enterprise');
 	}
 
 	/**
@@ -72,7 +82,9 @@ class AccountController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$account=Account::findOrFail($id);
+
+		return view('Admin.Account.edit', compact('account') );
 	}
 
 	/**
@@ -83,7 +95,15 @@ class AccountController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$account=Account::find($id);
+		$account->name=Input::get('name');
+		$account->ruc=Input::get('ruc');
+		$account->contact=Input::get('contact');
+		$account->mobile_phone=Input::get('mobile_phone');
+		$account->office_phone=Input::get('office_phone');
+		$account->email_contact=Input::get('email_contact');
+		$account->save();
+		return view('Admin.Account.edit', compact('account') );
 	}
 
 	/**

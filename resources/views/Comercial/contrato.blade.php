@@ -259,7 +259,7 @@
                                                     <div class="col-sm-2">
                                                         <button type="button" id="btnAddTable" class="btn btn-raised btn-primary ink-reaction btn-block">
                                                         <span class="pull-left">
-                                                            <i class="md md-add-box"></i>
+                                                            <i class="fa fa-plus"></i>
                                                         </span> Requirimientos
                                                         </button>
                                                     </div>
@@ -300,112 +300,7 @@
                 </div><!--end .row -->
                 <!-- END VALIDATION FORM WIZARD -->
 
-                <!-- BEGIN FORM MODAL MARKUP -->
-                <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="formModalLabel">Crear Horarios</h4>
-                            </div>
-                            <form class="form-horizontal" role="form">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Dia de Inicio</label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <select class="form-control select2-list" data-placeholder="Select an item" id="diainicio" >
-                                                <option value="">&nbsp;</option>
-                                                <option value="1">Lunes</option>
-                                                <option value="2">Martes</option>
-                                                <option value="3">Miercoles</option>
-                                                <option value="4">Jueves</option>
-                                                <option value="5">Viernes</option>
-                                                <option value="6">Sabado</option>
-                                                <option value="7">Domingo</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Dia de Fin</label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <select class="form-control select2-list" id="diafin" >
-                                                <option value="">&nbsp;</option>
-                                                <option value="1">Lunes</option>
-                                                <option value="2">Martes</option>
-                                                <option value="3">Miercoles</option>
-                                                <option value="4">Jueves</option>
-                                                <option value="5">Viernes</option>
-                                                <option value="6">Sabado</option>
-                                                <option value="7">Domingo</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label for="horafin" class="control-label">Hora de Ingreso</label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            {!! Form::text('horainicio', null, array('class' => 'form-control time12-mask','required')) !!}
-                                            <p class="help-block">Time: am/pm</p>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <label for="horafin" class="control-label">Hora de Salida</label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            {!! Form::text('horafin', null, array('class' => 'form-control time12-mask','required')) !!}
-                                            <p class="help-block">Time: am/pm</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label for="horainicio" class="control-label">Numero de Personas</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            {!! Form::text('horainicio', null, array('class' => 'form-control','required')) !!}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
 
-                                    </div>
-
-                                    <div class="form-group">
-
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="crearhorario">registrar</button>
-                                </div>
-                            </form>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-                <!-- END FORM MODAL MARKUP -->
-
-                @if(isset($worker))
-                    <!-- BEGIN FORM MODAL MARKUP -->
-                    <div class="modal fade" id="formModalSuccess" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="formModalLabel">Registro Creado</h4>
-                                </div>
-                                <form class="form-horizontal" role="form">
-                                    <div class="modal-body">
-                                        <h3>Transaccion Exitosa!</h3>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="crearhorario">OK</button>
-                                    </div>
-                                </form>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-                    <!-- END FORM MODAL MARKUP -->
-                @endif
             </div><!--end .section-body -->
         </section>
     </div><!--end #content-->

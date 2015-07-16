@@ -26,8 +26,20 @@
                     </a>
                     <!--start submenu -->
                     <ul>
-                        <li><a href="/admin/empresa" class="item-menu-bar"><span class="title">Empresa</span></a></li>
-                        <li><a href="/admin/locales" class="item-menu-bar"><span class="title">Locales</span></a></li>
+                        <li class="gui-folder">
+                            <a href="javascript:void(0);" class="item-menu-bar"><span class="title">Empresa</span></a>
+                            <ul>
+                                <li><a href="/admin/empresa/crear" ><span class="title">Crear</span></a></li>
+                                <li><a href="/admin/empresa" ><span class="title">Editar</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li>
+                        <li class="gui-folder">
+                            <a href="javascript:void(0);" class="item-menu-bar"><span class="title">Locales</span></a>
+                            <ul>
+                                <li><a href="/admin/locales/crear" ><span class="title">Crear</span></a></li>
+                                <li><a href="/admin/locales" ><span class="title">Editar</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li>
                     </ul><!--end /submenu -->
                 </li><!--end /menu-li -->
                 <!-- END ADMIN-->
@@ -55,7 +67,14 @@
                     </a>
                     <!--start submenu -->
                     <ul>
-                        <li><a href="/comercial/contrato" class="item-menu-bar"><span class="title">Contrato</span></a></li>
+                        <li class="gui-folder">
+                            <a href="javascript:void(0);" class="item-menu-bar"><span class="title">Contrato</span></a>
+                            <ul>
+                                <li><a href="/comercial/contrato/crear" ><span class="title">Crear</span></a></li>
+                                <li><a href="/comercial/contrato" ><span class="title">Editar</span></a></li>
+                                <li><a href="/comercial/contrato/colaboradores" ><span class="title">Colaboradores</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li>
                     </ul><!--end /submenu -->
                 </li><!--end /menu-li -->
                 <!-- END COMERCIAL-->

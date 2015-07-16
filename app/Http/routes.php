@@ -73,10 +73,6 @@ Route::get('rrhh/colaborador/editar/{dni}', [
 	'middleware' => [ 'auth', 'acl' ]
 ]);
 
-/*Route::get('rrhh/colaborador/buscar',['uses'=>'RRHH\WorkersController@find','permission'=>'rrhh_persona', 'middleware'=>['auth','acl']]);
-
-Route::post('rrhh/colaborador/buscar/{dni}',[ 'uses'=>'RRHH\WorkersController@show','permission'=>'rrhh_persona','middleware'=>['auth','acl']]);*/
-
 Route::get('rrhh/colaborador/foto', [
 	'uses'       => 'RRHH\WorkersController@photo',
 	'permission' => 'rrhh_workers_photo_edit',
@@ -119,14 +115,51 @@ Route::post('rrhh/asignacion/requerimiento', [
 	'middleware' => [ 'auth', 'acl' ]
 ]);
 
+
 Route::get('comercial/contrato', [
 	'uses'       => 'Comercial\ContractsController@index',
 	'permission' => 'rrhh_contracts_add',
 	'middleware' => [ 'auth', 'acl' ]
 ]);
 
-Route::post('comercial/contrato', [
+Route::get('comercial/contrato/crear', [
 	'uses'       => 'Comercial\ContractsController@create',
+	'permission' => 'rrhh_contracts_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::post('comercial/contrato/crear', [
+	'uses'       => 'Comercial\ContractsController@store',
+	'permission' => 'rrhh_contracts_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::get('comercial/contrato/{id}/editar', [
+	'uses'       => 'Comercial\ContractsController@edit',
+	'permission' => 'rrhh_contracts_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::post('comercial/contrato/{id}/editar', [
+	'uses'       => 'Comercial\ContractsController@update',
+	'permission' => 'rrhh_contracts_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::get('comercial/contrato/colaboradores', [
+	'uses'       => 'Comercial\RequirementContractsController@index',
+	'permission' => 'rrhh_contracts_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::get('comercial/contrato/colaboradores/{id}', [
+	'uses'       => 'Comercial\RequirementContractsController@show',
+	'permission' => 'rrhh_contracts_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::post('comercial/contrato/colaboradores', [
+	'uses'       => 'Comercial\RequirementContractsController@create',
 	'permission' => 'rrhh_contracts_add',
 	'middleware' => [ 'auth', 'acl' ]
 ]);
@@ -137,9 +170,45 @@ Route::get('admin/empresa', [
 	'middleware' => [ 'auth', 'acl' ]
 ]);
 
+Route::get('admin/empresa/crear', [
+	'uses'       => 'Admin\AccountController@create',
+	'permission' => 'admin_enterprises_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::post('admin/empresa/crear', [
+	'uses'       => 'Admin\AccountController@store',
+	'permission' => 'admin_enterprises_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::get('admin/empresa/{id}/editar', [
+	'uses'       => 'Admin\AccountController@edit',
+	'permission' => 'admin_enterprises_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::post('admin/empresa/{id}/editar', [
+	'uses'       => 'Admin\AccountController@update',
+	'permission' => 'admin_enterprises_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
 Route::post('admin/empresa', [
 	'uses'       => 'Admin\AccountController@create',
 	'permission' => 'admin_enterprises_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::get('admin/locales/crear', [
+	'uses'       => 'Admin\WorkplacesController@create',
+	'permission' => 'rrhh_workplaces_add',
+	'middleware' => [ 'auth', 'acl' ]
+]);
+
+Route::post('admin/locales/crear', [
+	'uses'       => 'Admin\WorkplacesController@store',
+	'permission' => 'rrhh_workplaces_add',
 	'middleware' => [ 'auth', 'acl' ]
 ]);
 
